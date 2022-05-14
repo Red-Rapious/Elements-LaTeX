@@ -1,0 +1,17 @@
+{
+  "name": "elements-latex",
+  "version": "1.0.0",
+  "description": "A cross-platform, powerful electron-based LaTeX editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "elements",
+    "latex",
+    "text-editor",
+    "latex-editor"
+  ],
+  "author": "Antoine Groudiev",
+  "license": "ISC"
+}
