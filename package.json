@@ -17,6 +17,7 @@
   "license": "CC-BY-NC-SA-4.0",
   "repository": "github:Red-Rapious/Elements-LaTeX",
   "devDependencies": {
-    "electron": "^18.2.3"
+    "electron": "^18.2.3",
+    "electron-reloader": "^1.2.3"
   }
 }

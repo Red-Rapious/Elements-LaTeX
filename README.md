@@ -18,6 +18,7 @@ mkdir elements-latex
 cd elements-latex
 git clone https://github.com/Red-Rapious/Elements-LaTeX
 npm install electron -D
+npm install electron-reloader -D
 ```
 
 Then, to start the project, type:

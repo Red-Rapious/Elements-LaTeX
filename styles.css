@@ -1,0 +1,27 @@
+body {
+    background-color: rgb(26, 27, 38);
+    margin: 0;
+    color: #fff;
+}
+
+.title-bar {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(24, 28, 73);
+    -webkit-app-region: drag;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.title-bar .document-name, 
+.title-bar .menu-section {
+    margin-right: 10 px;
+}
+
+.menu-section button {
+    background-color: rgb(56, 61, 120);
+    border: none;
+    outline: none;
+    color: #fff;
+}
