@@ -25,6 +25,10 @@ window.addEventListener("DOMContentLoaded", () => {
         ipcRenderer.send("open-document-triggered");
     });
 
+    el.fileTextarea.addEventListener("input", (e) => {
+        ipcRenderer.send("file-content-updated", e.target.value);
+    });
+
     ipcRenderer.on("document-created", (_, filePath) => {
         handleDocumentChange(filePath);
     });

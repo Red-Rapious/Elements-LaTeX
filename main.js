@@ -4,6 +4,16 @@ const fs = require("fs");
 require("electron-reloader")(module);
 
 let mainWindow;
+let openedFilePath;
+
+const handleError = (location = "undefined") => {
+    /*new Notification({
+        title: "Error",
+        body: "An error occured during " + location,
+    }).show();*/
+
+    alert("An error occured during " + location);
+};
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
@@ -15,7 +25,7 @@ const createWindow = () => {
 
     //mainWindow.webContents.openDevTools();
     mainWindow.loadFile("index.html");
-}
+};
 
 app.whenReady().then(createWindow);
 
@@ -27,9 +37,10 @@ ipcMain.on("create-document-triggered", () => {
         //console.log(filePath);
         fs.writeFile(filePath, "", (error) => {
             if (error) {
-                alert(error);
+                handleError("the creation of the file")
             }
             else {
+                openedFilePath = filePath;
                 mainWindow.webContents.send("document-created", filePath); 
             }
         } );
@@ -43,14 +54,25 @@ ipcMain.on("open-document-triggered", () => {
     })
     .then(({ filePaths }) => {
         const filePath = filePath[0];
+        openedFilePath = filePath;
 
         fs.readFile(filePath, "utf-8", (error, content) => {
             if (error) {
-                alert(error)
+                handleError("the opening of the file");
             }
             else {
                 mainWindow.webContents.send("document-opened", { filePath, content })
             }
         })
+    });
+});
+
+// Note: this method of updating file at every keyboard input is pretty inefficient
+// TODO: change it later
+ipcMain.on("file-content-updated", (_, textareaContent) => {
+    fs.writeFile(openedFilePath, textareaContent, (error) => {
+        if (error) {
+            handleError("the update of the file");
+        }
     });
 });
