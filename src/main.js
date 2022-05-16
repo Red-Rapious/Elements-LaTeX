@@ -28,11 +28,11 @@ const createWindow = () => {
         width: 1500,
         height: 1000,
         titleBarStyle: "hiddenInset",
-        webPreferences: {preload: path.join(app.getAppPath(), "renderer.js")},
+        webPreferences: {preload: path.join(app.getAppPath(), "src/renderer.js")},
     });
 
     //mainWindow.webContents.openDevTools();
-    mainWindow.loadFile("index.html");
+    mainWindow.loadFile("src/index.html");
 
     const menuTemplate = [
     {

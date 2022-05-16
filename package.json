@@ -3,7 +3,7 @@
   "product-name": "Elements LaTeX",
   "version": "0.0.1",
   "description": "A cross-platform, powerful electron-based LaTeX editor",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "build": "electron-builder"
