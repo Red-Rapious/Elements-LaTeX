@@ -1,5 +1,6 @@
 {
   "name": "elements-latex",
+  "product-name": "Elements LaTeX",
   "version": "0.0.1",
   "description": "A cross-platform, powerful electron-based LaTeX editor",
   "main": "main.js",

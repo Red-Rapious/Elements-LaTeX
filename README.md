@@ -28,6 +28,12 @@ Then, to start the project, type:
 npm run start
 ```
 
+If you want to build the project, you can lauch:
+
+```
+npm run build
+```
+
 ## Developpement status
 In early phase of developpement
 
