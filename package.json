@@ -4,7 +4,8 @@
   "description": "A cross-platform, powerful electron-based LaTeX editor",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "NODE_ENV=development electron .",
+    "build": "electron-builder"
   },
   "keywords": [
     "elements",
@@ -17,6 +18,7 @@
   "repository": "github:Red-Rapious/Elements-LaTeX",
   "devDependencies": {
     "electron": "^18.2.3",
+    "electron-builder": "^23.0.3",
     "electron-reloader": "^1.2.3"
   }
 }

@@ -1,7 +1,15 @@
-const { BrowserWindow, app, ipcMain, dialog } = require("electron");
+const { BrowserWindow, app, ipcMain, dialog, Menu } = require("electron");
 const path = require("path");
 const fs = require("fs");
-require("electron-reloader")(module);
+
+
+const isDevelopementEnvironement = process.env.NODE_ENV === "development";
+
+if (isDevelopementEnvironement) {
+    try {
+        require("electron-reloader")(module);
+    } catch {}
+}
 
 let mainWindow;
 let openedFilePath;
@@ -25,7 +33,119 @@ const createWindow = () => {
 
     //mainWindow.webContents.openDevTools();
     mainWindow.loadFile("index.html");
+
+    const menuTemplate = [
+    {
+        label: "File",
+        submenu: [
+            {
+                label: "Open...",
+                click: () => ipcMain.emit("open-document-triggered")
+            },
+            {
+                label: "Create a new file",
+                click: () => ipcMain.emit("open-document-triggered")
+            },
+            { type: 'separator'},
+            {
+                "label":"Open Recent",
+                "role":"recentdocuments",
+                "submenu":[
+                  {
+                    "label":"Clear Recent",
+                    "role":"clearrecentdocuments"
+                  }
+                ]
+            },
+            { type: 'separator'},
+            { role: 'quit' }
+        ]
+    },
+    {
+        label: 'Edit',
+        submenu: [
+            { role: 'undo' },
+            { role: 'redo' },
+            { type: 'separator' },
+            { role: 'cut' },
+            { role: 'copy' },
+            { role: 'paste' },
+            { role: 'pasteAndMatchStyle' },
+            { role: 'delete' },
+            { role: 'selectAll' },
+            { type: 'separator' },
+            {
+            label: 'Speech',
+            submenu: [
+                { role: 'startSpeaking' },
+                { role: 'stopSpeaking' }
+            ]},
+            { role: 'delete' },
+            { type: 'separator' },
+            { role: 'selectAll' }
+        ]
+      },
+      {
+        label: 'View',
+        submenu: [
+          { role: 'reload' },
+          { role: 'forceReload' },
+          //{ role: 'toggleDevTools' },
+          { type: 'separator' },
+          { role: 'resetZoom' },
+          { role: 'zoomIn' },
+          { role: 'zoomOut' },
+          { type: 'separator' },
+          { role: 'togglefullscreen' }
+        ]
+      },
+      {
+        label: 'Window',
+        submenu: [
+        { role: 'minimize' },
+        { role: 'zoom' },
+        { type: 'separator' },
+        { role: 'front' },
+        { type: 'separator' },
+        { role: 'window' },
+        { role: 'close' }
+        ]
+      },
+      {
+        role: 'help',
+        submenu: [
+          {
+            label: 'Learn More',
+            click: async () => {
+              const { shell } = require('electron')
+              await shell.openExternal('https://electronjs.org')
+            }
+          }
+        ]
+      }
+    ];
+
+    const menu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(menu);
 };
+
+const openFile = (filePath) => {
+    openedFilePath = filePath;
+
+    fs.readFile(filePath, "utf-8", (error, content) => {
+        if (error) {
+            handleError("the opening of the file");
+        }
+        else {
+            app.addRecentDocument(filePath);
+            mainWindow.webContents.send("document-opened", { filePath, content })
+        }
+    });
+};
+
+app.on("open-file", (_, filePath) => {
+    openFile(filePath);
+});
 
 app.whenReady().then(createWindow);
 
@@ -41,6 +161,7 @@ ipcMain.on("create-document-triggered", () => {
             }
             else {
                 openedFilePath = filePath;
+                app.addRecentDocument(filePath);
                 mainWindow.webContents.send("document-created", filePath); 
             }
         } );
@@ -53,17 +174,8 @@ ipcMain.on("open-document-triggered", () => {
         filters: [{name: "LaTeX files", extensions: ["tex"]}]
     })
     .then(({ filePaths }) => {
-        const filePath = filePath[0];
-        openedFilePath = filePath;
-
-        fs.readFile(filePath, "utf-8", (error, content) => {
-            if (error) {
-                handleError("the opening of the file");
-            }
-            else {
-                mainWindow.webContents.send("document-opened", { filePath, content })
-            }
-        })
+        const filePath = filePaths[0];
+        openFile(filePath);
     });
 });
 

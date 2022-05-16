@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
         el.documentName.innerHTML = path.parse(filePath).base;
 
         el.fileTextarea.removeAttribute("disabled");
-        el.fileTextarea.ariaValueMax(content);
+        el.fileTextarea.value = content;
         el.fileTextarea.focus();
     }
 

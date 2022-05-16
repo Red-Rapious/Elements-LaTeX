@@ -8,13 +8,13 @@ body {
 }
 
 .title-bar {
-    height: 50px;
+    height: 45px;
     width: 100%;
     background-color: rgb(24, 28, 73);
     -webkit-app-region: drag;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .title-bar .document-name, 
