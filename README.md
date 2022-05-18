@@ -3,10 +3,11 @@ A cross-platform, powerful electron-based LaTeX editor.
 Coming soon.
 
 ## Preview
-Nothing to show yet
+This is the current interface of Elements LaTeX, still at a very early development state:
+![Current interface screenshot](/assets/current_screenshot.png)
 
 ## Features
-Features list coming soon
+Features list is coming soon
 
 ## Building the project
 This project uses `npm` and `electron`.
@@ -18,6 +19,7 @@ mkdir elements-latex
 cd elements-latex
 git clone https://github.com/Red-Rapious/Elements-LaTeX
 npm install electron -D
+
 npm install electron-reloader -D
 npm install electron-builder -D
 ```
@@ -35,7 +37,7 @@ npm run build
 ```
 
 ## Developpement status
-In early phase of developpement
+In early phase of developpement.
 
 ## License
 This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
