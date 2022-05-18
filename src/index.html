@@ -21,12 +21,28 @@
         </div>
 
         <main>
-            <div class="container" style="display: flex">
-                <textarea class="code-area" id="codeTextArea" disabled ></textarea>
-                <div id="codePdfResizer" class="resizer"></div>
-                <div class="pdf-area" id="pdfView">PDF</div>
+            <div class="HContainer" id="main-container">
+                <div class="VContainer" id="sidePanel">
+                    SIDE PANEL
+                </div>
 
+                <div id="sideDevelopmentResizer" class="resizer" data-direction="horizontal"></div>
+
+                <div id="devAndFooterContainer">
+
+                    <div class="HContainer" id="developmentPanel" style="display: flex">
+                        <textarea class="code-panel" id="codeEditorPanel" disabled ></textarea>
+                        <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
+                        <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
+                    </div>
+
+                    <div class="footer">FOOTER</div>
+
+                </div>
+                
             </div>
+
+
         </main>
     </body>
 </html>

@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
         documentName: document.getElementById("documentName"),
         createDocumentBtn: document.getElementById("createDocumentBtn"),
         openDocumentBtn: document.getElementById("openDocumentBtn"),
-        fileTextarea: document.getElementById("codeTextArea"),
+        fileTextarea: document.getElementById("codeEditorPanel"),
     };
 
     const handleDocumentChange = (filePath, content = "") => {
@@ -43,9 +43,9 @@ window.addEventListener("DOMContentLoaded", () => {
     /* RESIZABLE AREAS */
 
     // Query the element
-    const resizer = document.getElementById("codePdfResizer");
-    const leftSide = document.getElementById('codeTextArea');
-    const rightSide = document.getElementById("pdfView");
+    const codePdfresizer = document.getElementById("codePdfResizer");
+    const codeEditorPanel = document.getElementById('codeEditorPanel');
+    const pdfViewerPanel = document.getElementById("pdfViewerPanel");
 
     // The current position of mouse
     let x = 0;
@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Get the current mouse position
         x = e.clientX;
         y = e.clientY;
-        leftWidth = leftSide.getBoundingClientRect().width;
+        leftWidth = codeEditorPanel.getBoundingClientRect().width;
 
         // Attach the listeners to `document`
         document.addEventListener('mousemove', mouseMoveHandler);
@@ -68,34 +68,34 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     // Attach the handler
-    resizer.addEventListener('mousedown', mouseDownHandler);
+    codePdfresizer.addEventListener('mousedown', mouseDownHandler);
 
     const mouseMoveHandler = function (e) {
         // How far the mouse has been moved
         const dx = e.clientX - x;
         const dy = e.clientY - y;
 
-        const newLeftWidth = ((leftWidth + dx) * 100) / resizer.parentNode.getBoundingClientRect().width;
-        leftSide.style.width = `${newLeftWidth}%`;
+        const newLeftWidth = ((leftWidth + dx) * 100) / codePdfresizer.parentNode.getBoundingClientRect().width;
+        codeEditorPanel.style.width = `${newLeftWidth}%`;
 
         document.body.style.cursor = 'col-resize';
 
-        leftSide.style.userSelect = 'none';
-        leftSide.style.pointerEvents = 'none';
+        codeEditorPanel.style.userSelect = 'none';
+        codeEditorPanel.style.pointerEvents = 'none';
 
-        rightSide.style.userSelect = 'none';
-        rightSide.style.pointerEvents = 'none';
+        pdfViewerPanel.style.userSelect = 'none';
+        pdfViewerPanel.style.pointerEvents = 'none';
     };
 
     const mouseUpHandler = function () {
-        resizer.style.removeProperty('cursor');
+        codePdfresizer.style.removeProperty('cursor');
         document.body.style.removeProperty('cursor');
 
-        leftSide.style.removeProperty('user-select');
-        leftSide.style.removeProperty('pointer-events');
+        codeEditorPanel.style.removeProperty('user-select');
+        codeEditorPanel.style.removeProperty('pointer-events');
 
-        rightSide.style.removeProperty('user-select');
-        rightSide.style.removeProperty('pointer-events');
+        pdfViewerPanel.style.removeProperty('user-select');
+        pdfViewerPanel.style.removeProperty('pointer-events');
 
         // Remove the handlers of `mousemove` and `mouseup`
         document.removeEventListener('mousemove', mouseMoveHandler);
