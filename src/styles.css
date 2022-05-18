@@ -34,12 +34,11 @@ body {
 main 
 {
     flex: 1;
-    padding: 10px;
+    /*padding: 10px;*/
 }
 
 main textarea
 {
-    margin: 10px;
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -49,4 +48,37 @@ main textarea
     resize: none;
 
     font-family: Menlo, Monaco, 'Courier New', monospace;
+}
+
+.container {
+    display: flex;
+
+    /* Misc */
+    border: 1px solid #cbd5e0;
+    height: 100%;
+    width: 100%;
+}
+.code-area {
+    /* Initially, the left takes 1/2 width */
+    width: 50%;
+
+    /* Misc */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.resizer {
+    background-color: #cbd5e0;
+    cursor: ew-resize;
+    height: 100%;
+    width: 4px;
+}
+.pdf-area {
+    /* Take the remaining width */
+    flex: 1;
+
+    /* Misc */
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
