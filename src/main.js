@@ -1,7 +1,6 @@
-const { BrowserWindow, app, ipcMain, dialog, Menu } = require("electron");
+const { BrowserWindow, app, ipcMain, dialog, Menu, Notification } = require("electron");
 const path = require("path");
 const fs = require("fs");
-
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
@@ -15,12 +14,12 @@ let mainWindow;
 let openedFilePath;
 
 const handleError = (location = "undefined") => {
-    /*new Notification({
+    new Notification({
         title: "Error",
         body: "An error occured during " + location,
-    }).show();*/
+    }).show();
 
-    alert("An error occured during " + location);
+    //alert("An error occured during " + location);
 };
 
 const createWindow = () => {
@@ -28,10 +27,14 @@ const createWindow = () => {
         width: 1500,
         height: 1000,
         titleBarStyle: "hiddenInset",
-        webPreferences: {preload: path.join(app.getAppPath(), "src/renderer.js")},
+        webPreferences: {
+            nodeIntegration: true, 
+            contextIsolation: false, 
+            preload: path.join(app.getAppPath(), "src/renderer.js"),
+        },
     });
 
-    //mainWindow.webContents.openDevTools();
+    if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/index.html");
 
     const menuTemplate = [

@@ -36,4 +36,4 @@ window.addEventListener("DOMContentLoaded", () => {
     ipcRenderer.on("document-opened", (_, {filePath, content}) => {
         handleDocumentChange(filePath, content);
     });
-})
+});

@@ -18,8 +18,13 @@
   "license": "CC-BY-NC-SA-4.0",
   "repository": "github:Red-Rapious/Elements-LaTeX",
   "devDependencies": {
+    "codemirror": "^5.65.3",
     "electron": "^18.2.3",
     "electron-builder": "^23.0.3",
-    "electron-reloader": "^1.2.3"
+    "electron-reloader": "^1.2.3",
+    "pdfjs-dist": "^2.14.305"
+  },
+  "dependencies": {
+    "codemirror-node": "^1.0.1"
   }
 }
