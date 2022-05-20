@@ -39,11 +39,16 @@ Currently working on v 0.0.1: early phase of developpement.
 ## Features
 | Feature | Status | Planned for |
 | ------- | ------ | ----------- |
+| Resizable panels mechanism | :white_check_mark: | v 0.0.0 |
 | Full interface structure | :large_orange_diamond: | v 0.0.1 |
 | Create and open a folder/file | :x: | v 0.0.1 |
 | Modify and save file efficently | :x: | v 0.0.2 |
 | Compile file and show errors | :x: | v 0.0.3 |
 | Show generated PDF | :x: | v 0.0.4 |
+| Line numbers | :x: | v 1.0.1 |
+| Syntax highlightning | :x: | v 1.0.2 |
+| File structure | :x: | v 1.0.3 |
+| Default templates | :x: | v 1.0.4 |
 
 - :white_check_mark: Implemented
 - :large_orange_diamond: In active development
