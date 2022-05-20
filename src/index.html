@@ -14,17 +14,18 @@
     <body>
         <div class="title-bar">
             <span class="document-name unselectable" id="documentName"> No file opened yet </span>
-            <div class="menu-section">
-                <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
-                <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
-            </div>
+            
         </div>
 
         <main>
             <div class="HContainer" id="main-container">
                 <div class="VContainer" id="sidePanel">
                     
-                    <div id="folderManagementBar">Folder Management Bar</div>
+                    <div id="folderManagementBar">
+                            <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
+                            <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
+                    </div>
+
                     <div id="folderTreePanel">FOLDER TREE</div>
                     <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
                     <div id="structureTreePanel">STRUCTURE TREE</div>

@@ -27,23 +27,16 @@ body {
     justify-content: center;    
 }
 
-.title-bar, #footer {
+.title-bar, #footer, #folderManagementBar {
     border-color: rgb(19, 19, 25);
     border-width: 2px;
     border-style: solid;
 }
 
-.title-bar .document-name, 
+/*.title-bar .document-name, 
 .title-bar .menu-section {
     margin-right: 10px;
-}
-
-.menu-section button {
-    background-color: rgb(61, 89, 161);
-    border: none;
-    outline: none;
-    color: #fff;
-}
+}*/
 
 /* MAIN AND MISC. */
 main 
@@ -80,6 +73,22 @@ main
     flex-direction: column;
     text-align: center;
     justify-content: center;
+}
+
+#folderManagementBar {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#folderManagementBar button {
+    border-radius: 10%;
+    margin-right: 10%;
+    background-color: rgb(61, 89, 161);
+    border: none;
+    outline: none;
+    color: #fff;
 }
 
 /* DEVELOPMENT PANEL */
