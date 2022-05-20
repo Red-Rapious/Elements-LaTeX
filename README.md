@@ -6,9 +6,6 @@ Coming soon.
 This is the current interface of Elements LaTeX, still at a very early development state:
 ![Current interface screenshot](/assets/current_screenshot.png)
 
-## Features
-Features list is coming soon
-
 ## Building the project
 This project uses `npm` and `electron`.
 
@@ -37,7 +34,20 @@ npm run build
 ```
 
 ## Developpement status
-In early phase of developpement.
+Currently working on v 0.0.1: early phase of developpement.
+
+## Features
+| Feature | Status | Planned for |
+| ------- | ------ | ----------- |
+| Full interface structure | :large_orange_diamond: | v 0.0.1 |
+| Create and open a folder/file | :x: | v 0.0.1 |
+| Modify and save file efficently | :x: | v 0.0.2 |
+| Compile file and show errors | :x: | v 0.0.3 |
+| Show generated PDF | :x: | v 0.0.4 |
+
+- :white_check_mark: Implemented
+- :large_orange_diamond: In active development
+- :x: Not implemented yet
 
 ## License
 This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.

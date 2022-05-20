@@ -1,3 +1,4 @@
+/* GENERAL */
 body {
     background-color: rgb(22, 22, 30);
     margin: 0;
@@ -15,6 +16,7 @@ body {
     user-select: none;
 }
 
+/* TITLE BAR */
 .title-bar {
     height: 45px;
     width: 100%;
@@ -43,6 +45,7 @@ body {
     color: #fff;
 }
 
+/* MAIN AND MISC. */
 main 
 {
     flex: 1;
@@ -61,14 +64,25 @@ main
     width: 100%;
 }
 
+.resizer {
+    background-color: rgb(19, 19, 25);
+    cursor: ew-resize;
+    height: 100%;
+    width: 3px;
+}
+
+/* SIDE PANEL */
 #sidePanel {
     width: 18%;
 
     align-items: center;
     display: flex;
+    flex-direction: column;
+    text-align: center;
     justify-content: center;
 }
 
+/* DEVELOPMENT PANEL */
 #devAndFooterContainer {
     /* Take the remaining width */
     flex: 1;
@@ -77,6 +91,10 @@ main
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#developmentPanel {
+    width: 100%;
 }
 
 #codeEditorPanel {
@@ -95,17 +113,6 @@ main
     font-family: Menlo, Monaco, 'Courier New', monospace;
 }
 
-#developmentPanel {
-    width: 100%;
-}
-
-.resizer {
-    background-color: rgb(19, 19, 25);
-    cursor: ew-resize;
-    height: 100%;
-    width: 3px;
-}
-
 #pdfViewerPanel {
     /* Take the remaining width */
     flex: 1;
@@ -115,6 +122,8 @@ main
     justify-content: center;
 }
 
+
+/* FOOTER */
 #footer {
     width: 100%;
     /*flex: 1;*/
