@@ -1,6 +1,8 @@
 const { BrowserWindow, app, ipcMain, dialog, Menu, Notification } = require("electron");
 const path = require("path");
 const fs = require("fs");
+const settings = require("electron-settings");
+const { set } = require("electron-settings");
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
@@ -36,6 +38,15 @@ const createWindow = () => {
 
     if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/index.html");
+
+    settings.has("current-file").then( bool => {
+        if (bool) {
+            
+            settings.get("current-file").then(value => { 
+                openFile(value.data);
+            });
+        }
+    });
 
     const menuTemplate = [
     {
@@ -141,7 +152,8 @@ const openFile = (filePath) => {
         }
         else {
             app.addRecentDocument(filePath);
-            mainWindow.webContents.send("document-opened", { filePath, content })
+            settings.set("current-file", { data: filePath });
+            mainWindow.webContents.send("document-opened", { filePath, content });
         }
     });
 };
@@ -165,7 +177,7 @@ ipcMain.on("create-document-triggered", () => {
             else {
                 openedFilePath = filePath;
                 app.addRecentDocument(filePath);
-                mainWindow.webContents.send("document-created", filePath); 
+                mainWindow.webContents.send("document-created", filePath);
             }
         } );
     });

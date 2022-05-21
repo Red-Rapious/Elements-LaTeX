@@ -19,6 +19,7 @@ npm install electron -D
 
 npm install electron-reloader -D
 npm install electron-builder -D
+npm install electron-settings -D
 ```
 
 Then, to start the project, type:
