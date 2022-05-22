@@ -8,6 +8,9 @@
     "start": "NODE_ENV=development electron .",
     "build": "electron-builder"
   },
+  "build": {
+    "extraResources": ["./libs/**"]
+  },
   "keywords": [
     "elements",
     "latex",

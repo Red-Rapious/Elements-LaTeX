@@ -169,7 +169,6 @@ ipcMain.on("create-document-triggered", () => {
         filters: [{name: "LaTeX files", extensions: ["tex"]}]
     })
     .then(({ filePath }) => {
-        //console.log(filePath);
         fs.writeFile(filePath, "", (error) => {
             if (error) {
                 handleError("the creation of the file")
@@ -190,6 +189,7 @@ ipcMain.on("open-document-triggered", () => {
     })
     .then(({ filePaths }) => {
         const filePath = filePaths[0];
+        console.log(filePath)
         openFile(filePath);
     });
 });

@@ -1,9 +1,11 @@
 const { ipcRenderer } = require("electron");
 const path = require("path");
+const fs = require("fs");
 
 window.addEventListener("DOMContentLoaded", () => {
-    /* BUTTONS */
+    let texDocumentPath = "";
 
+    /* BUTTONS */
     const el = {
         documentName: document.getElementById("documentName"),
         createDocumentBtn: document.getElementById("createDocumentBtn"),
@@ -12,11 +14,39 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleDocumentChange = (filePath, content = "") => {
+        texDocumentPath = filePath;
         el.documentName.innerHTML = path.parse(filePath).base;
+
+        updatePDFPanel();
 
         el.fileTextarea.removeAttribute("disabled");
         el.fileTextarea.value = content;
         el.fileTextarea.focus();
+    }
+
+    const updatePDFPanel = () => {
+        /* PDF HANDLING */
+        const viewerEle = document.getElementById('pdfViewerPanel');
+        viewerEle.innerHTML = ''; // destroy the old instance of PDF.js (if it exists)
+
+        const pdfPath = texDocumentPath.slice(0, -4) + ".pdf"; // path of the matching PDF document
+
+        fs.stat(pdfPath, function(err, stat) {
+            if (err == null) {
+                // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
+                const iframe = document.createElement('iframe');
+                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}`);
+
+                // Add the iframe to our UI.
+                viewerEle.appendChild(iframe);
+            } else if(err.code === 'ENOENT') {
+                // file doesn't exist
+                viewerEle.innerHTML = "No PDF document matching the opened TEX file";//"PDF: " + pdfPath + " doesn't exist...";
+            } else {
+                console.log("Error during PDF opening ", err.code);
+            }
+
+        });
     }
 
     el.createDocumentBtn.addEventListener("click", () => {
