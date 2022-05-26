@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (err == null) {
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}`);
+                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);
@@ -71,83 +71,86 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     /* RESIZABLE AREAS */
-
-    // Query the element
-    const resizer = [document.getElementById("codePdfResizer"), document.getElementById("sideDevelopmentResizer")];
-    const leftSide = [document.getElementById("codeEditorPanel"), document.getElementById("sidePanel")];
-    const rightSide = [document.getElementById("pdfViewerPanel"), document.getElementById("devAndFooterContainer")];
-
-    // Store the functions that might need to be removed later
-    let mouseUpFuncs = [];
-    let mouseMoveFuncs = [];
-
-    for (var i = 0 ; i < resizer.length ; i++) {
-        const id = i;
-        mouseMoveFuncs.push((e) => { mouseMoveHandler(e, id); });
-        mouseUpFuncs.push(() => { mouseUpHandler(id); });
-    }
     
-    // The current position of mouse
-    let x = 0;
-    let y = 0;
+    const resizable = function (resizer) {
+        const direction = resizer.getAttribute('data-direction') || 'horizontal';
+        const prevSibling = resizer.previousElementSibling;
+        const nextSibling = resizer.nextElementSibling;
 
-    // Width of left side
-    let leftWidth = [0, 0];
+        // The current position of mouse
+        let x = 0;
+        let y = 0;
+        let prevSiblingHeight = 0;
+        let prevSiblingWidth = 0;
 
-    // Handle the mousedown event
-    // that's triggered when user drags the resizer
-    const mouseDownHandler = function (e, id) {
-        // Get the current mouse position
-        x = e.clientX;
-        y = e.clientY;
-        leftWidth[id] = leftSide[id].getBoundingClientRect().width;
+        // Handle the mousedown event
+        // that's triggered when user drags the resizer
+        const mouseDownHandler = function (e) {
+            // Get the current mouse position
+            x = e.clientX;
+            y = e.clientY;
+            const rect = prevSibling.getBoundingClientRect();
+            prevSiblingHeight = rect.height;
+            prevSiblingWidth = rect.width;
 
-        // Attach the listeners to `document`
-        document.addEventListener('mousemove', mouseMoveFuncs[id]);
-        document.addEventListener('mouseup', mouseUpFuncs[id]);
+            // Attach the listeners to `document`
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        };
+
+        const mouseMoveHandler = function (e) {
+            // How far the mouse has been moved
+            const dx = e.clientX - x;
+            const dy = e.clientY - y;
+
+            switch (direction) {
+                case 'vertical':
+                    const h =
+                        ((prevSiblingHeight + dy) * 100) /
+                        resizer.parentNode.getBoundingClientRect().height;
+                    prevSibling.style.height = `${h}%`;
+                    break;
+                case 'horizontal':
+                default:
+                    const w =
+                        ((prevSiblingWidth + dx) * 100) / resizer.parentNode.getBoundingClientRect().width;
+                    prevSibling.style.width = `${w}%`;
+                    break;
+            }
+
+            const cursor = direction === 'horizontal' ? 'col-resize' : 'row-resize';
+            resizer.style.cursor = cursor;
+            document.body.style.cursor = cursor;
+
+            prevSibling.style.userSelect = 'none';
+            prevSibling.style.pointerEvents = 'none';
+
+            nextSibling.style.userSelect = 'none';
+            nextSibling.style.pointerEvents = 'none';
+        };
+
+        const mouseUpHandler = function () {
+            resizer.style.removeProperty('cursor');
+            document.body.style.removeProperty('cursor');
+
+            prevSibling.style.removeProperty('user-select');
+            prevSibling.style.removeProperty('pointer-events');
+
+            nextSibling.style.removeProperty('user-select');
+            nextSibling.style.removeProperty('pointer-events');
+
+            // Remove the handlers of `mousemove` and `mouseup`
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mouseup', mouseUpHandler);
+        };
+
+        // Attach the handler
+        resizer.addEventListener('mousedown', mouseDownHandler);
     };
 
-    const mouseMoveHandler = function (e, id) {
-        // How far the mouse has been moved
-        const dx = e.clientX - x;
-        const dy = e.clientY - y;
+    // Query all resizers
+    document.querySelectorAll('.resizer').forEach(function (ele) {
+        resizable(ele);
+    });
 
-        const parentWidth = resizer[id].parentNode.getBoundingClientRect().width;
-        const newLeftWidth = ((leftWidth[id] + dx) * 100) / parentWidth;
-        const newRightWidth =  ((parentWidth - leftWidth[id] - dx) * 100) / parentWidth;
-
-        leftSide[id].style.width = `${newLeftWidth}%`;
-        rightSide[id].style.width = `${newRightWidth}%`;
-
-        // TODO: ADAPT RIGHT SIDE ALSO
-
-        document.body.style.cursor = 'col-resize';
-
-        leftSide[id].style.userSelect = 'none';
-        leftSide[id].style.pointerEvents = 'none';
-
-        rightSide[id].style.userSelect = 'none';
-        rightSide[id].style.pointerEvents = 'none';
-    };
-
-    const mouseUpHandler = function (id) {
-        resizer[id].style.removeProperty('cursor');
-        document.body.style.removeProperty('cursor');
-
-        leftSide[id].style.removeProperty('user-select');
-        leftSide[id].style.removeProperty('pointer-events');
-
-        rightSide[id].style.removeProperty('user-select');
-        rightSide[id].style.removeProperty('pointer-events');
-
-        // Remove the handlers of `mousemove` and `mouseup`
-        document.removeEventListener('mousemove', mouseMoveFuncs[id]);
-        document.removeEventListener('mouseup', mouseUpFuncs[id]);
-    };
-
-    // Attach the handler
-    for (var i = 0 ; i < resizer.length ; i++) {
-        const id = i;
-        resizer[id].addEventListener('mousedown', (e) => { mouseDownHandler(e, id); });
-    }
 });

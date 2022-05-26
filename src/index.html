@@ -14,22 +14,19 @@
     <body>
         <div class="title-bar">
             <span class="document-name unselectable" id="documentName"> No file opened yet </span>
-            <span class="unselectable" id="elementsLogo">
-                <!--<img id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">-->
-                Elements LaTeX
-            </span>
+            <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">
         </div>
 
         <main>
             <div class="HContainer" id="main-container">
                 <div class="VContainer" id="sidePanel">
-                    
-                    <div id="folderManagementBar">
+                    <div id="folderTreePanel">
+                        <div id="folderManagementBar">
                             <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
                             <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
+                        </div>
+                        FOLDER TREE
                     </div>
-
-                    <div id="folderTreePanel">FOLDER TREE</div>
                     <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
                     <div id="structureTreePanel">STRUCTURE TREE</div>
 
