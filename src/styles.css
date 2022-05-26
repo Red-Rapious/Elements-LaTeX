@@ -34,7 +34,26 @@ body {
     border-style: solid;
 }
 
-/*.title-bar .document-name, 
+#documentName {
+    text-align: center;
+    position: fixed;
+    left: 50%;
+}
+
+#elementsLogo {
+    width: 100%;
+    font-size: medium;
+    text-align: right;
+    margin-right: 12px;
+}
+
+/*#simplifiedLogoImage {
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
+}*/
+
+/*.title-bar .documenName, 
 .title-bar .menu-section {
     margin-right: 10px;
 }*/
