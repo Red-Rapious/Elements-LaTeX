@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const settings = require("electron-settings");
 const { set } = require("electron-settings");
+const { get } = require("http");
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
@@ -141,6 +142,22 @@ const createWindow = () => {
 
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
+};
+
+const getAllFilesFromFolder = function(dir) {
+    var results = [];
+
+    fs.readdirSync(dir).forEach(function(file) {
+
+        file = dir+'/'+file;
+        var stat = fs.statSync(file);
+
+        if (stat && stat.isDirectory()) {
+            results = results.concat(getAllFilesFromFolder(file))
+        } else results.push(file);
+
+    });
+    return results;
 };
 
 const openFile = (filePath) => {

@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
 
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./styles.css" />
 
         <title>Elements LaTeX</title>
@@ -14,18 +15,41 @@
     <body>
         <div class="title-bar">
             <span class="document-name unselectable" id="documentName"> No file opened yet </span>
-            <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">
-        </div>
+            <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">        </div>
 
         <main>
             <div class="HContainer" id="main-container">
                 <div class="VContainer" id="sidePanel">
                     <div id="folderTreePanel">
                         <div id="folderManagementBar">
+                            <div class="unselectable" id="folderStructureLabel"><i class="fa fa-folder-open"></i>Folder Structure</div>
                             <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
                             <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
                         </div>
-                        FOLDER TREE
+                        
+                        <div class="tree unselectable">
+                            <ul>
+                              <li><i class="fa fa-folder-open"></i> Main folder
+                                <ul>
+                                  <li><i class="fa fa-folder-open"></i> Opened Folder
+                                    <ul>
+                                      <li><i class="fa fa-folder-open"></i> css
+                                        <ul>
+                                          <li><i class="fa fa-code"></i> CSS Files</li>    
+                                        </ul>
+                                      </li>
+                                      <li><i class="fa fa-folder"></i> Folder close
+                                      </li>
+                                      <li><i class="fab fa-html5"></i> index.html</li>
+                                      <li><i class="fa fa-picture-o"></i> favicon.ico</li>
+                                    </ul>
+                                  </li>
+                                  <li><i class="fa fa-folder"></i> Folder close</li>
+                                </ul>
+                              </li>
+                            </ul>
+                        </div>
+
                     </div>
                     <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
                     <div id="structureTreePanel">STRUCTURE TREE</div>

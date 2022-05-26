@@ -2,6 +2,23 @@ const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 
+var _getAllFilesFromFolder = function(dir) {
+    var results = [];
+
+    filesystem.readdirSync(dir).forEach(function(file) {
+
+        file = dir+'/'+file;
+        var stat = filesystem.statSync(file);
+
+        if (stat && stat.isDirectory()) {
+            results = results.concat(_getAllFilesFromFolder(file))
+        } else results.push(file);
+
+    });
+
+    return results;
+};
+
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
 
@@ -35,7 +52,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (err == null) {
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none`);
+                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=110`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);
@@ -69,9 +86,9 @@ window.addEventListener("DOMContentLoaded", () => {
         handleDocumentChange(filePath, content);
     });
 
-
+    const minWidth = 15;
+    const minHeight = 15;
     /* RESIZABLE AREAS */
-    
     const resizable = function (resizer) {
         const direction = resizer.getAttribute('data-direction') || 'horizontal';
         const prevSibling = resizer.previousElementSibling;

@@ -4,7 +4,7 @@ Coming soon.
 
 ## Preview
 This is the current interface of Elements LaTeX, still at a very early development state:
-![Current interface screenshot](/assets/current_screenshot.png)
+![Current interface screenshot](/assets/screenshots/current_screenshot.png)
 
 ## Building the project
 This project uses `npm` and `electron`.
