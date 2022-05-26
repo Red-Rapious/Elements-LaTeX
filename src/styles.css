@@ -67,8 +67,6 @@ main
 .HContainer {
     display: flex;
 
-    /* Misc */
-    /*border: 1px solid #cbd5e0;*/
     height: 100%;
     width: 100%;
 }
@@ -99,14 +97,13 @@ main
     min-width: 10%;
 }
 
-#folderStructureLabel {
-    font-size: medium;
+#folderStructureLabel, #fileStructureLabel {
     width: auto;
     white-space: nowrap;
     margin-right: 5%;
 }
 
-#folderStructureLabel i {
+#folderStructureLabel i, #fileStructureLabel i {
     margin-right: 7px;
 }
 
@@ -123,7 +120,7 @@ main
 .tree {
     width: 100%;
     height: 100%;
-    background-color: rgb(26, 27, 38);
+    /*background-color: rgb(26, 27, 38);*/
     color: #fff;
     font-family: 'Roboto Mono', monospace;
     font-size: .85rem;
@@ -139,11 +136,12 @@ main
       color: #a8a8a8;
 }
 
-#folderManagementBar {
+#folderManagementBar, #structureManagementBar {
     display: flex;
+    font-size: medium;
     align-items: center;
     justify-content: left;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-right: auto;
 }
 
@@ -198,14 +196,16 @@ main
 
 /*::-webkit-scrollbar {
     width: 15px;
+    border-color: rgb(19, 19, 25);
 }
 
 ::-webkit-scrollbar-track {
-    background: #ffff;
+    border-color: rgb(19, 19, 25);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(120, 124, 163);
+    background-color: rgb(30, 31, 42);
+    border-color: rgb(19, 19, 25);
 }*/
 
 #pdfViewerPanel {
@@ -232,7 +232,20 @@ viewer-pdf-toolbar {
 /* FOOTER */
 #footer {
     width: 100%;
-    /*flex: 1;*/
-    height: 25px;
-    text-align: center;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+#lineCountLabel, #elementsVersionLabel {
+    text-align: right;
+    margin-left: 15px;
+    margin-right: 15px;
+    white-space: nowrap;
+    font-size: medium;
+}
+
+#footer:first-child {
+    margin-left: auto;
 }

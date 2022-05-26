@@ -1,6 +1,8 @@
 const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
+var pjson = require('../package.json');
+
 
 var _getAllFilesFromFolder = function(dir) {
     var results = [];
@@ -28,7 +30,11 @@ window.addEventListener("DOMContentLoaded", () => {
         createDocumentBtn: document.getElementById("createDocumentBtn"),
         openDocumentBtn: document.getElementById("openDocumentBtn"),
         fileTextarea: document.getElementById("codeEditorPanel"),
+        lineCountLabel: document.getElementById("lineCountLabel"),
+        elementsVersionLabel: document.getElementById("elementsVersionLabel"),
     };
+
+    el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
 
     const handleDocumentChange = (filePath, content = "") => {
         texDocumentPath = filePath;
@@ -39,6 +45,8 @@ window.addEventListener("DOMContentLoaded", () => {
         el.fileTextarea.removeAttribute("disabled");
         el.fileTextarea.value = content;
         el.fileTextarea.focus();
+
+        el.lineCountLabel.innerHTML = "Lines: " + el.fileTextarea.value.match(/\n/g).length + 1;
     }
 
     const updatePDFPanel = () => {

@@ -27,7 +27,7 @@ const handleError = (location = "undefined") => {
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 1500,
+        width: 1600,
         height: 1000,
         titleBarStyle: "hiddenInset",
         webPreferences: {

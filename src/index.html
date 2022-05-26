@@ -15,7 +15,8 @@
     <body>
         <div class="title-bar">
             <span class="document-name unselectable" id="documentName"> No file opened yet </span>
-            <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">        </div>
+            <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">
+        </div>
 
         <main>
             <div class="HContainer" id="main-container">
@@ -52,7 +53,11 @@
 
                     </div>
                     <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
-                    <div id="structureTreePanel">STRUCTURE TREE</div>
+                    <div id="structureTreePanel">
+                      <div id="structureManagementBar">
+                        <div class="unselectable" id="fileStructureLabel"><i class="fa fa-code"></i>Document Structure</div>
+                      </div>
+                    </div>
 
                 </div>
 
@@ -66,7 +71,10 @@
                         <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
                     </div>
 
-                    <div id="footer">FOOTER</div>
+                    <div id="footer">
+                      <span id="elementsVersionLabel">Version undef</span>
+                      <span id="lineCountLabel">Lines: undef</span>
+                    </div>
 
                 </div>
                 
