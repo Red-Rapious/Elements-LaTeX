@@ -15,6 +15,7 @@ if (isDevelopementEnvironement) {
 
 let mainWindow;
 let openedFilePath;
+let openedFolderPath;
 
 const handleError = (location = "undefined") => {
     new Notification({
@@ -175,6 +176,12 @@ const openFile = (filePath) => {
     });
 };
 
+const openFolder = (folderPath) => {
+    openedFolderPath = folderPath;
+    settings.set("current-folder", { data: folderPath });
+    mainWindow.webContents.send("folder-opened", { folderPath });
+};
+
 app.on("open-file", (_, filePath) => {
     openFile(filePath);
 });
@@ -186,16 +193,18 @@ ipcMain.on("create-document-triggered", () => {
         filters: [{name: "LaTeX files", extensions: ["tex"]}]
     })
     .then(({ filePath }) => {
-        fs.writeFile(filePath, "", (error) => {
-            if (error) {
-                handleError("the creation of the file")
-            }
-            else {
-                openedFilePath = filePath;
-                app.addRecentDocument(filePath);
-                mainWindow.webContents.send("document-created", filePath);
-            }
-        } );
+        if (filePaths != undefined) {
+            fs.writeFile(filePath, "", (error) => {
+                if (error) {
+                    handleError("the creation of the file")
+                }
+                else {
+                    openedFilePath = filePath;
+                    app.addRecentDocument(filePath);
+                    mainWindow.webContents.send("document-created", filePath);
+                }
+            } );
+        }
     });
 });
 
@@ -205,9 +214,22 @@ ipcMain.on("open-document-triggered", () => {
         filters: [{name: "LaTeX files", extensions: ["tex"]}]
     })
     .then(({ filePaths }) => {
-        const filePath = filePaths[0];
-        console.log(filePath)
-        openFile(filePath);
+        if (filePaths != undefined) {
+            const filePath = filePaths[0];
+            openFile(filePath);
+        }
+    });
+});
+
+ipcMain.on("open-folder-triggered", () => {
+    dialog.showOpenDialog(mainWindow, {
+        properties: ["openDirectory", "createDirectory"],
+    })
+    .then(({ directoriesPath }) => {
+        if (directoriesPath != undefined) {
+            const folderPath = directoriesPath[0];
+            openFolder(folderPath);
+        }
     });
 });
 

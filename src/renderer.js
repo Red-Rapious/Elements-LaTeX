@@ -3,23 +3,22 @@ const path = require("path");
 const fs = require("fs");
 var pjson = require('../package.json');
 
+var getFolderStructure = function(dir) {
+    var result = [];
 
-var _getAllFilesFromFolder = function(dir) {
-    var results = [];
-
-    filesystem.readdirSync(dir).forEach(function(file) {
-
-        file = dir+'/'+file;
-        var stat = filesystem.statSync(file);
+    fs.readdirSync(dir).forEach(function(file) {
+        var stat = fs.statSync(dir+'/'+file);
 
         if (stat && stat.isDirectory()) {
-            results = results.concat(_getAllFilesFromFolder(file))
-        } else results.push(file);
-
+            result.push([file, getFolderStructure(dir+'/'+file)]);
+        } 
+        else {
+            if (file != ".DS_Store") result.push(file);
+        }
     });
 
-    return results;
-};
+    return [path.basename(dir), result];
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
@@ -29,6 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
         documentName: document.getElementById("documentName"),
         createDocumentBtn: document.getElementById("createDocumentBtn"),
         openDocumentBtn: document.getElementById("openDocumentBtn"),
+        openFolderBtn: document.getElementById("openFolderBtn"),
         fileTextarea: document.getElementById("codeEditorPanel"),
         lineCountLabel: document.getElementById("lineCountLabel"),
         elementsVersionLabel: document.getElementById("elementsVersionLabel"),
@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
         el.fileTextarea.focus();
 
         el.lineCountLabel.innerHTML = "Lines: " + el.fileTextarea.value.match(/\n/g).length + 1;
-    }
+    };
 
     const updatePDFPanel = () => {
         /* PDF HANDLING */
@@ -72,7 +72,12 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
         });
-    }
+    };
+
+    const handleFolderChange = (folderPath) => {
+        folderStructure = getFolderStructure(folderPath);
+
+    };
 
     el.createDocumentBtn.addEventListener("click", () => {
         ipcRenderer.send("create-document-triggered");
@@ -82,10 +87,14 @@ window.addEventListener("DOMContentLoaded", () => {
         ipcRenderer.send("open-document-triggered");
     });
 
+    el.openFolderBtn.addEventListener("click", () => {
+        ipcRenderer.send("open-folder-triggered");
+    });
+
     el.fileTextarea.addEventListener("input", (e) => {
         ipcRenderer.send("file-content-updated", e.target.value);
     });
-
+   
     ipcRenderer.on("document-created", (_, filePath) => {
         handleDocumentChange(filePath);
     });
@@ -94,9 +103,14 @@ window.addEventListener("DOMContentLoaded", () => {
         handleDocumentChange(filePath, content);
     });
 
+    ipcRenderer.on("folder-opened", (_, { folderPath }) => {
+        handleFolderChange(folderPath, content);
+    });
+
+    /* RESIZABLE AREAS */
     const minWidth = 15;
     const minHeight = 15;
-    /* RESIZABLE AREAS */
+    
     const resizable = function (resizer) {
         const direction = resizer.getAttribute('data-direction') || 'horizontal';
         const prevSibling = resizer.previousElementSibling;

@@ -50,7 +50,7 @@ body {
     margin-right: 10px;
 }
 
-/*.title-bar .documenName, 
+/*.title-bar .documentName, 
 .title-bar .menu-section {
     margin-right: 10px;
 }*/
@@ -132,7 +132,7 @@ main
     text-align: left;
 }
 
-.tree span {
+#structureTreePanel span {
       font-size: 13px;
       font-style: italic;
       letter-spacing: .4px;
@@ -155,6 +155,10 @@ main
     border: none;
     outline: none;
     color: #fff;
+}
+
+#folderManagementBar button:active {
+    background-color: rgb(67, 70, 107);
 }
 
 #structureTreePanel {
@@ -235,7 +239,7 @@ viewer-pdf-toolbar {
 /* FOOTER */
 #footer {
     width: 100%;
-    height: 24px;
+    height: 25px;
     display: flex;
     flex-direction: row;
     justify-content: right;
