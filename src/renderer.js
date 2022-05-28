@@ -171,9 +171,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     /* RESIZABLE AREAS */
-    const minWidth = 15;
-    const minHeight = 15;
-    
     const resizable = function (resizer) {
         const direction = resizer.getAttribute('data-direction') || 'horizontal';
         const prevSibling = resizer.previousElementSibling;

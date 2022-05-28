@@ -62,10 +62,9 @@ main
     width: 100%;
     height: 100%;
     border: none;
-    /*padding: 10px;*/
 }
 
-.HContainer {
+main {
     display: flex;
 
     height: 100%;
@@ -90,14 +89,13 @@ main
 /* SIDE PANEL */
 #sidePanel {
     width: 20%;
+    min-width: 10%;
 
     align-items: center;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
-
-    min-width: 10%;
 }
 
 #folderStructureLabel, #fileStructureLabel {
@@ -183,6 +181,7 @@ main
 
 #developmentPanel {
     width: 100%;
+    height: 100%;
 }
 
 #codeAndBarPanel {

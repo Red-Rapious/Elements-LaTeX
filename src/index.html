@@ -19,82 +19,57 @@
         </div>
 
         <main>
-            <div class="HContainer" id="main-container">
-                <div class="VContainer" id="sidePanel">
-                    <div id="folderTreePanel">
-                        <div id="folderManagementBar">
-                            <div class="unselectable" id="folderStructureLabel"><i class="fa fa-folder-open"></i>Folder Structure</div>
-                            <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
-                            <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
-                            <button id="openFolderBtn"><span class="material-icons"> create_new_folder </span></button>
-                        </div>
-                        
-                        <div id="folderTree" class="tree unselectable">
-                          <ul><i class="fa fa-folder-open"></i> No folder opened</ul>
-                            <!--<ul>
-                              <li><i class="fa fa-folder-open"></i> Main folder
-                                <ul>
-                                  <li><i class="fa fa-folder-open"></i> Project 1
-                                    <ul>
-                                      <li><i class="fa fa-folder-open"></i> Backup
-                                        <ul>
-                                          <li><i class="fa fa-code"></i> backup.tex </li>    
-                                        </ul>
-                                      </li>
-                                      <li><i class="fa fa-folder"></i> Main files
-                                      </li>
-                                      <li><i class="fa fa-code"></i> main.tex</li>
-                                      <li><i class="fa fa-code"></i> structure.tex</li>
-                                    </ul>
-                                  </li>
-                                  <li><i class="fa fa-folder"></i> Project 2 </li>
-                                </ul>
-                              </li>
-                            </ul>-->
-                        </div>
-
+            <div id="sidePanel">
+                <div id="folderTreePanel">
+                    <div id="folderManagementBar">
+                        <div class="unselectable" id="folderStructureLabel"><i class="fa fa-folder-open"></i>Folder Structure</div>
+                        <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
+                        <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
+                        <button id="openFolderBtn"><span class="material-icons"> create_new_folder </span></button>
                     </div>
-                    <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
-                    <div id="structureTreePanel">
-                      <div id="structureManagementBar">
-                        <div class="unselectable" id="fileStructureLabel"><i class="fa fa-code"></i>Document Structure</div>
-                      </div>
-                      <div id="structureTree" class="tree unselectable">
-                        <ul>
-                          <li><i class="fa fa-file"></i> No file opened </li>
-                        </ul>
-                      </div>
+                    
+                    <div id="folderTree" class="tree unselectable">
+                      <ul><i class="fa fa-folder-open"></i> No folder opened</ul>
                     </div>
 
                 </div>
-
-                <div id="sideDevelopmentResizer" class="resizer" data-direction="horizontal"></div>
-
-                <div id="devAndFooterContainer">
-
-                    <div class="HContainer" id="developmentPanel" style="display: flex">
-                        <div id="codeAndBarPanel">
-                          <div id="codeCompileBar">
-                            <button id="compileCodeBtn"><span class="material-icons"> play_arrow </span></button>
-                            <button id="interruptCompileBtn"><span class="material-icons"> pause </span></button>
-                            <button id="showErrorsBtn"><span class="material-icons"> bug_report </span></button>
-                          </div>
-                          <textarea id="codeEditorPanel" disabled ></textarea>
-                        </div>
-                        <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
-                        <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
-                    </div>
-
-                    <div id="footer">
-                      <span class="label" id="elementsVersionLabel">Version undef</span>
-                      <span class="label" id="lineCountLabel">Lines: undef</span>
-                    </div>
-
+                <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
+                <div id="structureTreePanel">
+                  <div id="structureManagementBar">
+                    <div class="unselectable" id="fileStructureLabel"><i class="fa fa-code"></i>Document Structure</div>
+                  </div>
+                  <div id="structureTree" class="tree unselectable">
+                    <ul>
+                      <li><i class="fa fa-file"></i> No file opened </li>
+                    </ul>
+                  </div>
                 </div>
-                
+
             </div>
 
+            <div id="sideDevelopmentResizer" class="resizer" data-direction="horizontal"></div>
 
+            <div id="devAndFooterContainer">
+
+                <div id="developmentPanel" style="display: flex">
+                    <div id="codeAndBarPanel">
+                      <div id="codeCompileBar">
+                        <button id="compileCodeBtn"><span class="material-icons"> play_arrow </span></button>
+                        <button id="interruptCompileBtn"><span class="material-icons"> pause </span></button>
+                        <button id="showErrorsBtn"><span class="material-icons"> bug_report </span></button>
+                      </div>
+                      <textarea id="codeEditorPanel" disabled ></textarea>
+                    </div>
+                    <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
+                    <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
+                </div>
+
+                <div id="footer">
+                  <span class="label" id="elementsVersionLabel">Version undef</span>
+                  <span class="label" id="lineCountLabel">Lines: undef</span>
+                </div>
+
+            </div>
         </main>
     </body>
 </html>
