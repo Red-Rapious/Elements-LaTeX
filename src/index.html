@@ -73,7 +73,14 @@
                 <div id="devAndFooterContainer">
 
                     <div class="HContainer" id="developmentPanel" style="display: flex">
-                        <textarea class="code-panel" id="codeEditorPanel" disabled ></textarea>
+                        <div id="codeAndBarPanel">
+                          <div id="codeCompileBar">
+                            <button id="compileCodeBtn"><span class="material-icons"> play_arrow </span></button>
+                            <button id="interruptCompileBtn"><span class="material-icons"> pause </span></button>
+                            <button id="showErrorsBtn"><span class="material-icons"> bug_report </span></button>
+                          </div>
+                          <textarea id="codeEditorPanel" disabled ></textarea>
+                        </div>
                         <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
                         <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
                     </div>

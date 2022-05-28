@@ -2,8 +2,6 @@ const { BrowserWindow, app, ipcMain, dialog, Menu, Notification } = require("ele
 const path = require("path");
 const fs = require("fs");
 const settings = require("electron-settings");
-const { set } = require("electron-settings");
-const { get } = require("http");
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
@@ -156,7 +154,6 @@ const createWindow = () => {
 
 const openFile = (filePath) => {
     openedFilePath = filePath;
-    openFolder(path.dirname(filePath));
 
     fs.readFile(filePath, "utf-8", (error, content) => {
         if (error) {
@@ -200,6 +197,7 @@ ipcMain.on("create-document-triggered", () => {
                     openedFilePath = filePath;
                     app.addRecentDocument(filePath);
                     mainWindow.webContents.send("document-created", filePath);
+                    openFolder(path.dirname(filePath));
                 }
             } );
         }
@@ -214,6 +212,7 @@ ipcMain.on("open-document-triggered", () => {
     .then(({ filePaths }) => {
         if (filePaths != undefined) {
             const filePath = filePaths[0];
+            openFolder(path.dirname(filePath));
             openFile(filePath);
         }
     });
