@@ -10,15 +10,33 @@ var getFolderStructure = function(dir) {
         var stat = fs.statSync(dir+'/'+file);
 
         if (stat && stat.isDirectory()) {
-            result.push([file, getFolderStructure(dir+'/'+file)]);
+            result.push(getFolderStructure(dir+'/'+file));
         } 
         else {
-            if (file != ".DS_Store") result.push(file);
+            if (file != ".DS_Store") result.push([file, []]);
         }
     });
 
     return [path.basename(dir), result];
 }
+
+var createFolderStructureHTML = (folderStructure) => {
+    var htmlCode = "";
+
+    if (folderStructure[1].length == 0) {
+        htmlCode = "<li><i class=\"fa fa-code\"></i> " + folderStructure[0] + " </li>\n";
+    }
+    else {
+        htmlCode += "<li><i class=\"fa fa-folder-open\"></i> " + folderStructure[0];
+        for (var i = 0 ; i < folderStructure[1].length ; i++)
+        {
+            htmlCode +=  "\n<ul> " + createFolderStructureHTML(folderStructure[1][i]) + " </ul> ";
+        }
+        htmlCode += "\n</li>";
+    }
+    return htmlCode;
+};
+
 
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
@@ -32,6 +50,7 @@ window.addEventListener("DOMContentLoaded", () => {
         fileTextarea: document.getElementById("codeEditorPanel"),
         lineCountLabel: document.getElementById("lineCountLabel"),
         elementsVersionLabel: document.getElementById("elementsVersionLabel"),
+        folderTree: document.getElementById("folderTree"),
     };
 
     el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
@@ -75,8 +94,8 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleFolderChange = (folderPath) => {
-        folderStructure = getFolderStructure(folderPath);
-
+        htmlCode = createFolderStructureHTML(getFolderStructure(folderPath))
+        el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
 
     el.createDocumentBtn.addEventListener("click", () => {
@@ -104,7 +123,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     ipcRenderer.on("folder-opened", (_, { folderPath }) => {
-        handleFolderChange(folderPath, content);
+        handleFolderChange(folderPath);
     });
 
     /* RESIZABLE AREAS */

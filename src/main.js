@@ -50,6 +50,15 @@ const createWindow = () => {
         }
     });
 
+    settings.has("current-folder").then( bool => {
+        if (bool) {
+            
+            settings.get("current-folder").then(value => { 
+                openFolder(value.data);
+            });
+        }
+    });
+
     const menuTemplate = [
     {
         label: "File",
@@ -225,9 +234,10 @@ ipcMain.on("open-folder-triggered", () => {
     dialog.showOpenDialog(mainWindow, {
         properties: ["openDirectory", "createDirectory"],
     })
-    .then(({ directoriesPath }) => {
-        if (directoriesPath != undefined) {
-            const folderPath = directoriesPath[0];
+    .then(({ filePaths }) => {
+        console.log(filePaths);
+        if (filePaths != undefined) {
+            const folderPath = filePaths[0];
             openFolder(folderPath);
         }
     });
