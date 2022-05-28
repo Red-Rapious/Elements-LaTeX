@@ -154,22 +154,6 @@ const createWindow = () => {
     Menu.setApplicationMenu(menu);
 };
 
-const getAllFilesFromFolder = function(dir) {
-    var results = [];
-
-    fs.readdirSync(dir).forEach(function(file) {
-
-        file = dir+'/'+file;
-        var stat = fs.statSync(file);
-
-        if (stat && stat.isDirectory()) {
-            results = results.concat(getAllFilesFromFolder(file))
-        } else results.push(file);
-
-    });
-    return results;
-};
-
 const openFile = (filePath) => {
     openedFilePath = filePath;
 
@@ -193,6 +177,10 @@ const openFolder = (folderPath) => {
 
 app.on("open-file", (_, filePath) => {
     openFile(filePath);
+});
+
+app.on("open-folder", (_, folderPath) => {
+    openFolder(folderPath);
 });
 
 app.whenReady().then(createWindow);
@@ -235,7 +223,6 @@ ipcMain.on("open-folder-triggered", () => {
         properties: ["openDirectory", "createDirectory"],
     })
     .then(({ filePaths }) => {
-        console.log(filePaths);
         if (filePaths != undefined) {
             const folderPath = filePaths[0];
             openFolder(folderPath);
@@ -251,4 +238,8 @@ ipcMain.on("file-content-updated", (_, textareaContent) => {
             handleError("the update of the file");
         }
     });
+});
+
+ipcMain.on("open-given-file", (_, filePath) => {
+    openFile(filePath);
 });

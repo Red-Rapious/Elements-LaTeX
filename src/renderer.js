@@ -13,7 +13,7 @@ var getFolderStructure = function(dir) {
             result.push(getFolderStructure(dir+'/'+file));
         } 
         else {
-            if (file != ".DS_Store") result.push([file, []]);
+            if (file != ".DS_Store") result.push([[file, dir+'/'+file], []]);
         }
     });
 
@@ -24,7 +24,8 @@ var createFolderStructureHTML = (folderStructure) => {
     var htmlCode = "";
 
     if (folderStructure[1].length == 0) {
-        htmlCode = "<li><i class=\"fa fa-code\"></i> " + folderStructure[0] + " </li>\n";
+        // TODO: SEPARATE TEX, PDF, AND OTHERS
+        htmlCode = "<li class=\"file\" id=\"" + folderStructure[0][1] + "\"><i class=\"fa fa-code\"></i> " + folderStructure[0][0] + " </li>\n";
     }
     else {
         htmlCode += "<li><i class=\"fa fa-folder-open\"></i> " + folderStructure[0];
@@ -65,7 +66,10 @@ window.addEventListener("DOMContentLoaded", () => {
         el.fileTextarea.value = content;
         el.fileTextarea.focus();
 
-        el.lineCountLabel.innerHTML = "Lines: " + el.fileTextarea.value.match(/\n/g).length + 1;
+        lineCount = 1;
+        lines = el.fileTextarea.value.match(/\n/g);
+        if (lines != null) lineCount = lines.length + 1;
+        el.lineCountLabel.innerHTML = "Lines: " + lineCount;
     };
 
     const updatePDFPanel = () => {
@@ -94,6 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleFolderChange = (folderPath) => {
+        console.log(folderPath);
         htmlCode = createFolderStructureHTML(getFolderStructure(folderPath))
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
@@ -124,6 +129,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ipcRenderer.on("folder-opened", (_, { folderPath }) => {
         handleFolderChange(folderPath);
+    });
+
+    el.folderTree.addEventListener("click", function(event){
+        var elem = event.target;
+        if(elem !== event.currentTarget)
+        {
+            if(elem.classList.contains("file"))
+            {
+                ipcRenderer.send("open-given-file", elem.id);
+            }
+        }
     });
 
     /* RESIZABLE AREAS */
