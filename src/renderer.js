@@ -74,6 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
         lineCountLabel: document.getElementById("lineCountLabel"),
         elementsVersionLabel: document.getElementById("elementsVersionLabel"),
         folderTree: document.getElementById("folderTree"),
+        structureTree: document.getElementById("structureTree"),
     };
 
     el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
@@ -81,6 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const handleDocumentChange = (filePath, content = "") => {
         texDocumentPath = filePath;
         el.documentName.innerHTML = path.parse(filePath).base;
+        el.structureTree.innerHTML = "<ul><li><i class=\"fa fa-file\"></i> " + path.parse(filePath).base + "</li>"
 
         updatePDFPanel();
 
