@@ -156,6 +156,7 @@ const createWindow = () => {
 
 const openFile = (filePath) => {
     openedFilePath = filePath;
+    openFolder(path.basename(filePath));
 
     fs.readFile(filePath, "utf-8", (error, content) => {
         if (error) {

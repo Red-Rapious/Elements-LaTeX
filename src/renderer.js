@@ -3,6 +3,12 @@ const path = require("path");
 const fs = require("fs");
 var pjson = require('../package.json');
 
+const getExtension = (fileName) => {
+    const segments = fileName.split(".")
+    const extension = segments[segments.length - 1];
+    return extension;
+};
+
 var getFolderStructure = function(dir) {
     var result = [];
 
@@ -25,7 +31,23 @@ var createFolderStructureHTML = (folderStructure) => {
 
     if (folderStructure[1].length == 0) {
         // TODO: SEPARATE TEX, PDF, AND OTHERS
-        htmlCode = "<li class=\"file\" id=\"" + folderStructure[0][1] + "\"><i class=\"fa fa-code\"></i> " + folderStructure[0][0] + " </li>\n";
+        var icons = "";
+        var classes = "";
+        
+        switch (getExtension(folderStructure[0][0])) {
+            case "pdf":
+                icons = "fa fa-file";
+                classes = "file file-pdf";
+                break;
+            case "tex":
+                icons = "fa fa-code";
+                classes = "file file-tex";;
+                break;
+            default:
+                icons = "fa fa-xmark";
+                classes = "file file-other";
+        }
+        htmlCode = "<li class=\"" + classes + "\" id=\"" + folderStructure[0][1] + "\"><i class=\"" + icons +"\"></i> " + folderStructure[0][0] + " </li>\n";
     }
     else {
         htmlCode += "<li><i class=\"fa fa-folder-open\"></i> " + folderStructure[0];
@@ -98,7 +120,6 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleFolderChange = (folderPath) => {
-        console.log(folderPath);
         htmlCode = createFolderStructureHTML(getFolderStructure(folderPath))
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
@@ -135,10 +156,15 @@ window.addEventListener("DOMContentLoaded", () => {
         var elem = event.target;
         if(elem !== event.currentTarget)
         {
-            if(elem.classList.contains("file"))
+            if(elem.classList.contains("file-tex"))
             {
                 ipcRenderer.send("open-given-file", elem.id);
             }
+            // TODO: open the TEX file when clicked on the PDF
+            /*else if(elem.classList.contains("file-pdf"))
+            {
+                ipcRenderer.send("open-given-file", elem.id);
+            }*/
         }
     });
 
