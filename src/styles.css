@@ -136,11 +136,8 @@ main
     background-color: rgb(61, 89, 161);
 }
 
-#structureTreePanel span {
-      font-size: 13px;
-      font-style: italic;
-      letter-spacing: .4px;
-      color: #a8a8a8;
+.tree .file-other {
+    color: #a8a8a8;
 }
 
 #folderManagementBar, #structureManagementBar {

@@ -54,7 +54,7 @@ const createWindow = () => {
         if (bool) {
             
             settings.get("current-folder").then(value => { 
-                openFolder(value.data);
+                //openFolder(value.data);
             });
         }
     });
@@ -156,7 +156,7 @@ const createWindow = () => {
 
 const openFile = (filePath) => {
     openedFilePath = filePath;
-    openFolder(path.basename(filePath));
+    openFolder(path.dirname(filePath));
 
     fs.readFile(filePath, "utf-8", (error, content) => {
         if (error) {
