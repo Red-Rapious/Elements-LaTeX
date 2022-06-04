@@ -29,7 +29,7 @@ const createWindow = () => {
         width: 1600,
         height: 1000,
         titleBarStyle: "hiddenInset",
-        icon: path.join(__dirname, "assets/logos/icon.png"),
+        icon: path.join(app.getAppPath(), "assets/logos/icon.png"),
         webPreferences: {
             nodeIntegration: true, 
             contextIsolation: false, 

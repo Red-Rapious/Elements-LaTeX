@@ -135,6 +135,10 @@ main {
     background-color: rgb(61, 89, 161);
 }
 
+.tree .file-tex {
+    margin-right: 10px;
+}
+
 .tree .file-other {
     color: #a8a8a8;
 }
