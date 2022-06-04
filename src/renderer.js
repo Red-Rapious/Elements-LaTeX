@@ -60,6 +60,7 @@ var createFolderStructureHTML = (folderStructure) => {
     return htmlCode;
 };
 
+let isFileUpToDate = true;
 
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
@@ -107,7 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (err == null) {
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=110`);
+                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);
@@ -138,9 +139,22 @@ window.addEventListener("DOMContentLoaded", () => {
         ipcRenderer.send("open-folder-triggered");
     });
 
+    el.fileTextarea.addEventListener("input", () => {
+        isFileUpToDate = false;
+
+        el.documentName.innerHTML = path.parse(texDocumentPath).base + " (modified)";
+
+        lineCount = 1;
+        lines = el.fileTextarea.value.match(/\n/g);
+        if (lines != null) lineCount = lines.length + 1;
+        el.lineCountLabel.innerHTML = "Lines: " + lineCount;
+    });
+
     ipcRenderer.on("save-file-triggered", (_) => {
         ipcRenderer.send("update-file-content", el.fileTextarea.value);
-        console.log(el.fileTextarea.value)
+        
+        isFileUpToDate = true;
+        el.documentName.innerHTML = path.parse(texDocumentPath).base;
     });
    
     ipcRenderer.on("document-created", (_, filePath) => {
@@ -163,11 +177,10 @@ window.addEventListener("DOMContentLoaded", () => {
             {
                 ipcRenderer.send("open-given-file", elem.id);
             }
-            // TODO: open the TEX file when clicked on the PDF
-            /*else if(elem.classList.contains("file-pdf"))
+            else if(elem.classList.contains("file-pdf"))
             {
-                ipcRenderer.send("open-given-file", elem.id);
-            }*/
+                ipcRenderer.send("open-given-file", elem.id.slice(0, elem.id.length - 3) + "tex");
+            }
         }
     });
 

@@ -51,10 +51,6 @@ body {
     margin-right: 10px;
 }
 
-/*.title-bar .documentName, 
-.title-bar .menu-section {
-    margin-right: 10px;
-}*/
 
 /* MAIN AND MISC. */
 main 
@@ -90,7 +86,8 @@ main {
 /* SIDE PANEL */
 #sidePanel {
     width: 20%;
-    min-width: 10%;
+    min-width: 20%;
+    max-width: 40%;
 
     align-items: center;
     display: flex;
@@ -111,12 +108,16 @@ main {
 
 #folderTreePanel, #structureTreePanel {
     width: 100%;
-    height: 70%;
+    height: 90%;
     min-height: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+#structureTreePanel {
+    min-height: 10%;
 }
 
 .tree {
@@ -131,11 +132,11 @@ main {
     text-align: left;
 }
 
-/*.tree .file-pdf:hover,*/ .tree .file-tex:hover {
+.tree .file-tex:hover, .tree .file-pdf:hover {
     background-color: rgb(61, 89, 161);
 }
 
-.tree .file-tex {
+.tree .file-tex, .tree .file-pdf {
     margin-right: 10px;
 }
 
@@ -161,6 +162,10 @@ main {
     color: #fff;
 }
 
+#codeCompileBar button {
+    background-color: rgb(90, 92, 98);
+}
+
 #folderManagementBar button:active, #codeCompileBar button:active {
     background-color: rgb(43, 45, 79);
 }
@@ -172,6 +177,7 @@ main {
 
     min-height: 20%;
 }
+
 
 /* DEVELOPMENT PANEL */
 #devAndFooterContainer {
@@ -203,7 +209,7 @@ main {
     width: 100%;
     height: 100%;
 
-    background-color: rgb(26, 27, 38);
+    background-color: rgb(30, 31, 45);
     color: #fff;/*rgb(122, 162, 247);*/
     border: none;
     outline: none;

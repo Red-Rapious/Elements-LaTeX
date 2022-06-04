@@ -53,7 +53,7 @@ const createWindow = () => {
         if (bool) {
             
             settings.get("current-folder").then(value => { 
-                //openFolder(value.data);
+                openFolder(value.data);
             });
         }
     });
@@ -244,8 +244,6 @@ ipcMain.on("open-folder-triggered", () => {
     });
 });
 
-// Note: this method of updating file at every keyboard input is pretty inefficient
-// TODO: change it later
 ipcMain.on("update-file-content", (_, textareaContent) => {
     fs.writeFile(openedFilePath, textareaContent, (error) => {
         if (error) {
