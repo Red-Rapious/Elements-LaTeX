@@ -6,10 +6,26 @@
   "main": "src/main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
-    "build": "electron-builder --dir"
+    "build": "electron-builder"
   },
   "build": {
-    "extraResources": ["./libs/**"]
+    "extraResources": [
+      "libs/**"
+    ],
+    "files": [
+      "assets/**",
+      "build/**",
+      "src/**",
+      "node_modules/**",
+      "libs/**"
+    ],
+    "productName": "Elements LaTeX",
+    "appId": "com.elements.latex",
+    "artifactName": "elements-latex-${version}-mac.zip",
+    "directories": {
+      "output": "build"
+    },
+    "copyright": "Copyright © 2022 ${author}"
   },
   "keywords": [
     "elements",
@@ -28,6 +44,7 @@
     "pdfjs-dist": "^2.14.305"
   },
   "dependencies": {
-    "codemirror-node": "^1.0.1"
+    "codemirror-node": "^1.0.1",
+    "electron-settings": "^4.0.2"
   }
 }

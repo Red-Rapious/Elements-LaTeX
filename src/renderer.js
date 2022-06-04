@@ -60,7 +60,7 @@ var createFolderStructureHTML = (folderStructure) => {
     return htmlCode;
 };
 
-let isFileUpToDate = true;
+let appPath = "";
 
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
@@ -102,13 +102,13 @@ window.addEventListener("DOMContentLoaded", () => {
         const viewerEle = document.getElementById('pdfViewerPanel');
         viewerEle.innerHTML = ''; // destroy the old instance of PDF.js (if it exists)
 
-        const pdfPath = texDocumentPath.slice(0, -4) + ".pdf"; // path of the matching PDF document
+        const pdfPath = texDocumentPath.slice(0, -3) + "pdf"; // path of the matching PDF document
 
         fs.stat(pdfPath, function(err, stat) {
             if (err == null) {
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.resolve(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
+                iframe.src = path.join(appPath, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);
@@ -140,8 +140,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.fileTextarea.addEventListener("input", () => {
-        isFileUpToDate = false;
-
         el.documentName.innerHTML = path.parse(texDocumentPath).base + " (modified)";
 
         lineCount = 1;
@@ -153,7 +151,6 @@ window.addEventListener("DOMContentLoaded", () => {
     ipcRenderer.on("save-file-triggered", (_) => {
         ipcRenderer.send("update-file-content", el.fileTextarea.value);
         
-        isFileUpToDate = true;
         el.documentName.innerHTML = path.parse(texDocumentPath).base;
     });
    
@@ -169,6 +166,10 @@ window.addEventListener("DOMContentLoaded", () => {
         handleFolderChange(folderPath);
     });
 
+    ipcRenderer.on("app-path-received", (_, { newAppPath }) => {
+        this.appPath = newAppPath;
+    });
+
     el.folderTree.addEventListener("click", function(event){
         var elem = event.target;
         if(elem !== event.currentTarget)
@@ -179,7 +180,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
             else if(elem.classList.contains("file-pdf"))
             {
-                ipcRenderer.send("open-given-file", elem.id.slice(0, elem.id.length - 3) + "tex");
+                ipcRenderer.send("open-given-file", elem.id.slice(0, -3) + "tex");
             }
         }
     });
