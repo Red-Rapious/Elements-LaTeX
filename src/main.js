@@ -70,6 +70,10 @@ const createWindow = () => {
                 label: "Create a new file",
                 click: () => ipcMain.emit("open-document-triggered")
             },
+            {
+                label: "Save file",
+                click: () => mainWindow.webContents.send("save-file-triggered")
+            },
             { type: 'separator'},
             {
                 "label":"Open Recent",
@@ -233,7 +237,7 @@ ipcMain.on("open-folder-triggered", () => {
 
 // Note: this method of updating file at every keyboard input is pretty inefficient
 // TODO: change it later
-ipcMain.on("file-content-updated", (_, textareaContent) => {
+ipcMain.on("update-file-content", (_, textareaContent) => {
     fs.writeFile(openedFilePath, textareaContent, (error) => {
         if (error) {
             handleError("the update of the file");
