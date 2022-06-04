@@ -60,19 +60,29 @@ const createWindow = () => {
 
     const menuTemplate = [
     {
+        label: "Elements LaTeX",
+        submenu : [
+            { type: 'separator'},
+            { role: 'quit' }
+        ],
+    },
+    {
         label: "File",
         submenu: [
             {
                 label: "Open...",
-                click: () => ipcMain.emit("open-document-triggered")
+                click: () => ipcMain.emit("open-document-triggered"),
+                accelerator: "Cmd+O"
             },
             {
                 label: "Create a new file",
-                click: () => ipcMain.emit("open-document-triggered")
+                click: () => ipcMain.emit("open-document-triggered"),
+                accelerator: "Cmd+N"
             },
             {
                 label: "Save file",
-                click: () => mainWindow.webContents.send("save-file-triggered")
+                click: () => mainWindow.webContents.send("save-file-triggered"),
+                accelerator: "Cmd+S"
             },
             { type: 'separator'},
             {
@@ -85,8 +95,7 @@ const createWindow = () => {
                   }
                 ]
             },
-            { type: 'separator'},
-            { role: 'quit' }
+            
         ]
     },
     {
