@@ -14,9 +14,7 @@
     ],
     "files": [
       "assets/**",
-      "build/**",
       "src/**",
-      "node_modules/**",
       "libs/**"
     ],
     "productName": "Elements LaTeX",
