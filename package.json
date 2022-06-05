@@ -44,7 +44,6 @@
     "pdfjs-dist": "^2.14.305"
   },
   "dependencies": {
-    "codemirror-node": "^1.0.1",
     "electron-settings": "^4.0.2"
   }
 }

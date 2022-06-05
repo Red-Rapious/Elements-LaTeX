@@ -7,9 +7,7 @@ This is the current interface of Elements LaTeX, still at a very early developme
 ![Current interface screenshot](/assets/screenshots/current_screenshot.png)
 
 ## Building the project
-This project uses `npm` and `electron`.
-
-Start by [installing `Node.js`](https://nodejs.org/en/download/) if not already done. Type the following commands to clone the `Elements-LaTeX` repository and install the dependencies:
+Start by [installing `Node.js`](https://nodejs.org/en/download/) and git if not already done. Type the following commands to clone the `Elements-LaTeX` repository and install the dependencies:
 
 ```
 mkdir elements-latex

@@ -72,6 +72,18 @@ main {
     background-color: rgb(19, 19, 25);
 }
 
+/*.resizer:hover {
+    background-color: rgb(26, 26, 65);
+}
+
+.resizer[data-direction='horizontal']:hover {
+    width: 6px;
+}
+
+.resizer[data-direction='vertical']:hover {
+    height: 6px;
+}*/
+
 .resizer[data-direction='horizontal'] {
     cursor: ew-resize;
     height: 100%;
