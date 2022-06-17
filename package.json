@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
-    "build": "electron-builder --dir"
+    "build": "electron-builder"
   },
   "build": {
     "productName": "Elements LaTeX",
