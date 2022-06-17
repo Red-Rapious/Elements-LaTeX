@@ -6,9 +6,11 @@
   "main": "src/main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
-    "build": "electron-builder"
+    "build": "electron-builder --dir"
   },
   "build": {
+    "productName": "Elements LaTeX",
+    "appId": "com.elements.latex",
     "extraResources": [
       "libs/**"
     ],
@@ -17,8 +19,6 @@
       "src/**",
       "libs/**"
     ],
-    "productName": "Elements LaTeX",
-    "appId": "com.elements.latex",
     "artifactName": "elements-latex-${version}-mac.zip",
     "directories": {
       "output": "build"

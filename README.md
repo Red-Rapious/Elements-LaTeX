@@ -20,7 +20,7 @@ npm install electron-builder -D
 npm install electron-settings -D
 ```
 
-Download the `PDF.js`library [here](https://github.com/mozilla/pdf.js/releases/download/v2.14.305/pdfjs-2.14.305-dist.zip), and add the extracted `pdfjs` folder in `elements-latex/libs`.
+Download the `PDF.js`library [here](https://github.com/mozilla/pdf.js/releases/download/v2.14.305/pdfjs-2.14.305-dist.zip), and add the extracted `pdfjs` folder in `elements-latex/src/libs`.
 
 The final project structure should look as follows:
 
@@ -28,11 +28,12 @@ The final project structure should look as follows:
 elements-latex
 │   README.md
 │   ...   
-└─── libs
-│   └─── pdfjs
-│       └─── build
-|       └─── web
+└─── assets
 └─── src
+|    └─── libs
+|    │   └─── pdfjs
+|    │       └─── build
+|    |       └─── web
 └─── node_modules
 └─── ...
 ```
@@ -40,8 +41,10 @@ elements-latex
 Then, to start the project, type:
 
 ```
-npm run start
+npm start
 ```
+
+> Note: working with `.tex` files contained in the `elements-latex` folder is not recommended, and can cause diverse issues.
 
 If you want to build the project, you can lauch:
 

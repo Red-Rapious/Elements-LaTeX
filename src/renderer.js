@@ -108,7 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (err == null) {
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.join(appPath, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
+                iframe.src = path.join(appPath, `libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);

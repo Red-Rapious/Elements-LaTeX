@@ -6,4 +6,4 @@ libs
 *.gz
 *.fls
 *.fdb_latexmk
-assets/demo_latex/main_folder
+assets/demo_latex
