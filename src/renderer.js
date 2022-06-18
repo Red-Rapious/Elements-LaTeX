@@ -61,8 +61,6 @@ var createFolderStructureHTML = (folderStructure) => {
     return htmlCode;
 };
 
-let appPath = "";
-
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
 
@@ -110,7 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (err == null) {
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.join(appPath, `libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
+                iframe.src = path.join(__dirname, `libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);
@@ -145,8 +143,13 @@ window.addEventListener("DOMContentLoaded", () => {
         command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + texDocumentPath;
 
         child_process.exec(command, (err, stdout, stderr) => {
-            console.log(err + "  " + stdout + "   " + stderr);
+            //console.log(err + "  " + stdout + "   " + stderr);
+            // TODO: Handle errors
         });
+    
+        // TODO: change to the current folder path
+        handleFolderChange(path.dirname(texDocumentPath));
+        updatePDFPanel();
     });
 
     el.fileTextarea.addEventListener("input", () => {
@@ -174,10 +177,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ipcRenderer.on("folder-opened", (_, { folderPath }) => {
         handleFolderChange(folderPath);
-    });
-
-    ipcRenderer.on("app-path-received", (_, { newAppPath }) => {
-        this.appPath = newAppPath;
     });
 
     el.folderTree.addEventListener("click", function(event){

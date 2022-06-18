@@ -164,8 +164,6 @@ const createWindow = () => {
 
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
-
-    mainWindow.webContents.send("app-path-received", app.getAppPath());
 };
 
 const openFile = (filePath) => {
