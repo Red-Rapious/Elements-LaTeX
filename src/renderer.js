@@ -2,6 +2,7 @@ const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 var pjson = require('../package.json');
+var child_process = require("child_process");
 
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
@@ -76,6 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
         elementsVersionLabel: document.getElementById("elementsVersionLabel"),
         folderTree: document.getElementById("folderTree"),
         structureTree: document.getElementById("structureTree"),
+        compileCodeBtn: document.getElementById("compileCodeBtn"),
     };
 
     el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
@@ -137,6 +139,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
     el.openFolderBtn.addEventListener("click", () => {
         ipcRenderer.send("open-folder-triggered");
+    });
+
+    el.compileCodeBtn.addEventListener("click", () => {
+        command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + texDocumentPath;
+
+        child_process.exec(command, (err, stdout, stderr) => {
+            console.log(err + "  " + stdout + "   " + stderr);
+        });
     });
 
     el.fileTextarea.addEventListener("input", () => {
