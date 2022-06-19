@@ -67,7 +67,7 @@ Currently working on v0.0.2: early phase of developpement.
 | Show erros during compilation | :x: | v 0.0.3 |
 | Show generated PDF | :white_check_mark: | v 0.0.4 |
 | Line numbers | :x: | v 1.0.1 |
-| Syntax highlightning | :x: | v 1.0.2 |
+| Syntax highlightning | :white_check_mark: | v 1.0.2 |
 | File structure | :x: | v 1.0.3 |
 | Default templates | :x: | v 1.0.4 |
 
