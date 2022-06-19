@@ -72,7 +72,7 @@ window.addEventListener("DOMContentLoaded", () => {
         createDocumentBtn: document.getElementById("createDocumentBtn"),
         openDocumentBtn: document.getElementById("openDocumentBtn"),
         openFolderBtn: document.getElementById("openFolderBtn"),
-        fileTextarea: document.getElementById("codeEditorPanel"),
+        fileTextarea: document.getElementById("codeInput"),
         lineCountLabel: document.getElementById("lineCountLabel"),
         elementsVersionLabel: document.getElementById("elementsVersionLabel"),
         folderTree: document.getElementById("folderTree"),

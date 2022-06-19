@@ -5,21 +5,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <!-- Import diverse icons sets, will be removed later and replaced by custom icons -->
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./styles.css" />
         
+        <!-- Import Prism.js for syntax coloration -->
         <script src="./libs/prism-js/prism.js"></script>
+        <link href="./libs/prism-js/prism.css" rel="stylesheet" />
+        <link href="./libs/prism-js/prism-one-dark.css" rel="stylesheet" />
         
-        <script src="./libs/code-input/code-input.js">
-        </script>
+        <!-- Import code-input for custom textareas -->
+        <script src="./libs/code-input/code-input.js"></script>
         <script>
           codeInput.registerTemplate("code-input", codeInput.templates.prism(Prism));
           </script>
         <link rel="stylesheet" href="./libs/code-input/code-input.css">
         
-        <link href="./libs/prism-js/prism.css" rel="stylesheet" />
-        <link href="./libs/prism-js/prism-one-dark.css" rel="stylesheet" />
+        <!-- Import my own stylesheet -->
+        <link rel="stylesheet" href="./styles.css" />
+
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         
         <title>Elements LaTeX</title>
@@ -71,8 +75,8 @@
                       <button id="interruptCompileBtn" disabled><span class="material-icons"> pause </span></button>
                       <button id="showErrorsBtn" disabled><span class="material-icons"> bug_report </span></button>
                     </div>
-                    <!--<code-input lang="LaTeX" placeholder="LaTeX code" value="" id="codeInput"></code-input>-->
-                    <textarea id="codeEditorPanel" disabled spellcheck="false"></textarea>
+                    <code-input lang="LaTeX" placeholder="LaTeX code" value="" id="codeInput"></code-input>
+                    <!--<textarea id="codeEditorPanel" disabled spellcheck="false"></textarea>-->
                   </div>
                   <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
                   <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
