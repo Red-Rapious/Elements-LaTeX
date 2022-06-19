@@ -11,7 +11,7 @@ const getExtension = (fileName) => {
     return extension;
 };
 
-const getFolderStructure = function(dir) {
+const getFolderStructure = (dir) => {
     var result = [];
 
     fs.readdirSync(dir).forEach(function(file) {

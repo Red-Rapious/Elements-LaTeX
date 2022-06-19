@@ -4,72 +4,86 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
-
+        
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./styles.css" />
-
+        
+        <script src="./libs/prism-js/prism.js"></script>
+        
+        <script src="./libs/code-input/code-input.js">
+        </script>
+        <script>
+          codeInput.registerTemplate("code-input", codeInput.templates.prism(Prism));
+          </script>
+        <link rel="stylesheet" href="./libs/code-input/code-input.css">
+        
+        <link href="./libs/prism-js/prism.css" rel="stylesheet" />
+        <link href="./libs/prism-js/prism-one-dark.css" rel="stylesheet" />
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        
         <title>Elements LaTeX</title>
-    </head>
+      </head>
     <body>
-        <div class="title-bar">
-            <span class="document-name unselectable" id="documentName"> No file opened yet </span>
-            <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">
-        </div>
 
-        <main>
-            <div id="sidePanel">
-                <div id="folderTreePanel">
-                    <div id="folderManagementBar">
-                        <div class="unselectable" id="folderStructureLabel"><i class="fa fa-folder-open"></i>Folder Structure</div>
-                        <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
-                        <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
-                        <button id="openFolderBtn"><span class="material-icons"> create_new_folder </span></button>
-                    </div>
-                    
-                    <div id="folderTree" class="tree unselectable">
-                      <ul><i class="fa fa-folder-open"></i> No folder opened</ul>
-                    </div>
+      <div class="title-bar">
+          <span class="document-name unselectable" id="documentName"> No file opened yet </span>
+          <img class="unselectable" id="simplifiedLogoImage" src="../assets/ui/simplified_logo.png" alt="Simplified Elements Logo">
+      </div>
 
-                </div>
-                <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
-                <div id="structureTreePanel">
-                  <div id="structureManagementBar">
-                    <div class="unselectable" id="fileStructureLabel"><i class="fa fa-code"></i>Document Structure</div>
+      <main>
+          <div id="sidePanel">
+              <div id="folderTreePanel">
+                  <div id="folderManagementBar">
+                      <div class="unselectable" id="folderStructureLabel"><i class="fa fa-folder-open"></i>Folder Structure</div>
+                      <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
+                      <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
+                      <button id="openFolderBtn"><span class="material-icons"> create_new_folder </span></button>
                   </div>
-                  <div id="structureTree" class="tree unselectable">
-                    <ul>
-                      <li><i class="fa fa-file"></i> No file opened </li>
-                    </ul>
+                  
+                  <div id="folderTree" class="tree unselectable">
+                    <ul><i class="fa fa-folder-open"></i> No folder opened</ul>
                   </div>
+
+              </div>
+              <div id="folderStructureResizer" class="resizer" data-direction="vertical"></div>
+              <div id="structureTreePanel">
+                <div id="structureManagementBar">
+                  <div class="unselectable" id="fileStructureLabel"><i class="fa fa-code"></i>Document Structure</div>
                 </div>
+                <div id="structureTree" class="tree unselectable">
+                  <ul>
+                    <li><i class="fa fa-file"></i> No file opened </li>
+                  </ul>
+                </div>
+              </div>
 
-            </div>
+          </div>
 
-            <div id="sideDevelopmentResizer" class="resizer" data-direction="horizontal"></div>
+          <div id="sideDevelopmentResizer" class="resizer" data-direction="horizontal"></div>
 
-            <div id="devAndFooterContainer">
+          <div id="devAndFooterContainer">
 
-                <div id="developmentPanel" style="display: flex">
-                    <div id="codeAndBarPanel">
-                      <div id="codeCompileBar">
-                        <button id="compileCodeBtn"><span class="material-icons"> play_arrow </span></button>
-                        <button id="interruptCompileBtn" disabled><span class="material-icons"> pause </span></button>
-                        <button id="showErrorsBtn" disabled><span class="material-icons"> bug_report </span></button>
-                      </div>
-                      <textarea id="codeEditorPanel" disabled spellcheck="false"></textarea>
+              <div id="developmentPanel" style="display: flex">
+                  <div id="codeAndBarPanel">
+                    <div id="codeCompileBar">
+                      <button id="compileCodeBtn"><span class="material-icons"> play_arrow </span></button>
+                      <button id="interruptCompileBtn" disabled><span class="material-icons"> pause </span></button>
+                      <button id="showErrorsBtn" disabled><span class="material-icons"> bug_report </span></button>
                     </div>
-                    <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
-                    <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
-                </div>
+                    <!--<code-input lang="LaTeX" placeholder="LaTeX code" value="" id="codeInput"></code-input>-->
+                    <textarea id="codeEditorPanel" disabled spellcheck="false"></textarea>
+                  </div>
+                  <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
+                  <div class="pdf-panel" id="pdfViewerPanel">PDF</div>
+              </div>
 
-                <div id="footer">
-                  <span class="label" id="elementsVersionLabel">Version undef</span>
-                  <span class="label" id="lineCountLabel">Lines: undef</span>
-                </div>
+              <div id="footer">
+                <span class="label" id="elementsVersionLabel">Version undef</span>
+                <span class="label" id="lineCountLabel">Lines: undef</span>
+              </div>
 
-            </div>
+          </div>
         </main>
     </body>
 </html>

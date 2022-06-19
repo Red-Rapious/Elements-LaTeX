@@ -2,7 +2,7 @@ node_modules
 dist
 build
 .DS_Store
-libs
+pdfjs
 *.gz
 *.fls
 *.fdb_latexmk
