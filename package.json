@@ -43,6 +43,7 @@
     "pdfjs-dist": "^2.14.305"
   },
   "dependencies": {
-    "electron-settings": "^4.0.2"
+    "electron-settings": "^4.0.2",
+    "node-latex": "^3.1.0"
   }
 }

@@ -37,7 +37,7 @@ const createWindow = () => {
         },
     });
 
-    if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
+    /*if (isDevelopementEnvironement)*/ mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/index.html");
 
     settings.has("current-file").then( bool => {
@@ -51,7 +51,6 @@ const createWindow = () => {
 
     settings.has("current-folder").then( bool => {
         if (bool) {
-            
             settings.get("current-folder").then(value => { 
                 openFolder(value.data);
             });

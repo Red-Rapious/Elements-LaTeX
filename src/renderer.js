@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const pjson = require('../package.json');
 const latex = require("node-latex");
+const child_process = require("child_process");
 
 
 const getExtension = (fileName) => {
@@ -111,6 +112,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const generateLatexFile = (filePath) => {
+        // WARNING: this function doesn't seem to work when the app is builded with electron-builder
         /* Uses the node module 'node-latex' to compile latex code into a PDF, and opens it */
 
         const input = fs.createReadStream(filePath);
@@ -122,6 +124,35 @@ window.addEventListener("DOMContentLoaded", () => {
         pdf.on('finish', () => {
             handleFolderChange(openedFolderPath); // make sure that the new PDF file appears in the folder structure
             updatePDFPanel();
+        });
+    };
+
+    const launchPDFLatexCommand = (filePath) => {
+        const command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + path.basename(texDocumentPath);
+
+        /*child_process.exec(command, (err, stdout, stderr) => {
+            //console.log(err + "  " + stdout + "   " + stderr);
+            // TODO: Handle errors
+        });*/
+
+        const result = child_process.spawn(command, {shell: true});
+
+        result.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+
+        result.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
+
+        result.on('close', (code) => {
+            // TODO: change to the current folder path
+            handleFolderChange(openedFolderPath);
+            updatePDFPanel();
+        });
+
+        result.on('error', (err) => {
+            console.error("Command error");
         });
     };
 
@@ -164,7 +195,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.compileCodeBtn.addEventListener("click", () => {
-        generateLatexFile(texDocumentPath);
+        //generateLatexFile(texDocumentPath);
+        launchPDFLatexCommand(texDocumentPath);
     });
 
     el.fileTextarea.addEventListener("input", () => {
@@ -292,5 +324,4 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.resizer').forEach(function (ele) {
         resizable(ele);
     });
-
 });
