@@ -1,0 +1,3 @@
+[submodule "src/libs/code-input"]
+	path = src/libs/code-input
+	url = https://github.com/WebCoder49/code-input
