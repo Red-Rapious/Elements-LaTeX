@@ -2,7 +2,6 @@ const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const pjson = require('../package.json');
-const child_process = require("child_process");
 const latex = require("node-latex");
 
 
@@ -67,7 +66,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
     let openedFolderPath = "";
 
-    /* Elements */
+    /* HTML elements */
     const el = {
         documentName: document.getElementById("documentName"),
         createDocumentBtn: document.getElementById("createDocumentBtn"),
@@ -121,7 +120,6 @@ window.addEventListener("DOMContentLoaded", () => {
         pdf.pipe(output);
         pdf.on('error', err => console.error(err));
         pdf.on('finish', () => {
-            // TODO: change to the current folder path
             handleFolderChange(openedFolderPath); // make sure that the new PDF file appears in the folder structure
             updatePDFPanel();
         });
@@ -199,7 +197,7 @@ window.addEventListener("DOMContentLoaded", () => {
     el.folderTree.addEventListener("click", function(event){
         /* Opens a file when it's clicked on the side panel's tree */
         
-        var elem = event.target;
+        const elem = event.target;
         if(elem !== event.currentTarget)
         {
             if(elem.classList.contains("file-tex"))

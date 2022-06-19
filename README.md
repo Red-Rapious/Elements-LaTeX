@@ -54,7 +54,7 @@ npm run build
 ```
 
 ## Developpement status
-Currently working on v 0.0.1: early phase of developpement.
+Currently working on v0.0.2: early phase of developpement.
 
 ## Features
 | Feature | Status | Planned for |
@@ -63,7 +63,8 @@ Currently working on v 0.0.1: early phase of developpement.
 | Full interface structure | :white_check_mark: | v 0.0.1 |
 | Create and open a folder/file | :white_check_mark: | v 0.0.1 |
 | Modify and save file efficently | :white_check_mark: | v 0.0.1 |
-| Compile file and show errors | :large_orange_diamond: | v 0.0.3 |
+| Compile file | :white_check_mark: | v 0.0.2 |
+| Show erros during compilation | :x: | v 0.0.3 |
 | Show generated PDF | :white_check_mark: | v 0.0.4 |
 | Line numbers | :x: | v 1.0.1 |
 | Syntax highlightning | :x: | v 1.0.2 |
