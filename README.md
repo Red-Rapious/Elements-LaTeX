@@ -18,7 +18,6 @@ npm install electron -D
 npm install electron-reloader -D
 npm install electron-builder -D
 npm install electron-settings -D
-npm install node-latex -D
 ```
 
 Download the `PDF.js`library [here](https://github.com/mozilla/pdf.js/releases/download/v2.14.305/pdfjs-2.14.305-dist.zip), and add the extracted `pdfjs` folder in `elements-latex/src/libs`.

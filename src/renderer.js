@@ -2,9 +2,7 @@ const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const pjson = require('../package.json');
-const latex = require("node-latex");
 const child_process = require("child_process");
-
 
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
@@ -109,22 +107,6 @@ window.addEventListener("DOMContentLoaded", () => {
         openedFolderPath = folderPath
         htmlCode = createFolderStructureHTML(getFolderStructure(openedFolderPath));
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
-    };
-
-    const generateLatexFile = (filePath) => {
-        // WARNING: this function doesn't seem to work when the app is builded with electron-builder
-        /* Uses the node module 'node-latex' to compile latex code into a PDF, and opens it */
-
-        const input = fs.createReadStream(filePath);
-        const output = fs.createWriteStream(filePath.replace(".tex", ".pdf"));
-        const pdf = latex(input);
-    
-        pdf.pipe(output);
-        pdf.on('error', err => console.error(err));
-        pdf.on('finish', () => {
-            handleFolderChange(openedFolderPath); // make sure that the new PDF file appears in the folder structure
-            updatePDFPanel();
-        });
     };
 
     const launchPDFLatexCommand = (filePath) => {

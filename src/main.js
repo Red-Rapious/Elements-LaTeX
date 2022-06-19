@@ -37,7 +37,7 @@ const createWindow = () => {
         },
     });
 
-    /*if (isDevelopementEnvironement)*/ mainWindow.webContents.openDevTools();
+    if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/index.html");
 
     settings.has("current-file").then( bool => {
