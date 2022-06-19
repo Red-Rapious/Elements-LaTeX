@@ -65,6 +65,7 @@ const createFolderStructureHTML = (folderStructure) => {
 
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
+    let openedFolderPath = "";
 
     /* Elements */
     const el = {
@@ -84,7 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
     el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
 
     const handleDocumentChange = (filePath, content = "") => {
-        /* On document change, updates the side folder tree, text area and line count */
+        /* On document change, updates the side file structure tree, text area and line count */
 
         texDocumentPath = filePath;
         el.documentName.innerHTML = path.parse(filePath).base;
@@ -102,6 +103,14 @@ window.addEventListener("DOMContentLoaded", () => {
         el.lineCountLabel.innerHTML = "Lines: " + lineCount;
     };
 
+    const handleFolderChange = (folderPath) => {
+        /* On folder change, updates the side folder structure tree */
+
+        openedFolderPath = folderPath
+        htmlCode = createFolderStructureHTML(getFolderStructure(openedFolderPath));
+        el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
+    };
+
     const generateLatexFile = (filePath) => {
         /* Uses the node module 'node-latex' to compile latex code into a PDF, and opens it */
 
@@ -113,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
         pdf.on('error', err => console.error(err));
         pdf.on('finish', () => {
             // TODO: change to the current folder path
-            handleFolderChange(path.dirname(filePath)); // make sure that the new PDF file appears
+            handleFolderChange(openedFolderPath); // make sure that the new PDF file appears in the folder structure
             updatePDFPanel();
         });
     };
@@ -142,11 +151,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
         });
-    };
-
-    const handleFolderChange = (folderPath) => {
-        htmlCode = createFolderStructureHTML(getFolderStructure(folderPath))
-        el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
 
     el.createDocumentBtn.addEventListener("click", () => {
