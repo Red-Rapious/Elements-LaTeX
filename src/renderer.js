@@ -66,7 +66,7 @@ const createFolderStructureHTML = (folderStructure) => {
 window.addEventListener("DOMContentLoaded", () => {
     let texDocumentPath = "";
 
-    /* BUTTONS */
+    /* Elements */
     const el = {
         documentName: document.getElementById("documentName"),
         createDocumentBtn: document.getElementById("createDocumentBtn"),
@@ -80,9 +80,12 @@ window.addEventListener("DOMContentLoaded", () => {
         compileCodeBtn: document.getElementById("compileCodeBtn"),
     };
 
+    // Update the footer version label
     el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
 
     const handleDocumentChange = (filePath, content = "") => {
+        /* On document change, updates the side folder tree, text area and line count */
+
         texDocumentPath = filePath;
         el.documentName.innerHTML = path.parse(filePath).base;
         el.structureTree.innerHTML = "<ul><li><i class=\"fa fa-file\"></i> " + path.parse(filePath).base + "</li>"
@@ -99,39 +102,9 @@ window.addEventListener("DOMContentLoaded", () => {
         el.lineCountLabel.innerHTML = "Lines: " + lineCount;
     };
 
-    const launchPDFLatexCommand = (filePath) => {
-        //const command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + texDocumentPath;
-        const command = "pdflatex " + filePath;
-    
-        // https://stackoverflow.com/questions/56375278/how-to-execute-a-command-through-electron-app
-        /*child_process.exec(command, (err, stdout, stderr) => {
-            //console.log(err + "  " + stdout + "   " + stderr);
-            // TODO: Handle errors
-        });*/
-    
-        const cd = child_process.exec("cd " + path.dirname(filePath));
-        const result = child_process.spawn("pdflatex", [filePath]);
-    
-        result.stdout.on('data', (data) => {
-            console.log(`stdout: ${data}`);
-        });
-    
-        result.stderr.on('data', (data) => {
-            console.error(`stderr: ${data}`);
-        });
-    
-        result.on('close', (code) => {
-            // TODO: change to the current folder path
-            handleFolderChange(path.dirname(filePath));
-            updatePDFPanel();
-        });
-    
-        result.on('error', (err) => {
-            console.error("Command error");
-        });
-    };
-
     const generateLatexFile = (filePath) => {
+        /* Uses the node module 'node-latex' to compile latex code into a PDF, and opens it */
+
         const input = fs.createReadStream(filePath);
         const output = fs.createWriteStream(filePath.replace(".tex", ".pdf"));
         const pdf = latex(input);
@@ -140,13 +113,14 @@ window.addEventListener("DOMContentLoaded", () => {
         pdf.on('error', err => console.error(err));
         pdf.on('finish', () => {
             // TODO: change to the current folder path
-            handleFolderChange(path.dirname(filePath));
+            handleFolderChange(path.dirname(filePath)); // make sure that the new PDF file appears
             updatePDFPanel();
         });
     };
 
     const updatePDFPanel = () => {
-        /* PDF HANDLING */
+        /* Uses pdfjs to show the matching pdf file into the dedicated panel */
+
         const viewerEle = document.getElementById('pdfViewerPanel');
         viewerEle.innerHTML = ''; // destroy the old instance of PDF.js (if it exists)
 
@@ -219,6 +193,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.folderTree.addEventListener("click", function(event){
+        /* Opens a file when it's clicked on the side panel's tree */
+        
         var elem = event.target;
         if(elem !== event.currentTarget)
         {
