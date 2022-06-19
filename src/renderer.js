@@ -1,8 +1,10 @@
 const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
-var pjson = require('../package.json');
-var child_process = require("child_process");
+const pjson = require('../package.json');
+const child_process = require("child_process");
+const latex = require("node-latex");
+
 
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
@@ -10,7 +12,7 @@ const getExtension = (fileName) => {
     return extension;
 };
 
-var getFolderStructure = function(dir) {
+const getFolderStructure = function(dir) {
     var result = [];
 
     fs.readdirSync(dir).forEach(function(file) {
@@ -27,7 +29,7 @@ var getFolderStructure = function(dir) {
     return [path.basename(dir), result];
 }
 
-var createFolderStructureHTML = (folderStructure) => {
+const createFolderStructureHTML = (folderStructure) => {
     var htmlCode = "";
 
     if (folderStructure[1].length == 0) {
@@ -97,6 +99,52 @@ window.addEventListener("DOMContentLoaded", () => {
         el.lineCountLabel.innerHTML = "Lines: " + lineCount;
     };
 
+    const launchPDFLatexCommand = (filePath) => {
+        //const command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + texDocumentPath;
+        const command = "pdflatex " + filePath;
+    
+        // https://stackoverflow.com/questions/56375278/how-to-execute-a-command-through-electron-app
+        /*child_process.exec(command, (err, stdout, stderr) => {
+            //console.log(err + "  " + stdout + "   " + stderr);
+            // TODO: Handle errors
+        });*/
+    
+        const cd = child_process.exec("cd " + path.dirname(filePath));
+        const result = child_process.spawn("pdflatex", [filePath]);
+    
+        result.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+    
+        result.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
+    
+        result.on('close', (code) => {
+            // TODO: change to the current folder path
+            handleFolderChange(path.dirname(filePath));
+            updatePDFPanel();
+        });
+    
+        result.on('error', (err) => {
+            console.error("Command error");
+        });
+    };
+
+    const generateLatexFile = (filePath) => {
+        const input = fs.createReadStream(filePath);
+        const output = fs.createWriteStream(filePath.replace(".tex", ".pdf"));
+        const pdf = latex(input);
+    
+        pdf.pipe(output);
+        pdf.on('error', err => console.error(err));
+        pdf.on('finish', () => {
+            // TODO: change to the current folder path
+            handleFolderChange(path.dirname(filePath));
+            updatePDFPanel();
+        });
+    };
+
     const updatePDFPanel = () => {
         /* PDF HANDLING */
         const viewerEle = document.getElementById('pdfViewerPanel');
@@ -140,16 +188,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.compileCodeBtn.addEventListener("click", () => {
-        command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + texDocumentPath;
-
-        child_process.exec(command, (err, stdout, stderr) => {
-            //console.log(err + "  " + stdout + "   " + stderr);
-            // TODO: Handle errors
-        });
-    
-        // TODO: change to the current folder path
-        handleFolderChange(path.dirname(texDocumentPath));
-        updatePDFPanel();
+        generateLatexFile(texDocumentPath);
     });
 
     el.fileTextarea.addEventListener("input", () => {
