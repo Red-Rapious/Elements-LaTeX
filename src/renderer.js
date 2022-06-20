@@ -5,6 +5,8 @@ const pjson = require('../package.json');
 const child_process = require("child_process");
 const fixPath = require("fix-path");
 
+const AUTOSAVE_INTERVAL = 5*60*1000; // 5 minutes
+
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
     const extension = segments[segments.length - 1];
@@ -66,6 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
     fixPath();
     let texDocumentPath = "";
     let openedFolderPath = "";
+    let autosaveInterval;
 
     /* HTML elements */
     const el = {
@@ -101,6 +104,9 @@ window.addEventListener("DOMContentLoaded", () => {
         lines = el.fileTextarea.value.match(/\n/g);
         if (lines != null) lineCount = lines.length + 1;
         el.lineCountLabel.innerHTML = "Lines: " + lineCount;
+
+        clearInterval(autosaveInterval);
+        autosaveInterval = setInterval(saveCurrentFile, AUTOSAVE_INTERVAL);
     };
 
     const handleFolderChange = (folderPath) => {
@@ -113,12 +119,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const launchPDFLatexCommand = (filePath) => {
         const command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + path.basename(texDocumentPath);
-
-        /*child_process.exec(command, (err, stdout, stderr) => {
-            //console.log(err + "  " + stdout + "   " + stderr);
-            // TODO: Handle errors
-        });*/
-
         const result = child_process.spawn(command, {shell: true});
 
         result.stdout.on('data', (data) => {
@@ -166,25 +166,28 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    const saveCurrentFile = () => {
+        ipcRenderer.send("update-file-content", el.fileTextarea.value);
+        el.documentName.innerHTML = path.parse(texDocumentPath).base;
+    };
+
     el.createDocumentBtn.addEventListener("click", () => {
+        saveCurrentFile();
         ipcRenderer.send("create-document-triggered");
     });
 
     el.openDocumentBtn.addEventListener("click", () => {
+        saveCurrentFile();
         ipcRenderer.send("open-document-triggered");
     });
 
     el.openFolderBtn.addEventListener("click", () => {
+        saveCurrentFile();
         ipcRenderer.send("open-folder-triggered");
     });
 
     el.compileCodeBtn.addEventListener("click", () => {
-        //generateLatexFile(texDocumentPath);
-
-        // TODO: create a save_file function
-        ipcRenderer.send("update-file-content", el.fileTextarea.value);
-        el.documentName.innerHTML = path.parse(texDocumentPath).base;
-        
+        saveCurrentFile();
         launchPDFLatexCommand(texDocumentPath);
     });
 
@@ -198,8 +201,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     ipcRenderer.on("save-file-triggered", (_) => {
-        ipcRenderer.send("update-file-content", el.fileTextarea.value);
-        el.documentName.innerHTML = path.parse(texDocumentPath).base;
+        saveCurrentFile();
     });
    
     ipcRenderer.on("document-created", (_, filePath) => {
