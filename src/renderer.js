@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const pjson = require('../package.json');
 const child_process = require("child_process");
+const fixPath = require("fix-path");
 
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
@@ -62,6 +63,7 @@ const createFolderStructureHTML = (folderStructure) => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+    fixPath();
     let texDocumentPath = "";
     let openedFolderPath = "";
 
@@ -178,6 +180,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     el.compileCodeBtn.addEventListener("click", () => {
         //generateLatexFile(texDocumentPath);
+
+        // TODO: create a save_file function
+        ipcRenderer.send("update-file-content", el.fileTextarea.value);
+        el.documentName.innerHTML = path.parse(texDocumentPath).base;
+        
         launchPDFLatexCommand(texDocumentPath);
     });
 
@@ -192,7 +199,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ipcRenderer.on("save-file-triggered", (_) => {
         ipcRenderer.send("update-file-content", el.fileTextarea.value);
-        
         el.documentName.innerHTML = path.parse(texDocumentPath).base;
     });
    

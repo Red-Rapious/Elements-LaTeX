@@ -38,9 +38,11 @@
     "electron": "^18.2.3",
     "electron-builder": "^23.0.3",
     "electron-reloader": "^1.2.3",
-    "electron-settings": "^4.0.2"
+    "electron-settings": "^4.0.2",
+    "fix-path": "3.0.0"
   },
   "dependencies": {
-    "electron-settings": "^4.0.2"
+    "electron-settings": "^4.0.2",
+    "fix-path": "3.0.0"
   }
 }
