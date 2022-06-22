@@ -57,6 +57,9 @@ npm run build
 ## Developpement status
 Currently working on v0.0.2: early phase of developpement.
 
+## License
+This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
+
 ## Features
 | Feature | Status | Planned for |
 | ------- | ------ | ----------- |
@@ -82,6 +85,3 @@ Currently working on v0.0.2: early phase of developpement.
 - :white_check_mark: Implemented
 - :large_orange_diamond: In active development
 - :x: Not implemented yet
-
-## License
-This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
