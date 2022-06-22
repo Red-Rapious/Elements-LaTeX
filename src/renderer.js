@@ -40,21 +40,26 @@ const createFolderStructureHTML = (folderStructure) => {
         
         switch (getExtension(folderStructure[0][0])) {
             case "pdf":
-                icons = "fa fa-file";
+                icons = "fa fa-align-justify";
                 classes = "file file-pdf";
                 break;
             case "tex":
                 icons = "fa fa-code";
-                classes = "file file-tex";;
+                classes = "file file-tex";
+                break;
+            case "aux":
+            case "log":
+                icons = "fa fa-gear";
+                classes = "file file-other";
                 break;
             default:
-                icons = "fa fa-xmark";
+                icons = "fa fa-file";
                 classes = "file file-other";
         }
         htmlCode = "<li class=\"" + classes + "\" id=\"" + folderStructure[0][1] + "\"><i class=\"" + icons +"\"></i> " + folderStructure[0][0] + " </li>\n";
     }
     else {
-        htmlCode += "<li><i class=\"fa fa-folder-open\"></i> " + folderStructure[0];
+        htmlCode += "<li><i class=\"fa fa-angle-down\"></i> " + folderStructure[0];
         for (var i = 0 ; i < folderStructure[1].length ; i++)
         {
             htmlCode +=  "\n<ul> " + createFolderStructureHTML(folderStructure[1][i]) + " </ul> ";
@@ -202,6 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ipcRenderer.on("save-file-triggered", (_) => {
         saveCurrentFile();
+        launchPDFLatexCommand(texDocumentPath);
     });
    
     ipcRenderer.on("document-created", (_, filePath) => {

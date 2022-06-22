@@ -1,6 +1,5 @@
 # Elements LaTeX
-A cross-platform, powerful electron-based LaTeX editor.
-Coming soon.
+A cross-platform, powerful electron-based LaTeX editor. Pre-release v0.0.1 now available for macOS.
 
 ## Preview
 This is the current interface of Elements LaTeX, still at a very early development state:
@@ -65,11 +64,13 @@ Currently working on v0.0.2: early phase of developpement.
 | Full interface structure | :white_check_mark: | v 0.0.1 |
 | Create and open a folder/file | :white_check_mark: | v 0.0.1 |
 | Modify and save file efficently | :white_check_mark: | v 0.0.1 |
-| Compile file | :white_check_mark: | v 0.0.2 |
-| Show erros during compilation | :x: | v 0.0.2 |
 | Show generated PDF | :white_check_mark: | v 0.0.1 |
-| Line numbers | :x: | v 0.0.2 |
+| Compile file | :white_check_mark: | v 0.0.2 |
 | Syntax highlightning | :white_check_mark: | v 0.0.2 |
+| Show erros during compilation | :x: | v 0.0.2 |
+| Line numbers | :x: | v 0.0.2 |
+| Interface embellishment | :x: | v 0.0.2 |
+| Quick interface changes buttons | :x: | v 0.0.2 |
 | File structure (inverse search) | :x: | v 0.0.3 |
 | Integrated git support | :x: | v 0.0.4 |
 | Default templates | :x: | v 0.0.4 |
