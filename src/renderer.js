@@ -138,7 +138,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const handleFolderChange = (folderPath) => {
         /* On folder change, updates the side folder structure tree */
 
-        openedFolderPath = folderPath
+        openedFolderPath = folderPath;
         htmlCode = createFolderStructureHTML(getFolderStructure(openedFolderPath));
 
         // Opens a non-specific TeX file

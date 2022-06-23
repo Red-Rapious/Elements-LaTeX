@@ -13,7 +13,7 @@ if (isDevelopementEnvironement) {
 
 let mainWindow;
 let openedFilePath;
-let openedFolderPath;
+//let openedFolderPath;
 
 const handleError = (location = "undefined") => {
     new Notification({
@@ -22,6 +22,26 @@ const handleError = (location = "undefined") => {
     }).show();
 
     //alert("An error occured during " + location);
+};
+
+const openFile = (filePath) => {
+    fs.readFile(filePath, "utf-8", (error, content) => {
+        if (error) {
+            handleError("the opening of the file");
+        }
+        else {
+            openedFilePath = filePath;
+            app.addRecentDocument(filePath);
+            settings.set("current-file", { data: filePath });
+            mainWindow.webContents.send("document-opened", { filePath, content });
+        }
+    });
+};
+
+const openFolder = (folderPath) => {
+    //openedFolderPath = folderPath;
+    settings.set("current-folder", { data: folderPath });
+    mainWindow.webContents.send("folder-opened", { folderPath });
 };
 
 const createWindow = () => {
@@ -165,26 +185,7 @@ const createWindow = () => {
     Menu.setApplicationMenu(menu);
 };
 
-const openFile = (filePath) => {
-    openedFilePath = filePath;
-
-    fs.readFile(filePath, "utf-8", (error, content) => {
-        if (error) {
-            handleError("the opening of the file");
-        }
-        else {
-            app.addRecentDocument(filePath);
-            settings.set("current-file", { data: filePath });
-            mainWindow.webContents.send("document-opened", { filePath, content });
-        }
-    });
-};
-
-const openFolder = (folderPath) => {
-    openedFolderPath = folderPath;
-    settings.set("current-folder", { data: folderPath });
-    mainWindow.webContents.send("folder-opened", { folderPath });
-};
+app.whenReady().then(createWindow);
 
 app.on("open-file", (_, filePath) => {
     openFile(filePath);
@@ -193,8 +194,6 @@ app.on("open-file", (_, filePath) => {
 app.on("open-folder", (_, folderPath) => {
     openFolder(folderPath);
 });
-
-app.whenReady().then(createWindow);
 
 ipcMain.on("create-document-triggered", () => {
     dialog.showSaveDialog(mainWindow, {
@@ -252,5 +251,5 @@ ipcMain.on("update-file-content", (_, textareaContent) => {
 });
 
 ipcMain.on("open-given-file", (_, filePath) => {
-    openFile(filePath);
+    if (fs.existsSync(filePath)) openFile(filePath);
 });
