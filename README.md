@@ -1,11 +1,16 @@
 # Elements LaTeX
-A cross-platform, powerful electron-based LaTeX editor. Pre-release v0.0.1 now available for macOS.
+A cross-platform, powerful electron-based LaTeX editor. Stable release v0.0.2 now available for macOS.
 
 ## Preview
 This is the current interface of Elements LaTeX, still at a very early development state:
 ![Current interface screenshot](/assets/screenshots/current_screenshot.png)
 
-## Building the project
+## Using Elements LaTeX on macOS
+Simply download [the latest release](https://github.com/Red-Rapious/Elements-LaTeX/releases) and install it. MacOS will probably block the app opening because "the developper isn't identified". I'm currently working on this issue, but you can in the meantime work around by clicking Show in Finder and Ctrl + click on the app icon.
+
+To compile a document, you'll need to have a LaTeX installation. I recommend [XeLaTeX](https://www.tug.org/xelatex/), but you can use any other LaTeX installation as long as the `pdflatex` command is available.
+
+## Building the project from source
 Start by [installing `Node.js`](https://nodejs.org/en/download/) and git if not already done. Type the following commands to clone the `Elements-LaTeX` repository and install the dependencies:
 
 ```
@@ -55,12 +60,12 @@ npm run build
 ```
 
 ## Developpement status
-Currently working on v0.0.2: early phase of developpement.
+Currently working on v0.0.3: middle phase of developpement.
 
 ## License
 This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
 
-## Features
+## Features list
 | Feature | Status | Planned for |
 | ------- | ------ | ----------- |
 | Resizable panels mechanism | :white_check_mark: | v 0.0.0 |

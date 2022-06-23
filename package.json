@@ -1,7 +1,7 @@
 {
   "name": "elements-latex",
   "product-name": "Elements LaTeX",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A cross-platform, powerful electron-based LaTeX editor",
   "main": "src/main.js",
   "scripts": {
