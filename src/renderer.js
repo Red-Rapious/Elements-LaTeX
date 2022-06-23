@@ -140,6 +140,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         openedFolderPath = folderPath
         htmlCode = createFolderStructureHTML(getFolderStructure(openedFolderPath));
+
+        // Opens a non-specific TeX file
         const randomTexFile = getTexFileInFolder(openedFolderPath)
         if (randomTexFile != "") handleDocumentChange(randomTexFile);
         
@@ -151,7 +153,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const result = child_process.spawn(command, {shell: true});
 
         result.stdout.on('data', (data) => {
-            console.log(`stdout: ${data}`);
+            //console.log(`stdout: ${data}`);
         });
 
         result.stderr.on('data', (data) => {
@@ -173,12 +175,13 @@ window.addEventListener("DOMContentLoaded", () => {
         /* Uses pdfjs to show the matching pdf file into the dedicated panel */
 
         const viewerEle = document.getElementById('pdfViewerPanel');
-        viewerEle.innerHTML = ''; // destroy the old instance of PDF.js (if it exists)
 
         const pdfPath = texDocumentPath.slice(0, -3) + "pdf"; // path of the matching PDF document
 
         fs.stat(pdfPath, function(err, stat) {
             if (err == null) {
+                viewerEle.innerHTML = ""; // destroy the old instance of PDF.js (if it exists)
+
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
                 iframe.src = path.join(__dirname, `libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
@@ -196,8 +199,12 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const saveCurrentFile = () => {
-        ipcRenderer.send("update-file-content", el.fileTextarea.value);
-        el.documentName.innerHTML = path.parse(texDocumentPath).base;
+        if (! el.fileTextarea.firstChild.disabled) {
+            ipcRenderer.send("update-file-content", el.fileTextarea.value);
+
+            // Delete the "modified" tag in the title bar
+            el.documentName.innerHTML = path.parse(texDocumentPath).base;
+        }
     };
 
     el.createDocumentBtn.addEventListener("click", () => {
