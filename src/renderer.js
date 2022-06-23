@@ -30,6 +30,24 @@ const getFolderStructure = (dir) => {
     return [path.basename(dir), result];
 }
 
+const getTexFileInFolder = (folder) => {
+    /* Recursively search for a tex file in a folder */
+    var texFile = "";
+    fs.readdirSync(folder).forEach(function(file) {
+        var stat = fs.statSync(folder+'/'+file);
+
+        if (stat && stat.isDirectory()) {
+            const result = getTexFileInFolder(folder+'/'+file);
+            if (result != "") texFile = result;
+        } 
+        else {
+            if (getExtension(file) == "tex") texFile = folder + "/" + file;
+        }
+    });
+
+    return texFile;
+};
+
 const createFolderStructureHTML = (folderStructure) => {
     var htmlCode = "";
 
@@ -122,6 +140,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
         openedFolderPath = folderPath
         htmlCode = createFolderStructureHTML(getFolderStructure(openedFolderPath));
+        const randomTexFile = getTexFileInFolder(openedFolderPath)
+        if (randomTexFile != "") handleDocumentChange(randomTexFile);
+        
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
 

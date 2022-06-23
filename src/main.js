@@ -201,7 +201,7 @@ ipcMain.on("create-document-triggered", () => {
         filters: [{name: "LaTeX files", extensions: ["tex"]}]
     })
     .then(({ filePath }) => {
-        if (filePaths != undefined) {
+        if (filePath != undefined) {
             fs.writeFile(filePath, "", (error) => {
                 if (error) {
                     handleError("the creation of the file")
