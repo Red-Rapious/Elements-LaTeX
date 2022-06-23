@@ -92,6 +92,9 @@ window.addEventListener("DOMContentLoaded", () => {
     // Update the footer version label
     el.elementsVersionLabel.innerHTML = "Version " + pjson.version;
 
+    // Initially disable the text area
+    el.fileTextarea.firstChild.disabled = true;
+
     const handleDocumentChange = (filePath, content = "") => {
         /* On document change, updates the side file structure tree, text area and line count */
 
@@ -101,7 +104,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         updatePDFPanel();
 
-        //el.fileTextarea.removeAttribute("disabled");
+        el.fileTextarea.firstChild.disabled = false;
         el.fileTextarea.value = content;
         el.fileTextarea.focus();
 
