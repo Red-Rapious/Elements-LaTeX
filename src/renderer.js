@@ -113,7 +113,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // Initially disable the text area
     el.fileTextarea.firstChild.disabled = true;
 
-    const handleDocumentChange = (filePath, content = "") => {
+    const handleDocumentChange = (filePath, content) => {
         /* On document change, updates the side file structure tree, text area and line count */
 
         texDocumentPath = filePath;
@@ -143,7 +143,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // Opens a non-specific TeX file
         const randomTexFile = getTexFileInFolder(openedFolderPath)
-        if (randomTexFile != "") handleDocumentChange(randomTexFile);
+        if (randomTexFile != "") ipcRenderer.send("open-given-file", randomTexFile);
         
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
