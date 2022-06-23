@@ -101,7 +101,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         updatePDFPanel();
 
-        el.fileTextarea.removeAttribute("disabled");
+        //el.fileTextarea.removeAttribute("disabled");
         el.fileTextarea.value = content;
         el.fileTextarea.focus();
 
