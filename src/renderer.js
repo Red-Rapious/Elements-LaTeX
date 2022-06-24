@@ -105,6 +105,7 @@ window.addEventListener("DOMContentLoaded", () => {
         folderTree: document.getElementById("folderTree"),
         structureTree: document.getElementById("structureTree"),
         compileCodeBtn: document.getElementById("compileCodeBtn"),
+        reloadFolderBtn: document.getElementById("reloadFolderBtn"),
     };
 
     // Update the footer version label
@@ -234,6 +235,11 @@ window.addEventListener("DOMContentLoaded", () => {
         lines = el.fileTextarea.value.match(/\n/g);
         if (lines != null) lineCount = lines.length + 1;
         el.lineCountLabel.innerHTML = "Lines: " + lineCount;
+    });
+
+    el.reloadFolderBtn.addEventListener("click", () => {
+        saveCurrentFile();
+        handleFolderChange(openedFolderPath);
     });
 
     ipcRenderer.on("save-file-triggered", (_) => {

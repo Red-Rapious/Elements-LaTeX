@@ -39,10 +39,18 @@
           <div id="sidePanel">
               <div id="folderTreePanel">
                   <div id="folderManagementBar">
-                      <div class="unselectable" id="folderStructureLabel"><i class="fa fa-folder-tree"></i>Folder Structure</div>
-                      <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
-                      <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
-                      <button id="openFolderBtn"><span class="material-icons"> create_new_folder </span></button>
+                      <div class="unselectable" id="folderStructureLabel">
+                        <button id="reloadFolderBtn">
+                          <i class="fa fa-folder-tree"></i>
+                          <i class="fa fa-arrow-rotate-right"></i>
+                        </button>
+                        Folder Structure
+                      </div>
+                      <div id="folderButtonsContainer">
+                        <button id="openDocumentBtn"><span class="material-icons"> launch </span></button>
+                        <button id="createDocumentBtn"><span class="material-icons"> note_add </span></button>
+                        <button id="openFolderBtn"><span class="material-icons"> create_new_folder </span></button>  
+                      </div>
                   </div>
                   
                   <div id="folderTree" class="tree unselectable">
@@ -83,7 +91,7 @@
 
               <div id="footer">
                 <span class="label" id="elementsVersionLabel">Version undef</span>
-                <span class="label" id="lineCountLabel">Lines: undef</span>
+                <span class="label" id="lineCountLabel"><!--Lines: undef--></span>
               </div>
 
           </div>

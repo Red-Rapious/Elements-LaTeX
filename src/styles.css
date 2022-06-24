@@ -95,8 +95,8 @@ main
 
 /* SIDE PANEL */
 #sidePanel {
-    width: 20%;
-    min-width: 20%;
+    width: 17%;
+    min-width: 10%;
     max-width: 40%;
 
     align-items: center;
@@ -165,9 +165,10 @@ main
     display: flex;
     font-size: medium;
     align-items: center;
-    justify-content: left;
-    margin-left: 20px;
+    justify-content: center;
     margin-right: auto;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 #folderManagementBar button, #codeCompileBar button {
@@ -177,6 +178,30 @@ main
     border: none;
     outline: none;
     color: #fff;
+}
+
+#reloadFolderBtn {
+    background-color: transparent !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    width: 20px;
+    height: 20px;
+}
+
+#reloadFolderBtn .fa-folder-tree {
+    display: inline;
+}
+
+#reloadFolderBtn .fa-arrow-rotate-right {
+    display: none;
+}
+
+#reloadFolderBtn:hover .fa-folder-tree {
+    display: none;
+}
+
+#reloadFolderBtn:hover .fa-arrow-rotate-right {
+    display: inline;
 }
 
 #codeCompileBar button:disabled {
@@ -247,7 +272,7 @@ code-input {
 }
 
 #codeCompileBar {
-    height: 43px;
+    height: 40px;
     width: 100%;
 
     display: flex;
