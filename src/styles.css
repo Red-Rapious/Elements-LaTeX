@@ -70,18 +70,6 @@ main
     background-color: rgb(19, 19, 25);
 }
 
-/*.resizer:hover {
-    background-color: rgb(26, 26, 65);
-}
-
-.resizer[data-direction='horizontal']:hover {
-    width: 6px;
-}
-
-.resizer[data-direction='vertical']:hover {
-    height: 6px;
-}*/
-
 .resizer[data-direction='horizontal'] {
     cursor: ew-resize;
     height: 100%;
@@ -281,20 +269,6 @@ code-input {
     align-items: center;
 }
 
-/*::-webkit-scrollbar {
-    width: 15px;
-    border-color: rgb(19, 19, 25);
-}
-
-::-webkit-scrollbar-track {
-    border-color: rgb(19, 19, 25);
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgb(30, 31, 42);
-    border-color: rgb(19, 19, 25);
-}*/
-
 #pdfViewerPanel {
     /* Take the remaining width */
     flex: 1;
@@ -333,12 +307,42 @@ viewer-pdf-toolbar {
     font-size: medium;
 }
 
-#footer:first-child {
+#elementsVersionLabel {
     margin-left: auto;
 }
 
-#footer .label {
+/*#footer .label {
     display: flex;
     align-items: center;
     justify-content: center;;
+}*/
+
+#footer button {
+    border-radius: 12%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: rgb(146, 150, 195);
+
+    width: 15px;
+    height: 15px;
+
+    font-size: larger;
+    margin-right: 20px;
+}
+
+#footer button[state="open"] i:first-child {
+    display: inline;
+}
+
+#footer button[state="open"] i:last-child {
+    display: none;
+}
+
+#footer button[state="closed"] i:first-child {
+    display: none;
+}
+
+#footer button[state="closed"] i:last-child {
+    display: inline;
 }

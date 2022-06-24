@@ -106,6 +106,8 @@ window.addEventListener("DOMContentLoaded", () => {
         structureTree: document.getElementById("structureTree"),
         compileCodeBtn: document.getElementById("compileCodeBtn"),
         reloadFolderBtn: document.getElementById("reloadFolderBtn"),
+        sidePanelCloseBtn: document.getElementById("sidePanelCloseBtn"),
+        pdfViewerCloseBtn: document.getElementById("pdfViewerCloseBtn"),
     };
 
     // Update the footer version label
@@ -226,6 +228,14 @@ window.addEventListener("DOMContentLoaded", () => {
     el.compileCodeBtn.addEventListener("click", () => {
         saveCurrentFile();
         launchPDFLatexCommand(texDocumentPath);
+    });
+
+    el.sidePanelCloseBtn.addEventListener("click", () => {
+        // TODO: close the side panel and update button appearance
+    });
+
+    el.pdfViewerCloseBtn.addEventListener("click", () => {
+        // TODO: close the pdf viewer and update button appearance
     });
 
     el.fileTextarea.addEventListener("input", () => {

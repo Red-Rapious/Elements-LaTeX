@@ -13,7 +13,6 @@ if (isDevelopementEnvironement) {
 
 let mainWindow;
 let openedFilePath;
-//let openedFolderPath;
 
 const handleError = (location = "undefined") => {
     new Notification({
@@ -39,7 +38,6 @@ const openFile = (filePath) => {
 };
 
 const openFolder = (folderPath) => {
-    //openedFolderPath = folderPath;
     settings.set("current-folder", { data: folderPath });
     mainWindow.webContents.send("folder-opened", { folderPath });
 };
@@ -60,19 +58,18 @@ const createWindow = () => {
     if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/index.html");
 
-    settings.has("current-file").then( bool => {
-        if (bool) {
-            
-            settings.get("current-file").then(value => { 
-                openFile(value.data);
-            });
-        }
-    });
-
     settings.has("current-folder").then( bool => {
         if (bool) {
             settings.get("current-folder").then(value => { 
                 openFolder(value.data);
+            });
+        }
+    });
+
+    settings.has("current-file").then( bool => {
+        if (bool) {
+            settings.get("current-file").then(value => { 
+                openFile(value.data);
             });
         }
     });
