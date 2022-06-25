@@ -346,3 +346,7 @@ viewer-pdf-toolbar {
 #footer button[state="closed"] i:last-child {
     display: inline;
 }
+
+#footer span {
+    margin-top: 2px;
+}
