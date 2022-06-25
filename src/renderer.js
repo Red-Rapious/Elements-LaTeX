@@ -108,6 +108,10 @@ window.addEventListener("DOMContentLoaded", () => {
         reloadFolderBtn: document.getElementById("reloadFolderBtn"),
         sidePanelCloseBtn: document.getElementById("sidePanelCloseBtn"),
         pdfViewerCloseBtn: document.getElementById("pdfViewerCloseBtn"),
+        sidePanel: document.getElementById("sidePanel"),
+        pdfViewerPanel: document.getElementById("pdfViewerPanel"),
+        codePdfResizer: document.getElementById("codePdfResizer"),
+        sideDevelopmentResizer: document.getElementById("sideDevelopmentResizer"),
     };
 
     // Update the footer version label
@@ -230,12 +234,27 @@ window.addEventListener("DOMContentLoaded", () => {
         launchPDFLatexCommand(texDocumentPath);
     });
 
+    const switchPanelDisplay = (button, minimizedPanel, resizer, otherPanel, width) => {
+        if (button.getAttribute("state") == "open") {
+            minimizedPanel.style.display = "none";
+            resizer.display = "none";
+            button.setAttribute("state", "closed");
+            otherPanel.style.width = "100%";
+        }
+        else {
+            minimizedPanel.style.display = "flex";
+            resizer.display = "block";
+            button.setAttribute("state", "open");
+            otherPanel.style.width = width;
+        };
+    };
+
     el.sidePanelCloseBtn.addEventListener("click", () => {
-        // TODO: close the side panel and update button appearance
+        switchPanelDisplay(el.sidePanelCloseBtn, el.sideDevelopmentResizer.previousElementSibling, el.sideDevelopmentResizer, el.sideDevelopmentResizer.nextElementSibling, "17%");
     });
 
     el.pdfViewerCloseBtn.addEventListener("click", () => {
-        // TODO: close the pdf viewer and update button appearance
+        switchPanelDisplay(el.pdfViewerCloseBtn, el.codePdfResizer.nextElementSibling, el.codePdfResizer, el.codePdfResizer.previousElementSibling, "50%");
     });
 
     el.fileTextarea.addEventListener("input", () => {

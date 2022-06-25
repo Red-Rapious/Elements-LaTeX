@@ -14,6 +14,12 @@ if (isDevelopementEnvironement) {
 let mainWindow;
 let openedFilePath;
 
+const getExtension = (fileName) => {
+    const segments = fileName.split(".")
+    const extension = segments[segments.length - 1];
+    return extension;
+};
+
 const handleError = (location = "undefined") => {
     new Notification({
         title: "Error",
@@ -184,11 +190,13 @@ const createWindow = () => {
 
 app.whenReady().then(createWindow);
 
-app.on("open-file", (_, filePath) => {
-    openFile(filePath);
+app.on("open-file", (event, filePath) => {
+    event.preventDefault();
+    if (getExtension(filePath) == "tex") openFile(filePath);
 });
 
-app.on("open-folder", (_, folderPath) => {
+app.on("open-folder", (event, folderPath) => {
+    event.preventDefault();
     openFolder(folderPath);
 });
 
