@@ -155,7 +155,7 @@ window.addEventListener("DOMContentLoaded", () => {
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
 
-    const launchPDFLatexCommand = (filePath) => {
+    const launchPDFLatexCommand = () => {
         const command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + path.basename(texDocumentPath);
         const result = child_process.spawn(command, {shell: true});
 
@@ -231,7 +231,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     el.compileCodeBtn.addEventListener("click", () => {
         saveCurrentFile();
-        launchPDFLatexCommand(texDocumentPath);
+        launchPDFLatexCommand();
     });
 
     const switchPanelDisplay = (button, minimizedPanel, resizer, otherPanel, width) => {
@@ -273,7 +273,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ipcRenderer.on("save-file-triggered", (_) => {
         saveCurrentFile();
-        launchPDFLatexCommand(texDocumentPath);
+        launchPDFLatexCommand();
     });
    
     ipcRenderer.on("document-created", (_, filePath) => {

@@ -2,7 +2,7 @@ const { BrowserWindow, app, ipcMain, dialog, Menu, Notification, TouchBar } = re
 const path = require("path");
 const fs = require("fs");
 const settings = require("electron-settings");
-const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
+const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
