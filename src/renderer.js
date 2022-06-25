@@ -288,6 +288,11 @@ window.addEventListener("DOMContentLoaded", () => {
         handleFolderChange(folderPath);
     });
 
+    ipcRenderer.on("request-compile", (_) => {
+        saveCurrentFile();
+        launchPDFLatexCommand();
+    });
+
     el.folderTree.addEventListener("click", function(event){
         /* Opens a file when it's clicked on the side panel's tree */
         

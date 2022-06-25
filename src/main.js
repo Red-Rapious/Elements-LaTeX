@@ -1,7 +1,8 @@
-const { BrowserWindow, app, ipcMain, dialog, Menu, Notification } = require("electron");
+const { BrowserWindow, app, ipcMain, dialog, Menu, Notification, TouchBar } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const settings = require("electron-settings");
+const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
@@ -183,9 +184,37 @@ const createWindow = () => {
         ]
       }
     ];
-
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
+
+    const touchBar = new TouchBar({
+        items: [
+            new TouchBarSpacer({ size: 'large' }),
+            new TouchBarButton({
+                label: "Compile",
+                click: () => {
+                    mainWindow.webContents.send("request-compile");
+                }
+              }),
+            new TouchBarSpacer({ size: 'small' }),
+            new TouchBarButton({
+                label: "Stop",
+                enabled: false,
+                click: () => {
+                }
+              }),
+            new TouchBarSpacer({ size: 'small' }),
+            new TouchBarButton({
+                label: "Debug",
+                enabled: false,
+                click: () => {
+                }
+              }),
+            new TouchBarSpacer({ size: 'large' }),
+        ]
+      });
+      
+    mainWindow.setTouchBar(touchBar);
 };
 
 app.whenReady().then(createWindow);
