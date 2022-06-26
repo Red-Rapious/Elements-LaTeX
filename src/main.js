@@ -4,7 +4,7 @@ const fs = require("fs");
 const settings = require("electron-settings");
 const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
-const { getExtension } = require("./utility");
+const { getExtension, handleError } = require("./utility");
 
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
@@ -16,15 +16,6 @@ if (isDevelopementEnvironement) {
 
 let mainWindow;
 let openedFilePath;
-
-const handleError = (location = "undefined") => {
-    new Notification({
-        title: "Error",
-        body: "An error occured during " + location,
-    }).show();
-
-    //alert("An error occured during " + location);
-};
 
 const openFile = (filePath) => {
     fs.readFile(filePath, "utf-8", (error, content) => {
@@ -45,7 +36,7 @@ const openFolder = (folderPath) => {
     mainWindow.webContents.send("folder-opened", { folderPath });
 };
 
-const createWindow = () => {
+const createMainWindow = () => {
     mainWindow = new BrowserWindow({
         width: 1600,
         height: 1000,
@@ -211,75 +202,75 @@ const createWindow = () => {
       });
       
     mainWindow.setTouchBar(touchBar);
+
+    app.on("open-file", (event, filePath) => {
+        event.preventDefault();
+        if (getExtension(filePath) == "tex") openFile(filePath);
+    });
+
+    app.on("open-folder", (event, folderPath) => {
+        event.preventDefault();
+        openFolder(folderPath);
+    });
+
+    ipcMain.on("create-document-triggered", () => {
+        dialog.showSaveDialog(mainWindow, {
+            filters: [{name: "LaTeX files", extensions: ["tex"]}]
+        })
+        .then(({ filePath }) => {
+            if (filePath != undefined) {
+                fs.writeFile(filePath, "", (error) => {
+                    if (error) {
+                        handleError("the creation of the file")
+                    }
+                    else {
+                        openedFilePath = filePath;
+                        app.addRecentDocument(filePath);
+                        mainWindow.webContents.send("document-created", filePath);
+                        openFolder(path.dirname(filePath));
+                    }
+                } );
+            }
+        });
+    });
+
+    ipcMain.on("open-document-triggered", () => {
+        dialog.showOpenDialog(mainWindow, {
+            properties: ["openFile"],
+            filters: [{name: "LaTeX files", extensions: ["tex"]}]
+        })
+        .then(({ filePaths }) => {
+            if (filePaths != undefined) {
+                const filePath = filePaths[0];
+                openFolder(path.dirname(filePath));
+                openFile(filePath);
+            }
+        });
+    });
+
+    ipcMain.on("open-folder-triggered", () => {
+        dialog.showOpenDialog(mainWindow, {
+            properties: ["openDirectory", "createDirectory"],
+        })
+        .then(({ filePaths }) => {
+            if (filePaths != undefined) {
+                const folderPath = filePaths[0];
+                openFolder(folderPath);
+            }
+        });
+    });
+
+    ipcMain.on("update-file-content", (_, textareaContent) => {
+        fs.writeFile(openedFilePath, textareaContent, (error) => {
+            if (error) {
+                handleError("the update of the file");
+            }
+        });
+    });
+
+    ipcMain.on("open-given-file", (_, filePath) => {
+        if (fs.existsSync(filePath)) openFile(filePath);
+    });
 };
 
-app.whenReady().then(createWindow);
-
-app.on("open-file", (event, filePath) => {
-    event.preventDefault();
-    if (getExtension(filePath) == "tex") openFile(filePath);
-});
-
-app.on("open-folder", (event, folderPath) => {
-    event.preventDefault();
-    openFolder(folderPath);
-});
-
-ipcMain.on("create-document-triggered", () => {
-    dialog.showSaveDialog(mainWindow, {
-        filters: [{name: "LaTeX files", extensions: ["tex"]}]
-    })
-    .then(({ filePath }) => {
-        if (filePath != undefined) {
-            fs.writeFile(filePath, "", (error) => {
-                if (error) {
-                    handleError("the creation of the file")
-                }
-                else {
-                    openedFilePath = filePath;
-                    app.addRecentDocument(filePath);
-                    mainWindow.webContents.send("document-created", filePath);
-                    openFolder(path.dirname(filePath));
-                }
-            } );
-        }
-    });
-});
-
-ipcMain.on("open-document-triggered", () => {
-    dialog.showOpenDialog(mainWindow, {
-        properties: ["openFile"],
-        filters: [{name: "LaTeX files", extensions: ["tex"]}]
-    })
-    .then(({ filePaths }) => {
-        if (filePaths != undefined) {
-            const filePath = filePaths[0];
-            openFolder(path.dirname(filePath));
-            openFile(filePath);
-        }
-    });
-});
-
-ipcMain.on("open-folder-triggered", () => {
-    dialog.showOpenDialog(mainWindow, {
-        properties: ["openDirectory", "createDirectory"],
-    })
-    .then(({ filePaths }) => {
-        if (filePaths != undefined) {
-            const folderPath = filePaths[0];
-            openFolder(folderPath);
-        }
-    });
-});
-
-ipcMain.on("update-file-content", (_, textareaContent) => {
-    fs.writeFile(openedFilePath, textareaContent, (error) => {
-        if (error) {
-            handleError("the update of the file");
-        }
-    });
-});
-
-ipcMain.on("open-given-file", (_, filePath) => {
-    if (fs.existsSync(filePath)) openFile(filePath);
-});
+app.whenReady().then(createMainWindow);

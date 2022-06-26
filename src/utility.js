@@ -81,4 +81,13 @@ const createFolderStructureHTML = (folderStructure) => {
     return htmlCode;
 };
 
-module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML };
+const handleError = (location = "undefined") => {
+    new Notification({
+        title: "Error",
+        body: "An error occured during " + location,
+    }).show();
+
+    //alert("An error occured during " + location);
+};
+
+module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError };
