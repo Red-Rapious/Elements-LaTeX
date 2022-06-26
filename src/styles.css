@@ -84,7 +84,7 @@ main
 /* SIDE PANEL */
 #sidePanel {
     width: 17%;
-    min-width: 10%;
+    min-width: 14%;
     max-width: 40%;
 
     align-items: center;
@@ -98,6 +98,7 @@ main
     width: auto;
     white-space: nowrap;
     margin-right: 5%;
+    margin-top: 10px;
 }
 
 #folderStructureLabel i, #fileStructureLabel i {

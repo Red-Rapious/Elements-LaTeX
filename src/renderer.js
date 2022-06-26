@@ -233,7 +233,7 @@ window.addEventListener("DOMContentLoaded", () => {
         launchPDFLatexCommand();
     });
 
-    const switchPanelDisplay = (button, minimizedPanel, resizer, otherPanel) => {
+    const switchPanelDisplayMin = (button, minimizedPanel, resizer, otherPanel) => {
         if (button.getAttribute("state") == "open") {
             console.log("Width " + otherPanel.style.width);
             minimizedPanel.style.display = "none";
@@ -250,11 +250,11 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     el.sidePanelCloseBtn.addEventListener("click", () => {
-        switchPanelDisplay(el.sidePanelCloseBtn, el.sideDevelopmentResizer.previousElementSibling, el.sideDevelopmentResizer, el.sideDevelopmentResizer.nextElementSibling);
+        switchPanelDisplayMin(el.sidePanelCloseBtn, el.sideDevelopmentResizer.previousElementSibling, el.sideDevelopmentResizer, el.sideDevelopmentResizer.nextElementSibling);
     });
 
     el.pdfViewerCloseBtn.addEventListener("click", () => {
-        switchPanelDisplay(el.pdfViewerCloseBtn, el.codePdfResizer.nextElementSibling, el.codePdfResizer, el.codePdfResizer.previousElementSibling);
+        switchPanelDisplayMin(el.pdfViewerCloseBtn, el.codePdfResizer.nextElementSibling, el.codePdfResizer, el.codePdfResizer.previousElementSibling);
     });
 
     el.fileTextarea.addEventListener("input", () => {
