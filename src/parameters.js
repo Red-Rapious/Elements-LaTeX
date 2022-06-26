@@ -1,3 +1,4 @@
 const AUTOSAVE_INTERVAL = 5*60*1000; // 5 minutes
+const USE_STARTUP_WINDOW = true;
 
-module.exports = { AUTOSAVE_INTERVAL };
+module.exports = { AUTOSAVE_INTERVAL, USE_STARTUP_WINDOW };
