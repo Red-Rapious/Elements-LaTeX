@@ -1,5 +1,8 @@
+const { Notification } = require("electron");
 const path = require("path");
 const fs = require("fs");
+
+const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
@@ -90,4 +93,4 @@ const handleError = (location = "undefined") => {
     //alert("An error occured during " + location);
 };
 
-module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError };
+module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError, isDevelopementEnvironement };
