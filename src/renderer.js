@@ -168,7 +168,6 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         result.on('close', (code) => {
-            // TODO: change to the current folder path
             handleFolderChange(openedFolderPath);
             updatePDFPanel();
         });
@@ -234,8 +233,9 @@ window.addEventListener("DOMContentLoaded", () => {
         launchPDFLatexCommand();
     });
 
-    const switchPanelDisplay = (button, minimizedPanel, resizer, otherPanel, width) => {
+    const switchPanelDisplay = (button, minimizedPanel, resizer, otherPanel) => {
         if (button.getAttribute("state") == "open") {
+            console.log("Width " + otherPanel.style.width);
             minimizedPanel.style.display = "none";
             resizer.display = "none";
             button.setAttribute("state", "closed");
@@ -245,16 +245,16 @@ window.addEventListener("DOMContentLoaded", () => {
             minimizedPanel.style.display = "flex";
             resizer.display = "block";
             button.setAttribute("state", "open");
-            otherPanel.style.width = width;
+            otherPanel.style.width = minimizedPanel.getAttribute("saved-width");
         };
     };
 
     el.sidePanelCloseBtn.addEventListener("click", () => {
-        switchPanelDisplay(el.sidePanelCloseBtn, el.sideDevelopmentResizer.previousElementSibling, el.sideDevelopmentResizer, el.sideDevelopmentResizer.nextElementSibling, "17%");
+        switchPanelDisplay(el.sidePanelCloseBtn, el.sideDevelopmentResizer.previousElementSibling, el.sideDevelopmentResizer, el.sideDevelopmentResizer.nextElementSibling);
     });
 
     el.pdfViewerCloseBtn.addEventListener("click", () => {
-        switchPanelDisplay(el.pdfViewerCloseBtn, el.codePdfResizer.nextElementSibling, el.codePdfResizer, el.codePdfResizer.previousElementSibling, "50%");
+        switchPanelDisplay(el.pdfViewerCloseBtn, el.codePdfResizer.nextElementSibling, el.codePdfResizer, el.codePdfResizer.previousElementSibling);
     });
 
     el.fileTextarea.addEventListener("input", () => {
