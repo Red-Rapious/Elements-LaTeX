@@ -4,6 +4,8 @@ const fs = require("fs");
 const settings = require("electron-settings");
 const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
+const { getExtension } = require("./utility");
+
 const isDevelopementEnvironement = process.env.NODE_ENV === "development";
 
 if (isDevelopementEnvironement) {
@@ -14,12 +16,6 @@ if (isDevelopementEnvironement) {
 
 let mainWindow;
 let openedFilePath;
-
-const getExtension = (fileName) => {
-    const segments = fileName.split(".")
-    const extension = segments[segments.length - 1];
-    return extension;
-};
 
 const handleError = (location = "undefined") => {
     new Notification({
