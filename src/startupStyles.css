@@ -9,7 +9,7 @@
 
 #titleContainer {
     width: 100%;
-    flex: 1;
+    flex: 2.5;
 
     padding-top: 30px;
 
@@ -36,10 +36,19 @@
 
 #buttonsContainer button {
     vertical-align: middle;
+
+    margin: 5px;
+    background-color: rgb(51, 76, 135);
+    border: none;
+    color: rgb(184, 196, 255);
 }
 
 #buttonsContainer button .material-icons {
     margin-right: 8px;
+}
+
+#checkboxContainer {
+    margin-bottom: 15px;
 }
 
 #rightPanel {
