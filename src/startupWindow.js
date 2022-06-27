@@ -7,7 +7,8 @@ const createStartupWindow = () => {
     startupWindow = new BrowserWindow({
         width: 800,
         height: 500,
-        titleBarStyle: "hiddenInset",
+        frame: false,
+        titleBarStyle: "customButtonsOnHover",
         icon: path.join(app.getAppPath(), "assets/logos/icon.png"),
         webPreferences: {
             nodeIntegration: true, 

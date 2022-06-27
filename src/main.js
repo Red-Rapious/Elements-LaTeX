@@ -1,4 +1,4 @@
-const { app, ipcMain } = require("electron");
+const { app, ipcMain, BrowserWindow } = require("electron");
 
 const { createMainWindow } = require("./mainWindow");
 const { createStartupWindow } = require("./startupWindow");
@@ -18,3 +18,15 @@ if (USE_STARTUP_WINDOW) {
 else {
     app.whenReady().then(createMainWindow);
 };
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+});
+
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createStartupWindow();
+    }
+});

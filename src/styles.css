@@ -146,6 +146,10 @@ main
     list-style-type: none;
 }
 
+.tree ul {
+    padding-inline-start: 30px;
+}
+
 #folderManagementBar, #structureManagementBar {
     display: flex;
     font-size: medium;
