@@ -6,16 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elements LaTeX</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+
     <link rel="stylesheet" href="./startupStyles.css" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
 </head>
 <body>
     <main>
-        <span class="unselectable">Welcome to</span>
-        <span class="unselectable">Elements LaTeX</span>
-        <span id="versionLabel">Version undef</span>
-        <button id="mainWindowBtn">Go to main window</button>
+        <div id="mainArea">
+            <img class="unselectable" id="logoImage" src="../assets/ui/logo_fullframe.png" alt="Elements Logo">
+            <span class="unselectable">Elements LaTeX</span>
+            <span id="versionLabel">Version undefined</span>
+
+            <button id="mainWindowBtn">Go to main window</button>
+
+            <div id="buttonsContainer">
+                <button><span class="material-icons"> launch </span>Open file</button>
+                <button><span class="material-icons"> note_add </span>Create file</button>
+                <button><span class="material-icons"> create_new_folder </span>Open folder</button>
+            </div>
+
+            <input type="checkbox" id="openStartupWindow" name="openStartupWindow" value="True" checked>
+            <label for="openStartupWindow">Always show this window on startup</label>
+        </div>
+        <div id="rightPanel">
+            <ul>
+                <li>File 1</li>
+                <li>File 2</li>
+                <li>File 3</li>
+                <li>File 4</li>
+            </ul>
+        </div>
+
     </main>
 </body>
 </body>

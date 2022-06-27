@@ -29,3 +29,8 @@ main button {
     width: 20%;
     height: 10%;
 }
+
+#logoImage {
+    width: 100px;
+    height: 100px;
+}

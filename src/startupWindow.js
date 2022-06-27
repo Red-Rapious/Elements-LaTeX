@@ -7,6 +7,7 @@ const createStartupWindow = () => {
     startupWindow = new BrowserWindow({
         width: 800,
         height: 500,
+        resizable: false,
         frame: false,
         titleBarStyle: "customButtonsOnHover",
         icon: path.join(app.getAppPath(), "assets/logos/icon.png"),
@@ -17,7 +18,7 @@ const createStartupWindow = () => {
         },
     });
 
-    if (isDevelopementEnvironement) startupWindow.webContents.openDevTools();
+    //if (isDevelopementEnvironement) startupWindow.webContents.openDevTools();
     startupWindow.loadFile("src/startupWindow.html");
 };
 
