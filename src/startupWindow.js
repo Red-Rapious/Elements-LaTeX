@@ -5,7 +5,7 @@ const { isDevelopementEnvironement } = require("./utility");
 
 const createStartupWindow = () => {
     startupWindow = new BrowserWindow({
-        width: 800,
+        width: 800+350,
         height: 500,
         resizable: false,
         frame: false,
@@ -18,7 +18,7 @@ const createStartupWindow = () => {
         },
     });
 
-    //if (isDevelopementEnvironement) startupWindow.webContents.openDevTools();
+    if (isDevelopementEnvironement) startupWindow.webContents.openDevTools();
     startupWindow.loadFile("src/startupWindow.html");
 };
 
