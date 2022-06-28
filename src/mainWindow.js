@@ -38,12 +38,12 @@ const createMainWindow = () => {
         webPreferences: {
             nodeIntegration: true, 
             contextIsolation: false, 
-            preload: path.join(app.getAppPath(), "src/renderer.js"),
+            preload: path.join(app.getAppPath(), "src/mainRenderer.js"),
         },
     });
 
     if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
-    mainWindow.loadFile("src/index.html");
+    mainWindow.loadFile("src/mainWindow.html");
 
     settings.has("current-folder").then( bool => {
         if (bool) {
