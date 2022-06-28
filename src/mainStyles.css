@@ -209,21 +209,6 @@
     justify-content: center;
 }
 
-/*#codeEditorPanel {
-    width: 100%;
-    height: 100%;
-
-    background-color: rgb(30, 31, 45);
-    color: #fff;/*rgb(122, 162, 247);
-    border: none;
-    outline: none;
-    resize: none;
-
-    font-family: Menlo, Monaco, 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 160% !important;
-}*/
-
 code-input {
     width: 100%;
     height: 100%;
