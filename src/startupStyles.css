@@ -1,5 +1,5 @@
 #mainArea {
-    width: 70%;
+    flex: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -17,6 +17,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    color: rgb(207, 215, 255)
 }
 
 #logoImage {
@@ -35,16 +37,27 @@
 }
 
 #buttonsContainer button {
+    display: flex;
+    flex-direction: row;
     vertical-align: middle;
+    align-items: center;
 
     margin: 5px;
+    padding: 5px 10px 5px 10px;
     background-color: rgb(51, 76, 135);
     border: none;
-    color: rgb(184, 196, 255);
+    color: rgb(207, 215, 255);
+
+    border-radius: 4px;
 }
 
 #buttonsContainer button .material-icons {
     margin-right: 8px;
+}
+
+#buttonsContainer button .text {
+    flex: 1;
+    font-weight: bold;
 }
 
 #checkboxContainer {
@@ -54,5 +67,29 @@
 #rightPanel {
     background-color: rgb(29, 29, 42);
 
-    flex: 1;
+    width: 30%;
+}
+
+
+/* LATEX LOGO */
+.latex sub, .latex sup {
+    text-transform: uppercase;
+}
+
+.latex sub {
+    vertical-align: -0.5ex;
+    margin-left: -0.1667em;
+    margin-right: -0.125em;
+}
+
+.latex, .latex sub {
+    font-size: 1em;
+    font: "Times New Roman", Times, serif !important;
+}
+
+.latex sup {
+    font-size: 0.85em;
+    vertical-align: 0.15em;
+    margin-left: -0.36em;
+    margin-right: -0.15em;
 }

@@ -4,7 +4,8 @@ const fs = require("fs");
 const settings = require("electron-settings");
 const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
-const { getExtension, handleError, isDevelopementEnvironement } = require("./utility");
+const { getExtension, handleError } = require("./utility");
+const { isDevelopementEnvironement } = require("./parameters");
 
 let mainWindow;
 let openedFilePath;

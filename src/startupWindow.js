@@ -1,11 +1,11 @@
 const { BrowserWindow, app, Menu } = require("electron");
 const path = require("path");
 
-const { isDevelopementEnvironement } = require("./utility");
+const { STARTUP_INSPECTOR } = require("./parameters");
 
 const createStartupWindow = () => {
     startupWindow = new BrowserWindow({
-        width: 800+350,
+        width: 800 + (STARTUP_INSPECTOR ? 350 : 0),
         height: 500,
         resizable: false,
         frame: false,
@@ -18,7 +18,7 @@ const createStartupWindow = () => {
         },
     });
 
-    if (isDevelopementEnvironement) startupWindow.webContents.openDevTools();
+    if (STARTUP_INSPECTOR) startupWindow.webContents.openDevTools();
     startupWindow.loadFile("src/startupWindow.html");
 };
 
