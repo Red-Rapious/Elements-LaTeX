@@ -84,7 +84,7 @@ window.addEventListener("DOMContentLoaded", () => {
         updateFolderTree(folderPath);
         
         // Opens a non-specific TeX file
-        if (folderPath != openedFolderPath) {
+        if (texDocumentPath == "" || texDocumentPath.indexOf(folderPath) == -1) {
             const randomTexFile = getTexFileInFolder(folderPath)
             if (randomTexFile != "") ipcRenderer.send("open-given-file", randomTexFile);
         }

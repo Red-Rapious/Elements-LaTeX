@@ -47,12 +47,12 @@ const createMainWindow = () => {
     mainWindow.loadFile("src/mainWindow.html");
 
     mainWindow.once("ready-to-show", () => {
-        if (settings.hasSync("current-folder")) {
-            openFolder(settings.getSync("current-folder"));
-        }
-    
         if (settings.hasSync("current-file")) {
             openFile(settings.getSync("current-file"));
+        }
+
+        if (settings.hasSync("current-folder")) {
+            openFolder(settings.getSync("current-folder"));
         }
     });
 
