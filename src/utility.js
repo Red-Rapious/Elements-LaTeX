@@ -91,4 +91,8 @@ const handleError = (location = "undefined") => {
     //alert("An error occured during " + location);
 };
 
-module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError };
+const generateHeader = (filePath, folderPath, modified=false) => {
+    return path.parse(folderPath).base + " - " + path.parse(filePath).base + (modified ? " (modified)" : "");
+};
+
+module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError, generateHeader };

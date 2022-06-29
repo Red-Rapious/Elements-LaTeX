@@ -8,7 +8,8 @@ const fixPath = require("fix-path");
 const { 
     getFolderStructure, 
     getTexFileInFolder, 
-    createFolderStructureHTML 
+    createFolderStructureHTML,
+    generateHeader
 } = require("./utility");
 
 const { AUTOSAVE_INTERVAL } = require("./parameters");
@@ -57,7 +58,7 @@ window.addEventListener("DOMContentLoaded", () => {
         texDocumentPath = filePath;
 
         // Update the structure tree (WIP)
-        el.documentName.innerHTML = path.parse(filePath).base;
+        el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, false);
         el.structureTree.innerHTML = "<ul><li><i class=\"fa fa-file\"></i> " + path.parse(filePath).base + "</li>"
         
         // Update the content of text area
@@ -90,6 +91,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         
         openedFolderPath = folderPath;
+        el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, false);
     };
 
     const launchPDFLatexCommand = () => {
@@ -146,7 +148,7 @@ window.addEventListener("DOMContentLoaded", () => {
             ipcRenderer.send("update-file-content", el.fileTextarea.value);
 
             // Delete the "modified" tag in the title bar
-            el.documentName.innerHTML = path.parse(texDocumentPath).base;
+            el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, false);
         }
     };
 
@@ -195,7 +197,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.fileTextarea.addEventListener("input", () => {
-        el.documentName.innerHTML = path.parse(texDocumentPath).base + " (modified)";
+        el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, true);
 
         lineCount = 1;
         lines = el.fileTextarea.value.match(/\n/g);
