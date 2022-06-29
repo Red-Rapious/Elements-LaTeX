@@ -23,7 +23,6 @@ const openFile = (filePath) => {
     catch (error) {
         handleError("the opening of the file");
     }
-    
 };
 
 const openFolder = (folderPath) => {
@@ -47,13 +46,15 @@ const createMainWindow = () => {
     if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/mainWindow.html");
 
-    if (settings.hasSync("current-folder")) {
-        openFolder(settings.getSync("current-folder"));
-    }
-
-    if (settings.hasSync("current-file")) {
-        openFile(settings.getSync("current-file"));
-    }
+    mainWindow.once("ready-to-show", () => {
+        if (settings.hasSync("current-folder")) {
+            openFolder(settings.getSync("current-folder"));
+        }
+    
+        if (settings.hasSync("current-file")) {
+            openFile(settings.getSync("current-file"));
+        }
+    });
 
     const menuTemplate = [
     {

@@ -69,6 +69,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleFolderChange = (folderPath) => {
+        console.log("handleFolderChange");
         /* On folder change, updates the side folder structure tree */
 
         openedFolderPath = folderPath;
@@ -203,7 +204,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
    
     ipcRenderer.on("document-created", (_, filePath) => {
-        handleDocumentChange(filePath);
+        handleDocumentChange(filePath, "");
     });
 
     ipcRenderer.on("document-opened", (_, {filePath, content}) => {
