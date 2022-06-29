@@ -11,22 +11,24 @@ let mainWindow;
 let openedFilePath;
 
 const openFile = (filePath) => {
-    fs.readFile(filePath, "utf-8", (error, content) => {
-        if (error) {
-            handleError("the opening of the file");
-        }
-        else {
-            openedFilePath = filePath;
-            app.addRecentDocument(filePath);
-            settings.set("current-file", { data: filePath });
-            mainWindow.webContents.send("document-opened", { filePath, content });
-        }
-    });
+    try {
+        const content = fs.readFileSync(filePath, "utf-8");
+
+        openedFilePath = filePath;
+        mainWindow.webContents.send("document-opened", { filePath, content });
+        
+        app.addRecentDocument(filePath);
+        settings.setSync("current-file", filePath);
+    }
+    catch (error) {
+        handleError("the opening of the file");
+    }
+    
 };
 
 const openFolder = (folderPath) => {
-    settings.set("current-folder", { data: folderPath });
     mainWindow.webContents.send("folder-opened", { folderPath });
+    settings.setSync("current-folder", folderPath);
 };
 
 const createMainWindow = () => {
@@ -45,21 +47,13 @@ const createMainWindow = () => {
     if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/mainWindow.html");
 
-    settings.has("current-folder").then( bool => {
-        if (bool) {
-            settings.get("current-folder").then(value => { 
-                openFolder(value.data);
-            });
-        }
-    });
+    if (settings.hasSync("current-folder")) {
+        openFolder(settings.getSync("current-folder"));
+    }
 
-    settings.has("current-file").then( bool => {
-        if (bool) {
-            settings.get("current-file").then(value => { 
-                openFile(value.data);
-            });
-        }
-    });
+    if (settings.hasSync("current-file")) {
+        openFile(settings.getSync("current-file"));
+    }
 
     const menuTemplate = [
     {
