@@ -1,6 +1,9 @@
 # Elements LaTeX
 A cross-platform, powerful electron-based LaTeX editor. Stable release v0.0.2 now available for macOS.
 
+![release badge](https://img.shields.io/github/v/release/red-rapious/elements-latex.svg)
+<img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="license" height="20px"/>
+
 ## Preview
 This is the current interface of Elements LaTeX, still at a very early development state:
 ![Current interface screenshot](/assets/screenshots/current_screenshot.png)
