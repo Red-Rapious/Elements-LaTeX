@@ -46,40 +46,50 @@ window.addEventListener("DOMContentLoaded", () => {
     // Initially disable the text area
     el.fileTextarea.firstChild.disabled = true;
 
+    const updateFolderTree = (folderPath) => {
+        // Update the folder tree
+        htmlCode = createFolderStructureHTML(getFolderStructure(folderPath));
+        el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
+    };
+
     const handleDocumentChange = (filePath, content) => {
         /* On document change, updates the side file structure tree, text area and line count */
-
         texDocumentPath = filePath;
+
+        // Update the structure tree (WIP)
         el.documentName.innerHTML = path.parse(filePath).base;
         el.structureTree.innerHTML = "<ul><li><i class=\"fa fa-file\"></i> " + path.parse(filePath).base + "</li>"
-
-        updatePDFPanel();
-
+        
+        // Update the content of text area
         el.fileTextarea.firstChild.disabled = false;
         el.fileTextarea.value = content;
         el.fileTextarea.focus();
-
+        
+        // Update the line count
         lineCount = 1;
         lines = el.fileTextarea.value.match(/\n/g);
         if (lines != null) lineCount = lines.length + 1;
         el.lineCountLabel.innerHTML = "Lines: " + lineCount;
-
+        
+        // Manage autosave
         clearInterval(autosaveInterval);
         autosaveInterval = setInterval(saveCurrentFile, AUTOSAVE_INTERVAL);
+
+        updatePDFPanel();
     };
 
     const handleFolderChange = (folderPath) => {
-        console.log("handleFolderChange");
         /* On folder change, updates the side folder structure tree */
 
-        openedFolderPath = folderPath;
-        htmlCode = createFolderStructureHTML(getFolderStructure(openedFolderPath));
-
-        // Opens a non-specific TeX file
-        const randomTexFile = getTexFileInFolder(openedFolderPath)
-        if (randomTexFile != "") ipcRenderer.send("open-given-file", randomTexFile);
+        updateFolderTree(folderPath);
         
-        el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
+        // Opens a non-specific TeX file
+        if (folderPath != openedFolderPath) {
+            const randomTexFile = getTexFileInFolder(folderPath)
+            if (randomTexFile != "") ipcRenderer.send("open-given-file", randomTexFile);
+        }
+        
+        openedFolderPath = folderPath;
     };
 
     const launchPDFLatexCommand = () => {

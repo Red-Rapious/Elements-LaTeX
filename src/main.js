@@ -2,7 +2,7 @@ const { app, ipcMain, BrowserWindow } = require("electron");
 
 const { createMainWindow } = require("./mainWindow");
 const { createStartupWindow } = require("./startupWindow");
-const { USE_STARTUP_WINDOW, isDevelopementEnvironement } = require("./parameters");
+const { isDevelopementEnvironement } = require("./parameters");
 const settings = require("electron-settings");
 
 if (isDevelopementEnvironement) {
@@ -19,7 +19,7 @@ app.on("ready", () => {
         useStartupWindow = settings.getSync("open-startup-window");
     }
 
-    if (useStartupWindow && USE_STARTUP_WINDOW) {
+    if (useStartupWindow) {
         ipcMain.on("open-main-window", (_, openStartupWindowCheck) => {
             settings.setSync("open-startup-window", openStartupWindowCheck);
             createMainWindow();
