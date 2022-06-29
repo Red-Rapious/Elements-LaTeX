@@ -66,6 +66,11 @@ const createMainWindow = () => {
         label: "Elements LaTeX",
         submenu : [
             { type: 'separator'},
+            {   label: "Reset settings",
+                click: () => {
+                    settings.unsetSync();
+                },
+            },
             { role: 'quit' }
         ],
     },

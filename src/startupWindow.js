@@ -1,4 +1,4 @@
-const { BrowserWindow, app, Menu } = require("electron");
+const { BrowserWindow, app } = require("electron");
 const path = require("path");
 
 const { STARTUP_INSPECTOR } = require("./parameters");
@@ -13,7 +13,7 @@ const createStartupWindow = () => {
         icon: path.join(app.getAppPath(), "assets/logos/icon.png"),
         webPreferences: {
             nodeIntegration: true, 
-            contextIsolation: false, 
+            contextIsolation: false,
             preload: path.join(app.getAppPath(), "src/startupRenderer.js"),
         },
     });
