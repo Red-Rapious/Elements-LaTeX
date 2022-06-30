@@ -5,8 +5,8 @@ const { STARTUP_INSPECTOR } = require("./parameters");
 
 const createStartupWindow = () => {
     startupWindow = new BrowserWindow({
-        width: 800 + (STARTUP_INSPECTOR ? 350 : 0),
-        height: 500,
+        width: 750 + (STARTUP_INSPECTOR ? 350 : 0),
+        height: 460,
         resizable: false,
         frame: false,
         titleBarStyle: "customButtonsOnHover",
