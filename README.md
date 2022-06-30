@@ -78,6 +78,7 @@ This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/li
 | Show generated PDF | :white_check_mark: | v 0.0.1 |
 | Compile file | :white_check_mark: | v 0.0.2 |
 | Syntax highlightning | :white_check_mark: | v 0.0.2 |
+| Startup window | :large_orange_diamond: | v 0.0.2 |
 | Show erros during compilation | :x: | v 0.0.2 |
 | Line numbers | :x: | v 0.0.2 |
 | Interface embellishment | :x: | v 0.0.2 |

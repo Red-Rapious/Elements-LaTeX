@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+const pjson = require('../package.json');
 
 window.addEventListener("DOMContentLoaded", () => {
     const openMainWindow = () => {
@@ -11,6 +12,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el = {
+        versionLabel: document.getElementById("versionLabel"),
         openStartupWindowCheck: document.getElementById("openStartupWindowCheck"),
     };
+
+    el.versionLabel.innerHTML = "Version " + pjson.version;
 });

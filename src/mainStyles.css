@@ -160,10 +160,6 @@
     display: inline;
 }
 
-#codeCompileBar button:disabled {
-    background-color: rgb(90, 92, 98);
-}
-
 #folderManagementBar button:active, #codeCompileBar button:active {
     background-color: rgb(43, 45, 79);
 }
