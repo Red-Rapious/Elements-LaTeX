@@ -217,7 +217,7 @@ code-input {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
     border-color: rgb(19, 19, 25);
 }
 ::-webkit-scrollbar-track {
