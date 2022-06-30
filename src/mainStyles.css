@@ -216,6 +216,22 @@ code-input {
     line-height: 135% !important; /* HYPER PARMAMETER */
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+    border-color: rgb(19, 19, 25);
+}
+::-webkit-scrollbar-track {
+    border-color: rgb(19, 19, 25);
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(30, 31, 42);
+    border-color: rgb(19, 19, 25);
+}
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+
 #codeCompileBar {
     height: 40px;
     width: 100%;
