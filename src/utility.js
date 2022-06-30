@@ -1,6 +1,7 @@
 const { Notification } = require("electron");
 const path = require("path");
 const fs = require("fs");
+const { isDevelopementEnvironement } = require("./parameters")
 
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
@@ -82,13 +83,17 @@ const createFolderStructureHTML = (folderStructure) => {
     return htmlCode;
 };
 
-const handleError = (location = "undefined") => {
-    new Notification({
-        title: "Error",
-        body: "An error occured during " + location,
-    }).show();
-
-    //alert("An error occured during " + location);
+const handleError = (location = "undefined", error = "error unspecified") => {
+    const message = "An error occured during " + location + ": " + error;
+    if (isDevelopementEnvironement) {
+        new Notification({
+            title: "Elements LaTeX: error",
+            body: message,
+        }).show();
+    }
+    else {
+        console.log(message);
+    }
 };
 
 const generateHeader = (filePath, folderPath, modified=false) => {

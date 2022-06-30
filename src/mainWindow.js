@@ -21,7 +21,7 @@ const openFile = (filePath) => {
         settings.setSync("current-file", filePath);
     }
     catch (error) {
-        handleError("the opening of the file");
+        handleError("the opening of the file", error);
     }
 };
 
@@ -211,10 +211,10 @@ const createMainWindow = () => {
             filters: [{name: "LaTeX files", extensions: ["tex"]}]
         })
         .then(({ filePath }) => {
-            if (filePath != undefined) {
+            if (filePath != undefined && filePath != "") {
                 fs.writeFile(filePath, "", (error) => {
                     if (error) {
-                        handleError("the creation of the file")
+                        handleError("the creation of the file", error);
                     }
                     else {
                         openedFilePath = filePath;
@@ -256,7 +256,7 @@ const createMainWindow = () => {
     ipcMain.on("update-file-content", (_, textareaContent) => {
         fs.writeFile(openedFilePath, textareaContent, (error) => {
             if (error) {
-                handleError("the update of the file");
+                handleError("the update of the file", error);
             }
         });
     });
