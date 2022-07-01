@@ -21,6 +21,11 @@
     color: rgb(207, 215, 255)
 }
 
+h1 {
+    font-size: 40px;
+    margin: 10px;
+}
+
 #logoImage {
     width: 100px;
     height: 100px;
