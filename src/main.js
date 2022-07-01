@@ -44,6 +44,7 @@ app.on('activate', () => {
 });
 
 ipcMain.on("return-to-startup-window", () => {
+    settings.setSync("open-startup-window", true);
     app.relaunch();
     app.exit();
 });
