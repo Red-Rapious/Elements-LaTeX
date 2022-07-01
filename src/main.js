@@ -1,5 +1,4 @@
 const { app, ipcMain, BrowserWindow } = require("electron");
-
 const { createMainWindow } = require("./mainWindow");
 const { createStartupWindow } = require("./startupWindow");
 const { isDevelopementEnvironement } = require("./parameters");
@@ -28,7 +27,7 @@ app.on("ready", () => {
         createStartupWindow();
     }
     else {
-        createMainWindow();
+        createMainWindow();     
     };
 });
 
@@ -42,4 +41,9 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createStartupWindow();
     }
+});
+
+ipcMain.on("return-to-startup-window", () => {
+    app.relaunch();
+    app.exit();
 });

@@ -35,3 +35,26 @@ main
 button:disabled {
     background-color: rgb(90, 92, 98) !important;
 }
+
+/* LATEX LOGO */
+.latex sub, .latex sup {
+    text-transform: uppercase;
+}
+
+.latex sub {
+    vertical-align: -0.5ex;
+    margin-left: -0.1667em;
+    margin-right: -0.125em;
+}
+
+.latex, .latex sub {
+    font-size: 1em;
+    font: "Times New Roman", Times, serif !important;
+}
+
+.latex sup {
+    font-size: 0.85em;
+    vertical-align: 0.15em;
+    margin-left: -0.36em;
+    margin-right: -0.15em;
+}

@@ -39,6 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
         pdfViewerPanel: document.getElementById("pdfViewerPanel"),
         codePdfResizer: document.getElementById("codePdfResizer"),
         sideDevelopmentResizer: document.getElementById("sideDevelopmentResizer"),
+        titleAndLogo: document.getElementById("titleAndLogo"),
     };
 
     // Update the footer version label
@@ -170,6 +171,11 @@ window.addEventListener("DOMContentLoaded", () => {
     el.compileCodeBtn.addEventListener("click", () => {
         saveCurrentFile();
         launchPDFLatexCommand();
+    });
+
+    el.titleAndLogo.addEventListener("click", () => {
+        saveCurrentFile();
+        ipcRenderer.send("return-to-startup-window");
     });
 
     const switchPanelDisplayMin = (button, minimizedPanel, resizer, otherPanel) => {
