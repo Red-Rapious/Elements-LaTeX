@@ -5,11 +5,11 @@ A cross-platform, powerful electron-based LaTeX editor. Stable release v0.0.2 no
 <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="license" height="20px"/>
 
 ## Preview
-This is the current interface of Elements LaTeX, still at a very early development state:
+This is the current interface of Elements LaTeX, currently in active development:
 ![Current interface screenshot](/assets/screenshots/current_screenshot.png)
 
 ## Using Elements LaTeX on macOS
-Simply download [the latest release](https://github.com/Red-Rapious/Elements-LaTeX/releases) and install it. MacOS will probably block the app opening because "the developper isn't identified". I'm currently working on this issue, but you can in the meantime work around by clicking Show in Finder and Ctrl + click on the app icon.
+Simply download [the latest release](https://github.com/Red-Rapious/Elements-LaTeX/releases) and install it. MacOS will probably block the app opening because "the developper isn't identified". Until I sign the application with an Apple Developper Account, you can work around by clicking Show in Finder and Ctrl + click on the app icon.
 
 To compile a document, you'll need to have a LaTeX installation. I recommend [XeLaTeX](https://www.tug.org/xelatex/), but you can use any other LaTeX installation as long as the `pdflatex` command is available.
 
@@ -78,11 +78,11 @@ This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/li
 | Show generated PDF | :white_check_mark: | v 0.0.1 |
 | Compile file | :white_check_mark: | v 0.0.2 |
 | Syntax highlightning | :white_check_mark: | v 0.0.2 |
+| Quick interface changes buttons | :white_check_mark: | v 0.0.2 |
 | Startup window | :large_orange_diamond: | v 0.0.2 |
 | Show erros during compilation | :x: | v 0.0.2 |
-| Line numbers | :x: | v 0.0.2 |
-| Interface embellishment | :x: | v 0.0.2 |
-| Quick interface changes buttons | :x: | v 0.0.2 |
+| Line numbers | :x: | v 0.0.3 |
+| Interface embellishment | :x: | v 0.0.3 |
 | File structure (inverse search) | :x: | v 0.0.3 |
 | Integrated git support | :x: | v 0.0.4 |
 | Default templates | :x: | v 0.0.4 |
