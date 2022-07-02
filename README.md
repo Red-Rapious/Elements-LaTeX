@@ -68,6 +68,10 @@ Currently working on v0.0.3: middle phase of developpement.
 ## License
 This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
 
+## Contributors
+- <img src="https://github.com/Red-Rapious.png" alt="avatar" height="15px"/>  [Red-Rapious](https://github.com/Red-Rapious): Project lead and main developer.
+- <img src="https://github.com/Marilabs.png" alt="avatar" height="15px"/>   [Marilabs](https://github.com/marilabs): Logo creator and UX designer.
+
 ## Features list
 | Feature | Status | Planned for |
 | ------- | ------ | ----------- |
