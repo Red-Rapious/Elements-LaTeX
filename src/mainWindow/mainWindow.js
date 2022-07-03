@@ -4,8 +4,8 @@ const fs = require("fs");
 const settings = require("electron-settings");
 const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
-const { getExtension, handleError } = require("./utility");
-const { isDevelopementEnvironement } = require("./parameters");
+const { getExtension, handleError } = require("./../utility");
+const { isDevelopementEnvironement } = require("./../parameters");
 
 let mainWindow;
 let openedFilePath;
@@ -39,12 +39,12 @@ const createMainWindow = () => {
         webPreferences: {
             nodeIntegration: true, 
             contextIsolation: false, 
-            preload: path.join(app.getAppPath(), "src/mainRenderer.js"),
+            preload: path.join(app.getAppPath(), "src/mainWindow/mainRenderer.js"),
         },
     });
 
     if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
-    mainWindow.loadFile("src/mainWindow.html");
+    mainWindow.loadFile("src/mainWindow/mainWindow.html");
 
     mainWindow.once("ready-to-show", () => {
         if (settings.hasSync("current-file")) {

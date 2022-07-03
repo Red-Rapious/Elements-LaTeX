@@ -1,7 +1,7 @@
 const { ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
-const pjson = require('../package.json');
+const pjson = require('../../package.json');
 const child_process = require("child_process");
 const fixPath = require("fix-path");
 
@@ -10,9 +10,9 @@ const {
     getTexFileInFolder, 
     createFolderStructureHTML,
     generateHeader
-} = require("./utility");
+} = require("../utility");
 
-const { AUTOSAVE_INTERVAL } = require("./parameters");
+const { AUTOSAVE_INTERVAL } = require("../parameters");
 
 window.addEventListener("DOMContentLoaded", () => {
     fixPath();
@@ -130,7 +130,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 // Create an iframe that points to our PDF.js viewer, and tell PDF.js to open the file that was selected from the file picker.
                 const iframe = document.createElement('iframe');
-                iframe.src = path.join(__dirname, `libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
+                iframe.src = path.join(__dirname, `../libs/pdfjs/web/viewer.html?file=${pdfPath}#pagemode=none&zoom=80`);
 
                 // Add the iframe to our UI.
                 viewerEle.appendChild(iframe);

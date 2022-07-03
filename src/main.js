@@ -1,6 +1,6 @@
 const { app, ipcMain, BrowserWindow } = require("electron");
-const { createMainWindow } = require("./mainWindow");
-const { createStartupWindow } = require("./startupWindow");
+const { createMainWindow } = require("./mainWindow/mainWindow");
+const { createStartupWindow } = require("./startupWindow/startupWindow");
 const { isDevelopementEnvironement } = require("./parameters");
 const settings = require("electron-settings");
 

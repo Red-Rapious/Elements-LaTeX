@@ -1,7 +1,7 @@
 const { BrowserWindow, app } = require("electron");
 const path = require("path");
 
-const { STARTUP_INSPECTOR } = require("./parameters");
+const { STARTUP_INSPECTOR } = require("./../parameters");
 
 const createStartupWindow = () => {
     startupWindow = new BrowserWindow({
@@ -14,12 +14,12 @@ const createStartupWindow = () => {
         webPreferences: {
             nodeIntegration: true, 
             contextIsolation: false,
-            preload: path.join(app.getAppPath(), "src/startupRenderer.js"),
+            preload: path.join(app.getAppPath(), "src/startupWindow/startupRenderer.js"),
         },
     });
 
     if (STARTUP_INSPECTOR) startupWindow.webContents.openDevTools();
-    startupWindow.loadFile("src/startupWindow.html");
+    startupWindow.loadFile("src/startupWindow/startupWindow.html");
 };
 
 module.exports = { createStartupWindow };

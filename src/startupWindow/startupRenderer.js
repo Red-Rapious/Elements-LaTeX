@@ -1,5 +1,5 @@
 const { ipcRenderer } = require("electron");
-const pjson = require('../package.json');
+const pjson = require('../../package.json');
 
 window.addEventListener("DOMContentLoaded", () => {
     const openMainWindow = () => {
