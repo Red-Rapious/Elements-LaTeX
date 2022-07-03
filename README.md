@@ -9,12 +9,12 @@ This is the current interface of Elements LaTeX, currently in active development
 ![Current interface screenshot](/assets/screenshots/current_screenshot.png)
 
 ## Using Elements LaTeX on macOS
-Simply download [the latest release](https://github.com/Red-Rapious/Elements-LaTeX/releases) and install it. MacOS will probably block the app opening because "the developper isn't identified". Until I sign the application with an Apple Developper Account, you can work around by clicking Show in Finder and Ctrl + click on the app icon.
+Simply download [the latest release](https://github.com/Red-Rapious/Elements-LaTeX/releases) and install it. MacOS will probably block the app opening because "the developper isn't identified". Until I sign the application with an Apple Developper Account, you can work around by clicking Show in Finder and `Ctrl + click` on the app icon.
 
 To compile a document, you'll need to have a LaTeX installation. I recommend [XeLaTeX](https://www.tug.org/xelatex/), but you can use any other LaTeX installation as long as the `pdflatex` command is available.
 
 ## Building the project from source
-Start by [installing `Node.js`](https://nodejs.org/en/download/) and git if not already done. Type the following commands to clone the `Elements-LaTeX` repository and install the dependencies:
+Start by [installing `Node.js`](https://nodejs.org/en/download/) and `git` if not already done. Type the following commands to clone the `Elements-LaTeX` repository and install the dependencies:
 
 ```
 mkdir elements-latex

@@ -47,7 +47,7 @@ const getTexFileInFolder = (folder) => {
 const createFolderStructureHTML = (folderStructure) => {
     var htmlCode = "";
 
-    if (folderStructure[1].length == 0) {
+    if (typeof folderStructure[0] !== "string" && folderStructure[1].length == 0) {
         // TODO: SEPARATE TEX, PDF, AND OTHERS
         var icons = "";
         var classes = "";
