@@ -3,6 +3,11 @@ const { createMainWindow } = require("./mainWindow/mainWindow");
 const { createStartupWindow } = require("./startupWindow/startupWindow");
 const { isDevelopementEnvironement } = require("./parameters");
 const settings = require("electron-settings");
+const contextMenu = require("electron-context-menu");
+
+contextMenu({
+    showInspectElement: isDevelopementEnvironement,
+});
 
 if (isDevelopementEnvironement) {
     try {

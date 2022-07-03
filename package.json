@@ -37,6 +37,7 @@
   "devDependencies": {
     "electron": "^18.2.3",
     "electron-builder": "^23.0.3",
+    "electron-context-menu": "^3.3.0",
     "electron-reloader": "^1.2.3",
     "electron-settings": "^4.0.2",
     "fix-path": "3.0.0"
