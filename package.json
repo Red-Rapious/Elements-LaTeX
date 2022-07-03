@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "electron-settings": "^4.0.2",
-    "fix-path": "3.0.0"
+    "fix-path": "3.0.0",
+    "electron-context-menu": "^3.3.0"
   }
 }
