@@ -15,6 +15,19 @@ if (isDevelopementEnvironement) {
     } catch {}
 }
 
+const openMainWindow = () => {
+    let previousFile = "";
+    let previousFolder = "";
+
+    if (settings.hasSync("current-file")) {
+        previousFile = settings.getSync("current-file");
+    }
+    if (settings.hasSync("current-folder")) {
+        previousFolder = settings.getSync("current-folder");
+    }
+    createMainWindow(previousFile, previousFolder);
+};
+
 
 app.on("ready", () => {
     let useStartupWindow = true;
@@ -26,13 +39,13 @@ app.on("ready", () => {
     if (useStartupWindow) {
         ipcMain.on("open-main-window", (_, openStartupWindowCheck) => {
             settings.setSync("open-startup-window", openStartupWindowCheck);
-            createMainWindow();
+            openMainWindow();
         });
 
         createStartupWindow();
     }
     else {
-        createMainWindow();     
+        openMainWindow();  
     };
 });
 

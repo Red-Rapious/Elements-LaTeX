@@ -30,7 +30,7 @@ const openFolder = (folderPath) => {
     settings.setSync("current-folder", folderPath);
 };
 
-const createMainWindow = () => {
+const createMainWindow = (previousFile, previousFolder) => {
     mainWindow = new BrowserWindow({
         width: 1600,
         height: 1000,
@@ -47,13 +47,8 @@ const createMainWindow = () => {
     mainWindow.loadFile("src/mainWindow/mainWindow.html");
 
     mainWindow.once("ready-to-show", () => {
-        if (settings.hasSync("current-file")) {
-            openFile(settings.getSync("current-file"));
-        }
-
-        if (settings.hasSync("current-folder")) {
-            openFolder(settings.getSync("current-folder"));
-        }
+        if (previousFile != "") openFile(previousFile);
+        if (previousFolder != "") openFolder(previousFolder);
     });
 
     const menuTemplate = [
