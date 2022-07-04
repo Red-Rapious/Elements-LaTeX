@@ -61,7 +61,7 @@ app.on("ready", () => {
             mainWindow.once("ready-to-show", () => {
                 switch (clickType) {
                     case STARTUP_WINDOW_CLICK_TYPE.OPEN_FILE:
-                        ipcMain.emit("open-document-triggered");
+                        ipcMain.emit("open-file-triggered");
                         break;
                     case STARTUP_WINDOW_CLICK_TYPE.OPEN_FOLDER:
                         ipcMain.emit("open-folder-triggered");

@@ -16,15 +16,15 @@ const { AUTOSAVE_INTERVAL } = require("../parameters");
 
 window.addEventListener("DOMContentLoaded", () => {
     fixPath();
-    let texDocumentPath = "";
+    let texFilePath = "";
     let openedFolderPath = "";
     let autosaveInterval;
 
     /* HTML elements */
     const el = {
-        documentName: document.getElementById("documentName"),
-        createDocumentBtn: document.getElementById("createDocumentBtn"),
-        openDocumentBtn: document.getElementById("openDocumentBtn"),
+        fileName: document.getElementById("fileName"),
+        createFileBtn: document.getElementById("createFileBtn"),
+        openFileBtn: document.getElementById("openFileBtn"),
         openFolderBtn: document.getElementById("openFolderBtn"),
         fileTextarea: document.getElementById("codeInput"),
         lineCountLabel: document.getElementById("lineCountLabel"),
@@ -54,12 +54,12 @@ window.addEventListener("DOMContentLoaded", () => {
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
     };
 
-    const handleDocumentChange = (filePath, content) => {
-        /* On document change, updates the side file structure tree, text area and line count */
-        texDocumentPath = filePath;
+    const handleFileChange = (filePath, content) => {
+        /* On file change, updates the side file structure tree, text area and line count */
+        texFilePath = filePath;
 
         // Update the structure tree (WIP)
-        el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, false);
+        el.fileName.innerHTML = generateHeader(texFilePath, openedFolderPath, false);
         el.structureTree.innerHTML = "<ul><li><i class=\"fa fa-file\"></i> " + path.parse(filePath).base + "</li>"
         
         // Update the content of text area
@@ -86,17 +86,17 @@ window.addEventListener("DOMContentLoaded", () => {
         updateFolderTree(folderPath);
         
         // Opens a non-specific TeX file
-        if (texDocumentPath == "" || texDocumentPath.indexOf(folderPath) == -1) {
+        if (texFilePath == "" || texFilePath.indexOf(folderPath) == -1) {
             const randomTexFile = getTexFileInFolder(folderPath)
             if (randomTexFile != "") ipcRenderer.send("open-given-file", randomTexFile);
         }
         
         openedFolderPath = folderPath;
-        el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, false);
+        el.fileName.innerHTML = generateHeader(texFilePath, openedFolderPath, false);
     };
 
     const launchPDFLatexCommand = () => {
-        const command = "cd " + path.dirname(texDocumentPath) + " && " + "pdflatex " + path.basename(texDocumentPath);
+        const command = "cd " + path.dirname(texFilePath) + " && " + "pdflatex " + path.basename(texFilePath);
         const result = child_process.spawn(command, {shell: true});
 
         result.stdout.on('data', (data) => {
@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const viewerEle = document.getElementById('pdfViewerPanel');
 
-        const pdfPath = texDocumentPath.slice(0, -3) + "pdf"; // path of the matching PDF document
+        const pdfPath = texFilePath.slice(0, -3) + "pdf"; // path of the matching PDF document
 
         fs.stat(pdfPath, function(err, stat) {
             if (err == null) {
@@ -149,18 +149,18 @@ window.addEventListener("DOMContentLoaded", () => {
             ipcRenderer.send("update-file-content", el.fileTextarea.value);
 
             // Delete the "modified" tag in the title bar
-            el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, false);
+            el.fileName.innerHTML = generateHeader(texFilePath, openedFolderPath, false);
         }
     };
 
-    el.createDocumentBtn.addEventListener("click", () => {
+    el.createFileBtn.addEventListener("click", () => {
         saveCurrentFile();
-        ipcRenderer.send("create-document-triggered");
+        ipcRenderer.send("create-file-triggered");
     });
 
-    el.openDocumentBtn.addEventListener("click", () => {
+    el.openFileBtn.addEventListener("click", () => {
         saveCurrentFile();
-        ipcRenderer.send("open-document-triggered");
+        ipcRenderer.send("open-file-triggered");
     });
 
     el.openFolderBtn.addEventListener("click", () => {
@@ -203,7 +203,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.fileTextarea.addEventListener("input", () => {
-        el.documentName.innerHTML = generateHeader(texDocumentPath, openedFolderPath, true);
+        el.fileName.innerHTML = generateHeader(texFilePath, openedFolderPath, true);
 
         lineCount = 1;
         lines = el.fileTextarea.value.match(/\n/g);
@@ -221,12 +221,12 @@ window.addEventListener("DOMContentLoaded", () => {
         launchPDFLatexCommand();
     });
    
-    ipcRenderer.on("document-created", (_, filePath) => {
-        handleDocumentChange(filePath, "");
+    ipcRenderer.on("file-created", (_, filePath) => {
+        handleFileChange(filePath, "");
     });
 
-    ipcRenderer.on("document-opened", (_, {filePath, content}) => {
-        handleDocumentChange(filePath, content);
+    ipcRenderer.on("file-opened", (_, {filePath, content}) => {
+        handleFileChange(filePath, content);
     });
 
     ipcRenderer.on("folder-opened", (_, { folderPath }) => {

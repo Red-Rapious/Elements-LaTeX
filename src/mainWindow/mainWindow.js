@@ -15,7 +15,7 @@ const openFile = (filePath) => {
         const content = fs.readFileSync(filePath, "utf-8");
 
         openedFilePath = filePath;
-        mainWindow.webContents.send("document-opened", { filePath, content });
+        mainWindow.webContents.send("file-opened", { filePath, content });
         
         app.addRecentDocument(filePath);
         settings.setSync("current-file", filePath);
@@ -69,12 +69,12 @@ const createMainWindow = (previousFile, previousFolder) => {
         submenu: [
             {
                 label: "Open...",
-                click: () => ipcMain.emit("open-document-triggered"),
+                click: () => ipcMain.emit("open-file-triggered"),
                 accelerator: "Cmd+O"
             },
             {
                 label: "Create a new file",
-                click: () => ipcMain.emit("open-document-triggered"),
+                click: () => ipcMain.emit("open-file-triggered"),
                 accelerator: "Cmd+N"
             },
             {
@@ -201,7 +201,7 @@ const createMainWindow = (previousFile, previousFolder) => {
         openFolder(folderPath);
     });
 
-    ipcMain.on("create-document-triggered", () => {
+    ipcMain.on("create-file-triggered", () => {
         dialog.showSaveDialog(mainWindow, {
             filters: [{name: "LaTeX files", extensions: ["tex"]}]
         })
@@ -214,7 +214,7 @@ const createMainWindow = (previousFile, previousFolder) => {
                     else {
                         openedFilePath = filePath;
                         app.addRecentDocument(filePath);
-                        mainWindow.webContents.send("document-created", filePath);
+                        mainWindow.webContents.send("file-created", filePath);
                         openFolder(path.dirname(filePath));
                     }
                 } );
@@ -222,7 +222,7 @@ const createMainWindow = (previousFile, previousFolder) => {
         });
     });
 
-    ipcMain.on("open-document-triggered", () => {
+    ipcMain.on("open-file-triggered", () => {
         dialog.showOpenDialog(mainWindow, {
             properties: ["openFile"],
             filters: [{name: "LaTeX files", extensions: ["tex"]}]
