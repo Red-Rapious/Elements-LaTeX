@@ -3,6 +3,12 @@ const path = require("path");
 const fs = require("fs");
 const { isDevelopementEnvironement } = require("./parameters")
 
+const STARTUP_WINDOW_CLICK_TYPE = {
+    NONE: 0,
+    OPEN_FILE: 1,
+    OPEN_FOLDER: 2,
+};
+
 const getExtension = (fileName) => {
     const segments = fileName.split(".")
     const extension = segments[segments.length - 1];
@@ -99,4 +105,4 @@ const generateHeader = (filePath, folderPath, modified=false) => {
     return path.parse(folderPath).base + " - " + path.parse(filePath).base + (modified ? " (modified)" : "");
 };
 
-module.exports = { getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError, generateHeader };
+module.exports = { STARTUP_WINDOW_CLICK_TYPE, getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError, generateHeader };

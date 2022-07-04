@@ -259,6 +259,8 @@ const createMainWindow = (previousFile, previousFolder) => {
     ipcMain.on("open-given-file", (_, filePath) => {
         if (fs.existsSync(filePath)) openFile(filePath);
     });
+
+    return mainWindow;
 };
 
 module.exports = { createMainWindow };

@@ -2,18 +2,19 @@ const { app, ipcMain, BrowserWindow } = require("electron");
 const { createMainWindow } = require("./mainWindow/mainWindow");
 const { createStartupWindow } = require("./startupWindow/startupWindow");
 const { isDevelopementEnvironement } = require("./parameters");
+const { STARTUP_WINDOW_CLICK_TYPE, handleError } = require("./utility");
 const settings = require("electron-settings");
 const contextMenu = require("electron-context-menu");
-
-contextMenu({
-    showInspectElement: isDevelopementEnvironement,
-});
 
 if (isDevelopementEnvironement) {
     try {
         require("electron-reloader")(module);
     } catch {}
 }
+
+contextMenu({
+    showInspectElement: isDevelopementEnvironement,
+});
 
 const openMainWindow = () => {
     let previousFile = "";
@@ -25,7 +26,7 @@ const openMainWindow = () => {
     if (settings.hasSync("current-folder")) {
         previousFolder = settings.getSync("current-folder");
     }
-    createMainWindow(previousFile, previousFolder);
+    return createMainWindow(previousFile, previousFolder);
 };
 
 
@@ -37,9 +38,24 @@ app.on("ready", () => {
     }
 
     if (useStartupWindow) {
-        ipcMain.on("open-main-window", (_, openStartupWindowCheck) => {
+        ipcMain.on("open-main-window", (_, { openStartupWindowCheck, clickType }) => {
             settings.setSync("open-startup-window", openStartupWindowCheck);
-            openMainWindow();
+            mainWindow = openMainWindow();
+
+            mainWindow.once("ready-to-show", () => {
+                switch (clickType) {
+                    case STARTUP_WINDOW_CLICK_TYPE.OPEN_FILE:
+                        ipcMain.emit("open-document-triggered");
+                        break;
+                    case STARTUP_WINDOW_CLICK_TYPE.OPEN_FOLDER:
+                        ipcMain.emit("open-folder-triggered");
+                        break;
+                    case STARTUP_WINDOW_CLICK_TYPE.NONE:
+                        break;
+                    default:
+                        handleError("the startup window click type", "the click type is not recognized");
+                }
+            });
         });
 
         createStartupWindow();

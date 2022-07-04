@@ -1,20 +1,36 @@
 const { ipcRenderer } = require("electron");
 const pjson = require('../../package.json');
+const { STARTUP_WINDOW_CLICK_TYPE } = require("./../utility");
+
 
 window.addEventListener("DOMContentLoaded", () => {
-    const openMainWindow = () => {
-        ipcRenderer.send("open-main-window", el.openStartupWindowCheck.checked);
+    const openMainWindow = (clickType) => {
+        ipcRenderer.send("open-main-window", { 
+            openStartupWindowCheck: el.openStartupWindowCheck.checked, 
+            clickType: clickType,
+        });
         window.close();
     };
-
-    document.getElementById("mainWindowBtn").addEventListener("click", () => {
-        openMainWindow();
-    });
 
     el = {
         versionLabel: document.getElementById("versionLabel"),
         openStartupWindowCheck: document.getElementById("openStartupWindowCheck"),
+        mainWindowBtn: document.getElementById("mainWindowBtn"),
+        openFileBtn: document.getElementById("openFileBtn"),
+        openFolderBtn: document.getElementById("openFolderBtn"),
     };
+
+    el.mainWindowBtn.addEventListener("click", () => {
+        openMainWindow(STARTUP_WINDOW_CLICK_TYPE.NONE);
+    });
+
+    el.openFileBtn.addEventListener("click", () => {
+        openMainWindow(STARTUP_WINDOW_CLICK_TYPE.OPEN_FILE);
+    });
+
+    el.openFolderBtn.addEventListener("click", () => {
+        openMainWindow(STARTUP_WINDOW_CLICK_TYPE.OPEN_FOLDER);
+    });
 
     el.versionLabel.innerHTML = "Version " + pjson.version;
 });
