@@ -20,6 +20,8 @@ const createStartupWindow = () => {
 
     if (STARTUP_INSPECTOR) startupWindow.webContents.openDevTools();
     startupWindow.loadFile("src/startupWindow/startupWindow.html");
+
+    return startupWindow;
 };
 
 module.exports = { createStartupWindow };

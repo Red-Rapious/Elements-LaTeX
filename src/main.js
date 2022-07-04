@@ -16,7 +16,8 @@ contextMenu({
     showInspectElement: isDevelopementEnvironement,
 });
 
-const openMainWindow = () => {
+const retrievePreviousFileSettings = () =>
+{
     let previousFile = "";
     let previousFolder = "";
 
@@ -26,6 +27,12 @@ const openMainWindow = () => {
     if (settings.hasSync("current-folder")) {
         previousFolder = settings.getSync("current-folder");
     }
+
+    return { previousFile, previousFolder };
+};
+
+const openMainWindow = () => {
+    const { previousFile, previousFolder } = retrievePreviousFileSettings();
     return createMainWindow(previousFile, previousFolder);
 };
 
@@ -58,10 +65,17 @@ app.on("ready", () => {
             });
         });
 
-        createStartupWindow();
+        startupWindow = createStartupWindow();
+        const { previousFile, previousFolder } = retrievePreviousFileSettings();
+        console.log("previousFile", previousFile, "previousFolder", previousFolder);
+        if (previousFile == "" && previousFolder == "") {
+            startupWindow.once("ready-to-show", () => {
+                startupWindow.webContents.send("disable-latest-window-button");
+            });
+        }
     }
     else {
-        openMainWindow();  
+        openMainWindow();
     };
 });
 
@@ -73,7 +87,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createStartupWindow();
+      createStartupWindow(); // TODO: create a func to open the startup window
     }
 });
 

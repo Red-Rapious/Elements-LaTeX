@@ -33,4 +33,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     el.versionLabel.innerHTML = "Version " + pjson.version;
+
+    ipcRenderer.on("disable-latest-window-button", (_) => {
+        el.mainWindowBtn.disabled = true;
+    });
 });
