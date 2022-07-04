@@ -68,11 +68,9 @@ app.on("ready", () => {
         startupWindow = createStartupWindow();
         const { previousFile, previousFolder } = retrievePreviousFileSettings();
         console.log("previousFile", previousFile, "previousFolder", previousFolder);
-        if (previousFile == "" && previousFolder == "") {
-            startupWindow.once("ready-to-show", () => {
-                startupWindow.webContents.send("disable-latest-window-button");
-            });
-        }
+        startupWindow.once("ready-to-show", () => {
+                startupWindow.webContents.send("disable-latest-window-button", previousFile == "" && previousFolder == "");
+        });
     }
     else {
         openMainWindow();
