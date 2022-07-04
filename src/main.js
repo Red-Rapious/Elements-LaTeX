@@ -36,6 +36,15 @@ const openMainWindow = () => {
     return createMainWindow(previousFile, previousFolder);
 };
 
+const openStartupWindow = () => {
+    startupWindow = createStartupWindow();
+    const { previousFile, previousFolder } = retrievePreviousFileSettings();
+    console.log("previousFile", previousFile, "previousFolder", previousFolder);
+    startupWindow.once("ready-to-show", () => {
+            startupWindow.webContents.send("disable-latest-window-button", previousFile == "" && previousFolder == "");
+    });
+};
+
 
 app.on("ready", () => {
     let useStartupWindow = true;
@@ -65,12 +74,7 @@ app.on("ready", () => {
             });
         });
 
-        startupWindow = createStartupWindow();
-        const { previousFile, previousFolder } = retrievePreviousFileSettings();
-        console.log("previousFile", previousFile, "previousFolder", previousFolder);
-        startupWindow.once("ready-to-show", () => {
-                startupWindow.webContents.send("disable-latest-window-button", previousFile == "" && previousFolder == "");
-        });
+        openStartupWindow();
     }
     else {
         openMainWindow();
@@ -85,7 +89,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createStartupWindow(); // TODO: create a func to open the startup window
+      openStartupWindow();
     }
 });
 
