@@ -15,12 +15,12 @@ window.addEventListener("DOMContentLoaded", () => {
     el = {
         versionLabel: document.getElementById("versionLabel"),
         openStartupWindowCheck: document.getElementById("openStartupWindowCheck"),
-        mainWindowBtn: document.getElementById("mainWindowBtn"),
+        latestWindowBtn: document.getElementById("latestWindowBtn"),
         openFileBtn: document.getElementById("openFileBtn"),
         openFolderBtn: document.getElementById("openFolderBtn"),
     };
 
-    el.mainWindowBtn.addEventListener("click", () => {
+    el.latestWindowBtn.addEventListener("click", () => {
         openMainWindow(STARTUP_WINDOW_CLICK_TYPE.NONE);
     });
 
@@ -35,6 +35,6 @@ window.addEventListener("DOMContentLoaded", () => {
     el.versionLabel.innerHTML = "Version " + pjson.version;
 
     ipcRenderer.on("disable-latest-window-button", (_, isDisabled) => {
-        el.mainWindowBtn.disabled = isDisabled;
+        el.latestWindowBtn.disabled = isDisabled;
     });
 });
