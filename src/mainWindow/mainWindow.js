@@ -241,8 +241,8 @@ const createMainWindow = (previousFile, previousFolder) => {
             properties: ["openDirectory", "createDirectory"],
         })
         .then(({ filePaths }) => {
-            if (filePaths != undefined) {
-                const folderPath = filePaths[0];
+            const folderPath = filePaths[0];
+            if (filePaths != undefined && folderPath != "" && folderPath != undefined) {
                 openFolder(folderPath);
             }
         });
