@@ -96,7 +96,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const launchPDFLatexCommand = () => {
-        const command = "cd " + path.dirname(texFilePath) + " && " + "pdflatex " + path.basename(texFilePath);
+        const command = "cd \"" + path.dirname(texFilePath) + "\" && " + "pdflatex \"" + path.basename(texFilePath) + "\"";
         const result = child_process.spawn(command, {shell: true});
 
         result.stdout.on('data', (data) => {
