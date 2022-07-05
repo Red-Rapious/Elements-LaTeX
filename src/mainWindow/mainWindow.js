@@ -5,7 +5,7 @@ const settings = require("electron-settings");
 const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
 const { getExtension, handleError } = require("./../utility");
-const { isDevelopementEnvironement } = require("./../parameters");
+const { IS_DEVELOPEMENT_ENVIRONEMENT } = require("./../parameters");
 
 let mainWindow;
 let openedFilePath;
@@ -43,7 +43,7 @@ const createMainWindow = (previousFile, previousFolder) => {
         },
     });
 
-    if (isDevelopementEnvironement) mainWindow.webContents.openDevTools();
+    if (IS_DEVELOPEMENT_ENVIRONEMENT) mainWindow.webContents.openDevTools();
     mainWindow.loadFile("src/mainWindow/mainWindow.html");
 
     mainWindow.once("ready-to-show", () => {

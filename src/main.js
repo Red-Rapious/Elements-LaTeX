@@ -1,19 +1,19 @@
 const { app, ipcMain, BrowserWindow } = require("electron");
 const { createMainWindow } = require("./mainWindow/mainWindow");
 const { createStartupWindow } = require("./startupWindow/startupWindow");
-const { isDevelopementEnvironement } = require("./parameters");
+const { IS_DEVELOPEMENT_ENVIRONEMENT } = require("./parameters");
 const { STARTUP_WINDOW_CLICK_TYPE, handleError } = require("./utility");
 const settings = require("electron-settings");
 const contextMenu = require("electron-context-menu");
 
-if (isDevelopementEnvironement) {
+if (IS_DEVELOPEMENT_ENVIRONEMENT) {
     try {
         require("electron-reloader")(module);
     } catch {}
 }
 
 contextMenu({
-    showInspectElement: isDevelopementEnvironement,
+    showInspectElement: IS_DEVELOPEMENT_ENVIRONEMENT,
 });
 
 const retrievePreviousFileSettings = () =>

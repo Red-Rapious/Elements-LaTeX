@@ -1,7 +1,7 @@
 const AUTOSAVE_INTERVAL = 5*60*1000; // 5 minutes
 
 /* DEBUG */
-const isDevelopementEnvironement = process.env.NODE_ENV === "development";
-const STARTUP_INSPECTOR = true && isDevelopementEnvironement;
+const IS_DEVELOPEMENT_ENVIRONEMENT = process.env.NODE_ENV === "development";
+const STARTUP_INSPECTOR = true && IS_DEVELOPEMENT_ENVIRONEMENT;
 
-module.exports = { AUTOSAVE_INTERVAL, STARTUP_INSPECTOR, isDevelopementEnvironement };
+module.exports = { AUTOSAVE_INTERVAL, STARTUP_INSPECTOR, IS_DEVELOPEMENT_ENVIRONEMENT };
