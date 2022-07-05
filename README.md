@@ -1,13 +1,13 @@
 # Elements LaTeX
 A cross-platform, powerful electron-based LaTeX editor. Stable release v0.0.2 now available for macOS.
 
-![release badge](https://img.shields.io/github/v/release/red-rapious/elements-latex?color=green)
-<img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="license" height="20px"/>
+[![release badge](https://img.shields.io/github/v/release/red-rapious/elements-latex?color=green)](https://github.com/Red-Rapious/Elements-LaTeX/releases/)
+[<img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="license" height="20px"/>](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-![files count badge](https://img.shields.io/github/directory-file-count/red-rapious/elements-latex)
-![repo size badge](https://img.shields.io/github/repo-size/red-rapious/elements-latex)
-![line count badge](https://img.shields.io/tokei/lines/github/red-rapious/elements-latex)
-![comit activity](https://img.shields.io/github/commit-activity/w/red-rapious/elements-latex?color=green)
+<!--![files count badge](https://img.shields.io/github/directory-file-count/red-rapious/elements-latex)-->
+[![repo size badge](https://img.shields.io/github/repo-size/red-rapious/elements-latex)](https://github.com/Red-Rapious/Elements-LaTeX/)
+[![line count badge](https://img.shields.io/tokei/lines/github/red-rapious/elements-latex)](https://github.com/Red-Rapious/Elements-LaTeX/)
+[![commit activity](https://img.shields.io/github/commit-activity/w/red-rapious/elements-latex?color=green)](https://github.com/Red-Rapious/Elements-LaTeX/commits/master)
 
 ## Preview
 This is the current interface of Elements LaTeX, currently in active development:
@@ -16,7 +16,7 @@ This is the current interface of Elements LaTeX, currently in active development
 ## Using Elements LaTeX on macOS
 Simply download [the latest release](https://github.com/Red-Rapious/Elements-LaTeX/releases) and install it. MacOS will probably block the app opening because "the developper isn't identified". Until I sign the application with an Apple Developper Account, you can work around by clicking Show in Finder and `Ctrl + click` on the app icon.
 
-To compile a document, you'll need to have a LaTeX installation. I recommend [XeLaTeX](https://www.tug.org/xelatex/), but you can use any other LaTeX installation as long as the `pdflatex` command is available.
+To compile a document, you'll need to have a LaTeX installation. You can download it [on the official website](https://www.latex-project.org/get/), but you can use any other LaTeX installation as long as the `pdflatex` command is available.
 
 ## Building the project from source
 Start by [installing `Node.js`](https://nodejs.org/en/download/) and `git` if not already done. Type the following commands to clone the `Elements-LaTeX` repository and install the dependencies:
