@@ -94,9 +94,9 @@ This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/li
 | Line numbers | :x: | v 0.0.3 |
 | Interface embellishment | :x: | v 0.0.3 |
 | File structure (inverse search) | :x: | v 0.0.3 |
-| Integrated git support | :x: | v 0.0.4 |
 | Default templates | :x: | v 0.0.4 |
-| Settings panel | :x: | v 0.0.5 |
+| Settings panel | :x: | v 0.0.4 |
+| Integrated git support | :x: | v 0.0.5 |
 | Text editor features (find, ...) | :x: | v 0.0.5 |
 | Autocompletion | :x: | v 0.0.6 |
 

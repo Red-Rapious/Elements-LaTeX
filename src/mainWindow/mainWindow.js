@@ -55,12 +55,23 @@ const createMainWindow = (previousFile, previousFolder) => {
     {
         label: "Elements LaTeX",
         submenu : [
-            { type: 'separator'},
+            {   type: 'separator' },
+            {   label: "Go back to startup window", 
+                click: () => { 
+                    ipcMain.emit("return-to-startup-window"); 
+                } 
+            },
             {   label: "Reset settings",
                 click: () => {
                     settings.unsetSync();
                 },
             },
+            {   label: "Reset recent files",
+                click: () => {
+                    app.clearRecentDocuments();
+                }
+            },
+            { type: 'separator' },
             { role: 'quit' }
         ],
     },
@@ -153,7 +164,7 @@ const createMainWindow = (previousFile, previousFolder) => {
             label: 'Learn More',
             click: async () => {
               const { shell } = require('electron')
-              await shell.openExternal('https://electronjs.org')
+              await shell.openExternal("https://github.com/Red-Rapious/Elements-LaTeX")
             }
           }
         ]
