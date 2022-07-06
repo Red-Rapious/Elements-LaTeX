@@ -1,4 +1,6 @@
-# Elements LaTeX
+<p align="center"><img src="assets/logos/icon.png" alt="Elements LaTeX" width="100" height="100"></p>
+<h1 align="center">Elements LaTeX</h1>
+
 A cross-platform, powerful electron-based LaTeX editor. Stable release v0.0.2 now available for macOS.
 
 [![release badge](https://img.shields.io/github/v/release/red-rapious/elements-latex?color=green)](https://github.com/Red-Rapious/Elements-LaTeX/releases/)
@@ -32,7 +34,9 @@ npm install fix-path@v3.0.0 -D
 npm install electron-context-menu -D
 ```
 
-Download the `PDF.js` library [here](https://github.com/mozilla/pdf.js/releases/download/v2.14.305/pdfjs-2.14.305-dist.zip), and add the extracted `pdfjs` folder in `elements-latex/src/libs`.
+> Note: this library might be included as a submodule in the future (or using the `electron-pdf-viewer` node package), but you'll need to install it by yourself to build the project in it's current state.
+
+To do so, download the `PDF.js` library [here](https://github.com/mozilla/pdf.js/releases/download/v2.14.305/pdfjs-2.14.305-dist.zip), and add the extracted `pdfjs` folder in `elements-latex/src/libs`.
 
 The final project structure should look as follows:
 
