@@ -3,7 +3,7 @@
 
 <div align="center">
 A cross-platform, powerful electron-based LaTeX editor.
-<h5 align="center">Stable release v0.0.2 now available for macOS.</h5>
+<h5 align="center">Stable release v0.0.3 now available for macOS.</h5>
 </div>
 
 <p></p>
@@ -102,17 +102,17 @@ This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/li
 | Show generated PDF | :white_check_mark: | v 0.0.1 |
 | Compile file | :white_check_mark: | v 0.0.2 |
 | Syntax highlightning | :white_check_mark: | v 0.0.2 |
-| Quick interface changes buttons | :white_check_mark: | v 0.0.2 |
-| Startup window | :white_check_mark: | v 0.0.2 |
-| Show erros during compilation | :x: | v 0.0.2 |
-| Line numbers | :x: | v 0.0.3 |
-| Interface embellishment | :x: | v 0.0.3 |
-| File structure (inverse search) | :x: | v 0.0.3 |
-| Default templates | :x: | v 0.0.4 |
-| Settings panel | :x: | v 0.0.4 |
-| Integrated git support | :x: | v 0.0.5 |
-| Text editor features (find, ...) | :x: | v 0.0.5 |
-| Autocompletion | :x: | v 0.0.6 |
+| Quick interface changes buttons | :white_check_mark: | v 0.0.3 |
+| Startup window | :white_check_mark: | v 0.0.3 |
+| Show erros during compilation | :x: | v 0.0.4 |
+| Line numbers | :x: | v 0.0.4 |
+| Interface embellishment | :x: | v 0.0.4 |
+| File structure (inverse search) | :x: | v 0.0.5 |
+| Default templates | :x: | v 0.0.5 |
+| Settings panel | :x: | v 0.0.6 |
+| Integrated git support | :x: | v 0.0.6 |
+| Text editor features (find, ...) | :x: | v 0.0.7 |
+| Autocompletion | :x: | v 0.0.8 |
 
 
 - :white_check_mark: Implemented
