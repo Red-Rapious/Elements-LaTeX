@@ -1,15 +1,25 @@
 <p align="center"><img src="assets/logos/icon.png" alt="Elements LaTeX" width="100" height="100"></p>
 <h1 align="center">Elements LaTeX</h1>
 
-A cross-platform, powerful electron-based LaTeX editor. Stable release v0.0.2 now available for macOS.
+<div align="center">
+A cross-platform, powerful electron-based LaTeX editor.
+<h5 align="center">Stable release v0.0.2 now available for macOS.</h5>
+</div>
+
+<p></p>
+<div align="center">
 
 [![release badge](https://img.shields.io/github/v/release/red-rapious/elements-latex?color=green)](https://github.com/Red-Rapious/Elements-LaTeX/releases/)
 [<img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="license" height="20px"/>](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+</div>
+
+<div align="center">
 
 <!--![files count badge](https://img.shields.io/github/directory-file-count/red-rapious/elements-latex)-->
 [![repo size badge](https://img.shields.io/github/repo-size/red-rapious/elements-latex)](https://github.com/Red-Rapious/Elements-LaTeX/)
 [![line count badge](https://img.shields.io/tokei/lines/github/red-rapious/elements-latex)](https://github.com/Red-Rapious/Elements-LaTeX/)
 [![commit activity](https://img.shields.io/github/commit-activity/w/red-rapious/elements-latex?color=green)](https://github.com/Red-Rapious/Elements-LaTeX/commits/master)
+</div>
 
 ## Preview
 This is the current interface of Elements LaTeX, currently in active development:
@@ -93,7 +103,7 @@ This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/li
 | Compile file | :white_check_mark: | v 0.0.2 |
 | Syntax highlightning | :white_check_mark: | v 0.0.2 |
 | Quick interface changes buttons | :white_check_mark: | v 0.0.2 |
-| Startup window | :large_orange_diamond: | v 0.0.2 |
+| Startup window | :white_check_mark: | v 0.0.2 |
 | Show erros during compilation | :x: | v 0.0.2 |
 | Line numbers | :x: | v 0.0.3 |
 | Interface embellishment | :x: | v 0.0.3 |
