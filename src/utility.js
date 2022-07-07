@@ -32,14 +32,14 @@ const getFolderStructure = (dir) => {
     return [path.basename(dir), result];
 }
 
-const getTexFileInFolder = (folder) => {
+const getRandomTexFileInFolder = (folder) => {
     /* Recursively search for a tex file in a folder */
     var texFile = "";
     fs.readdirSync(folder).forEach(function(file) {
         var stat = fs.statSync(folder+'/'+file);
 
         if (stat && stat.isDirectory()) {
-            const result = getTexFileInFolder(folder+'/'+file);
+            const result = getRandomTexFileInFolder(folder+'/'+file);
             if (result != "") texFile = result;
         } 
         else {
@@ -75,7 +75,8 @@ const createFolderStructureHTML = (folderStructure) => {
                 icons = "fa fa-file";
                 classes = "file file-other";
         }
-        htmlCode = "<li class=\"" + classes + "\" id=\"" + folderStructure[0][1] + "\"><i class=\"" + icons +"\"></i> " + folderStructure[0][0] + " </li>\n";
+        const deleteButton = "<i class='fa fa-trash-can delete-button'></i>";
+        htmlCode = "<li class=\"" + classes + "\" id=\"" + folderStructure[0][1] + "\"><i class=\"" + icons +" file-type-icon\"></i> " + deleteButton + folderStructure[0][0] + " </li>\n";
     }
     else {
         htmlCode += "<li><i class=\"fa fa-angle-down\"></i> " + folderStructure[0];
@@ -105,4 +106,4 @@ const generateHeader = (filePath, folderPath, modified=false) => {
     return path.parse(folderPath).base + " - " + path.parse(filePath).base + (modified ? " (modified)" : "");
 };
 
-module.exports = { STARTUP_WINDOW_CLICK_TYPE, getExtension, getFolderStructure, getTexFileInFolder, createFolderStructureHTML, handleError, generateHeader };
+module.exports = { STARTUP_WINDOW_CLICK_TYPE, getExtension, getFolderStructure, getRandomTexFileInFolder, createFolderStructureHTML, handleError, generateHeader };

@@ -118,12 +118,38 @@
     background-color: rgb(61, 89, 161);
 }
 
-.tree .file-tex, .tree .file-pdf {
+.tree .file-type-icon {
     margin-right: 10px;
+}
+
+.tree .delete-button {
+    margin-right: 17px;
 }
 
 .tree .file-other {
     color: #8b8b8b;
+}
+
+.tree .delete-button {
+    display: none;
+    color: rgb(255, 89, 89);
+
+    width: 10px;
+    height: 10px;
+}
+
+.tree .file-type-icon {
+    display: inline;
+    width: 10px;
+    height: 10px;
+}
+
+.tree .file:hover .delete-button {
+    display: inline;
+}
+
+.tree .file:hover .file-type-icon {
+    display: none;
 }
 
 .tree li {

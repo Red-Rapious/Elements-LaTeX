@@ -7,7 +7,7 @@ const fixPath = require("fix-path");
 
 const { 
     getFolderStructure, 
-    getTexFileInFolder, 
+    getRandomTexFileInFolder, 
     createFolderStructureHTML,
     generateHeader
 } = require("../utility");
@@ -52,6 +52,14 @@ window.addEventListener("DOMContentLoaded", () => {
         // Update the folder tree
         htmlCode = createFolderStructureHTML(getFolderStructure(folderPath));
         el.folderTree.innerHTML = "<ul>\n" + htmlCode + "\n<ul/>";
+
+        const deleteButtons = document.getElementsByClassName("delete-button");
+        for (let i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener("click", () => {
+                console.log("TODO: send a dialog to confirm deletion & delete the file");
+                //ipcRenderer.send("delete-file-triggered", deleteButtons[i].getAttribute("file-path"));
+            });
+        };
     };
 
     const handleFileChange = (filePath, content) => {
@@ -87,7 +95,7 @@ window.addEventListener("DOMContentLoaded", () => {
         
         // Opens a non-specific TeX file
         if (texFilePath == "" || texFilePath.indexOf(folderPath) == -1) {
-            const randomTexFile = getTexFileInFolder(folderPath)
+            const randomTexFile = getRandomTexFileInFolder(folderPath)
             if (randomTexFile != "") ipcRenderer.send("open-given-file", randomTexFile);
         }
         
