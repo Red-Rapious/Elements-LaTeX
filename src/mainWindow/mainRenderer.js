@@ -56,8 +56,8 @@ window.addEventListener("DOMContentLoaded", () => {
         const deleteButtons = document.getElementsByClassName("delete-button");
         for (let i = 0; i < deleteButtons.length; i++) {
             deleteButtons[i].addEventListener("click", () => {
-                console.log("TODO: send a dialog to confirm deletion & delete the file");
-                //ipcRenderer.send("delete-file-triggered", deleteButtons[i].getAttribute("file-path"));
+                const deletedFilePath = deleteButtons[i].parentElement.id;
+                ipcRenderer.send("delete-file-triggered", deletedFilePath);
             });
         };
     };
@@ -244,6 +244,10 @@ window.addEventListener("DOMContentLoaded", () => {
     ipcRenderer.on("request-compile", (_) => {
         saveCurrentFile();
         launchPDFLatexCommand();
+    });
+
+    ipcRenderer.on("request-folder-reload", (_) => {
+        handleFolderChange(openedFolderPath);
     });
 
     el.folderTree.addEventListener("click", function(event){

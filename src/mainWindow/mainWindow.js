@@ -271,6 +271,27 @@ const createMainWindow = (previousFile, previousFolder) => {
         if (fs.existsSync(filePath)) openFile(filePath);
     });
 
+    ipcMain.on("delete-file-triggered", (_, filePath) => {
+        dialog.showMessageBox(mainWindow, {
+            message: "Are you sure you want to delete " + path.basename(filePath) + "?",
+            buttons: ["Yes", "No"],
+            defaultId: 1,
+            cancelId: 1,
+        }).then(({ response }) => {
+            if (response == 0) {
+                fs.unlink(filePath, (error) => {
+                    if (error) {
+                        handleError("the deletion of the file", error);
+                    }
+                    else {
+                        mainWindow.webContents.send("request-folder-reload");
+                    }
+                });
+            }
+        });
+        
+    });
+
     return mainWindow;
 };
 
