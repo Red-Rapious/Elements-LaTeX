@@ -28,6 +28,8 @@ const openFile = (filePath) => {
 const openFolder = (folderPath) => {
     mainWindow.webContents.send("folder-opened", { folderPath });
     settings.setSync("current-folder", folderPath);
+
+    app.addRecentDocument(folderPath);
 };
 
 const deleteFile = (filePath, checkboxChecked) => {
@@ -217,7 +219,10 @@ const createMainWindow = (previousFile, previousFolder) => {
 
     app.on("open-file", (event, filePath) => {
         event.preventDefault();
-        if (getExtension(filePath) == "tex") openFile(filePath);
+        if (getExtension(filePath) == "tex") {
+            openFolder(path.dirname(filePath));
+            openFile(filePath);
+        }
     });
 
     app.on("open-folder", (event, folderPath) => {
