@@ -113,6 +113,7 @@
     overflow-x: hidden;
 }
 
+/* ICONS CONTAINER AND ITS ICONS */
 .tree .icons-container {
     display: inline;
     margin: 0px;
@@ -146,6 +147,7 @@
     display: none !important;
 }
 
+/* REST OF THE TREE */
 .tree li {
     list-style-type: none;
     white-space: nowrap;
@@ -194,10 +196,6 @@
     padding: 0px !important;
     width: 20px;
     height: 20px;
-}
-
-#reloadFolderBtn .fa-folder-tree {
-    display: inline;
 }
 
 #reloadFolderBtn .fa-arrow-rotate-right {

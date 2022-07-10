@@ -56,7 +56,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const deleteButtons = document.getElementsByClassName("delete-button");
         for (let i = 0; i < deleteButtons.length; i++) {
             deleteButtons[i].addEventListener("click", () => {
-                const deletedFilePath = deleteButtons[i].parentElement.id;
+                const deletedFilePath = deleteButtons[i].parentElement.parentElement.id;
                 ipcRenderer.send("delete-file-triggered", deletedFilePath);
             });
         };

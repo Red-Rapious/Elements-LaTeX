@@ -76,7 +76,7 @@ const createFolderStructureHTML = (folderStructure) => {
                 classes = "file file-other";
         }
         const iconsContainer = "<div class='icons-container'><i class='fa fa-trash-can delete-button'></i><i class='" + icons +" file-type-icon'></i> " + "</div>";
-        htmlCode = "<li class=\"" + classes + "\" id=\"" + folderStructure[0][1] + "\">" + iconsContainer + folderStructure[0][0] + " </li>\n";
+        htmlCode = "<li class='" + classes + "' id='" + folderStructure[0][1] + "'>" + iconsContainer + folderStructure[0][0] + " </li>\n";
     }
     else {
         htmlCode += "<li class='folder opened'><i class='fa fa-angle-down'></i><i class='fa fa-angle-right'></i> " + folderStructure[0];

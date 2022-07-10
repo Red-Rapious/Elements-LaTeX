@@ -39,7 +39,7 @@ const deleteFile = (filePath, checkboxChecked) => {
         }
         else {
             settings.setSync("ask-dialog-defore-delete", checkboxChecked);
-            ipcMain.emit("request-folder-reload");
+            mainWindow.webContents.send("request-folder-reload");
         }
     });
 
