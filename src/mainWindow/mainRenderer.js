@@ -264,6 +264,17 @@ window.addEventListener("DOMContentLoaded", () => {
             {
                 ipcRenderer.send("open-given-file", elem.id.slice(0, -3) + "tex");
             }
+            else if(elem.classList.contains("folder"))
+            {
+                if (elem.classList.contains("opened")) {
+                    elem.classList.remove("opened");
+                    elem.classList.add("closed");
+                }
+                else {
+                    elem.classList.remove("closed");
+                    elem.classList.add("opened");
+                }
+            }
         }
     });
 

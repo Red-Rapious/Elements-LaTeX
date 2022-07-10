@@ -152,7 +152,7 @@
 }
 
 .tree .file:hover .file-type-icon {
-    display: none;
+    display: none !important;
 }
 
 .tree li {
@@ -164,6 +164,18 @@
 
 .tree ul {
     padding-inline-start: 15px;
+}
+
+.tree .closed ul {
+    display: none;
+}
+
+.tree .opened > .fa-angle-right, .tree .closed > .fa-angle-down {
+    display: none;
+}
+
+.tree .opened > .fa-angle-down, .tree .closed > .fa-angle-right {
+    display: inline;
 }
 
 #folderManagementBar, #structureManagementBar {
