@@ -114,7 +114,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         result.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
-            el.errorsPanel.innerHTML += "<div class='stdout output'>" + data + "</div>";
+            if (String(data).toLowerCase().indexOf("warning") != -1) {
+                el.errorsPanel.innerHTML += "<div class='warning output'>" + data + "</div>";
+            }
+            else if (String(data) != ">") { // TODO: investigate this later
+                el.errorsPanel.innerHTML += "<div class='stdout output'>" + data + "</div>";
+            }
         });
 
         result.stderr.on('data', (data) => {

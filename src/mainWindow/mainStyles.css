@@ -298,6 +298,10 @@ code-input {
     color: rgb(173, 179, 211);
 }
 
+#errorsPanel .warning {
+    color: rgb(255, 163, 70);
+}
+
 #errorsPanel .stderr {
     color: rgb(255, 89, 89);
 }
