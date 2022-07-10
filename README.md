@@ -48,6 +48,8 @@ npm install electron-context-menu -D
 
 To do so, download the `PDF.js` library [here](https://github.com/mozilla/pdf.js/releases/download/v2.14.305/pdfjs-2.14.305-dist.zip), and add the extracted `pdfjs` folder in `elements-latex/src/libs`.
 
+Finally, the `code-input` submodules seems to be broken, so you'll need to install a previous version manually. Download the v1.0.3 [release here](https://github.com/WebCoder49/code-input/archive/refs/tags/v1.0.3.zip) and extract it in `elements-latex/src/libs/code-input-1.0.3`. I'll try to fix this submodule issue ASAP, sorry for the inconvenience.
+
 The final project structure should look as follows:
 
 ```
@@ -60,7 +62,7 @@ elements-latex
 |    │   └─── pdfjs
 |    │       └─── build
 |    |       └─── web
-|    │   └─── code-input (submodule)
+|    │   └─── code-input-1.0.3
 |    │   └─── ... (other submodules)
 └─── node_modules
 └─── ...

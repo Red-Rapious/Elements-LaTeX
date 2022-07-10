@@ -7,3 +7,4 @@ pdfjs
 *.fls
 *.fdb_latexmk
 assets/demo_latex
+src/libs/code-input-1.0.3
