@@ -102,7 +102,6 @@
 .tree {
     width: 100%;
     height: 100%;
-    /*background-color: rgb(26, 27, 38);*/
     color: #fff;
     font-family: 'Roboto Mono', monospace;
     font-size: .85rem;
@@ -129,10 +128,6 @@
     background-color: rgb(61, 89, 161);
 }
 
-/*.tree .file-type-icon {
-    margin-right: 10px;
-}*/
-
 .tree .file-other {
     color: #8b8b8b;
 }
@@ -140,22 +135,8 @@
 .tree .delete-button {
     display: none;
     color: rgb(255, 89, 89);
-    /*margin-right: 18px;*/
     cursor: pointer;
-
-    /*width: 10px;
-    height: 10px;*/
 }
-
-.tree .file-type-icon {
-    display: inline;
-    /*width: 10px;
-    height: 10px;*/
-}
-
-/*.tree .file-type-icon, .tree .delete-button {
-    margin-left: 7px;
-}*/
 
 .tree .file:hover .delete-button {
     display: inline;
