@@ -275,21 +275,36 @@ code-input {
     height: 70%;
     width: 100%;
     min-height: 10%;
-
-    display: flex;
 }
 
 #errorsPanel {
     min-height: 10%;
     flex: 1;
     resize: none;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    font-family: Courier, monospace;
+    font-size: small;
 
     background-color: rgb(26, 27, 37) !important;
-    color: rgb(154, 160, 189);
+    color: rgb(137, 142, 167);
 
     margin: 1px;
     padding: 10px;
     border-radius: 6px;
+}
+
+#errorsPanel .stdout {
+    color: rgb(173, 179, 211);
+}
+
+#errorsPanel .stderr {
+    color: rgb(255, 89, 89);
+}
+
+#errorsPanel .compilation-finished {
+    margin-top: 12px;
+    color: rgb(61, 89, 161);
 }
 
 ::-webkit-scrollbar {

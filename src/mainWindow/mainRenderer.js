@@ -107,18 +107,28 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     const launchPDFLatexCommand = () => {
+        el.errorsPanel.innerHTML = "";
+        
         const command = "cd \"" + path.dirname(texFilePath) + "\" && " + "pdflatex \"" + path.basename(texFilePath) + "\"";
         const result = child_process.spawn(command, {shell: true});
 
         result.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
+            el.errorsPanel.innerHTML += "<div class='stdout output'>" + data + "</div>";
         });
 
         result.stderr.on('data', (data) => {
             console.error(`stderr: ${data}`);
+            el.errorsPanel.innerHTML += "<div class='stderr output'>" + data + "</div>";
         });
 
         result.on('close', (code) => {
+            el.errorsPanel.innerHTML +=  "<div class='compilation-finished output'>Compilation finished with code "+ code + "</div>\n";
+            el.errorsPanel.scrollTo({
+                top: 10000,
+                left: 0,
+                behavior: 'smooth'
+              });
             handleFolderChange(openedFolderPath);
             updatePDFPanel();
         });
@@ -191,7 +201,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const switchPanelDisplayMin = (button, minimizedPanel, resizer, otherPanel) => {
         if (button.getAttribute("state") == "open") {
-            otherPanel.setAttribute("saved-width", minimizedPanel.offsetWidth);
+            //otherPanel.setAttribute("saved-width", minimizedPanel.offsetWidth);
             minimizedPanel.style.display = "none";
             resizer.style.display = "none";
             button.setAttribute("state", "closed");
@@ -203,7 +213,7 @@ window.addEventListener("DOMContentLoaded", () => {
             resizer.style.display = "block";
             button.setAttribute("state", "open");
             otherPanel.style.flex = "none";
-            otherPanel.style.width = minimizedPanel.getAttribute("saved-width");
+            //otherPanel.style.width = minimizedPanel.getAttribute("saved-width");
         };
     };
 
