@@ -275,6 +275,8 @@ code-input {
     height: 70%;
     width: 100%;
     min-height: 10%;
+
+    display: flex;
 }
 
 #errorsPanel {

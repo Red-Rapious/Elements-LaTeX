@@ -40,6 +40,9 @@ window.addEventListener("DOMContentLoaded", () => {
         codePdfResizer: document.getElementById("codePdfResizer"),
         sideDevelopmentResizer: document.getElementById("sideDevelopmentResizer"),
         titleAndLogo: document.getElementById("titleAndLogo"),
+        errorsPanel: document.getElementById("errorsPanel"),
+        showErrorsPanelBtn: document.getElementById("showErrorsPanelBtn"),
+        inputErrorsResizer: document.getElementById("inputErrorsResizer"),
     };
 
     // Update the footer version label
@@ -188,16 +191,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const switchPanelDisplayMin = (button, minimizedPanel, resizer, otherPanel) => {
         if (button.getAttribute("state") == "open") {
-            console.log("Width " + otherPanel.style.width);
+            otherPanel.setAttribute("saved-width", minimizedPanel.offsetWidth);
             minimizedPanel.style.display = "none";
-            resizer.display = "none";
+            resizer.style.display = "none";
             button.setAttribute("state", "closed");
             otherPanel.style.width = "100%";
+            otherPanel.style.flex = "1";
         }
         else {
             minimizedPanel.style.display = "flex";
-            resizer.display = "block";
+            resizer.style.display = "block";
             button.setAttribute("state", "open");
+            otherPanel.style.flex = "none";
             otherPanel.style.width = minimizedPanel.getAttribute("saved-width");
         };
     };
@@ -222,6 +227,10 @@ window.addEventListener("DOMContentLoaded", () => {
     el.reloadFolderBtn.addEventListener("click", () => {
         saveCurrentFile();
         handleFolderChange(openedFolderPath);
+    });
+
+    el.showErrorsPanelBtn.addEventListener("click", () => {
+        switchPanelDisplayMin(el.showErrorsPanelBtn, el.errorsPanel, el.inputErrorsResizer, el.fileTextarea);
     });
 
     ipcRenderer.on("save-file-triggered", (_) => {

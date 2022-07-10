@@ -89,13 +89,13 @@
                     <div id="codeCompileBar">
                       <button id="compileCodeBtn"><span class="material-icons"> play_arrow </span></button>
                       <button id="interruptCompileBtn" disabled><span class="material-icons"> pause </span></button>
-                      <button id="showErrorsBtn" disabled><span class="material-icons"> bug_report </span></button>
+                      <button id="showErrorsPanelBtn" state="open"><span class="material-icons"> bug_report </span></button>
                     </div>
                     
                     <div id="inputAndErrorsPanel">
                       <code-input lang="LaTeX" placeholder="Open a file using the side panel to begin..." value="" id="codeInput"></code-input>
-                      <div id="inputErrorResizer" class="resizer" data-direction="vertical"></div>
-                      <textarea id="errorsPanel" disabled>Compile errors will show here</textarea>
+                      <div id="inputErrorsResizer" class="resizer" data-direction="vertical"></div>
+                      <textarea id="errorsPanel" disabled>Compile errors will show here...</textarea>
                     </div>
                   </div>
                   <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
