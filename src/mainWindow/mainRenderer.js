@@ -108,7 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const result = child_process.spawn(command, {shell: true});
 
         result.stdout.on('data', (data) => {
-            //console.log(`stdout: ${data}`);
+            console.log(`stdout: ${data}`);
         });
 
         result.stderr.on('data', (data) => {
@@ -121,7 +121,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         result.on('error', (err) => {
-            console.error("Command error");
+            console.error("Command error: " + err);
         });
     };
 

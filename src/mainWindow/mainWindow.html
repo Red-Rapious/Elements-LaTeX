@@ -91,7 +91,12 @@
                       <button id="interruptCompileBtn" disabled><span class="material-icons"> pause </span></button>
                       <button id="showErrorsBtn" disabled><span class="material-icons"> bug_report </span></button>
                     </div>
-                    <code-input lang="LaTeX" placeholder="Open a file using the side panel to begin..." value="" id="codeInput"></code-input>
+                    
+                    <div id="inputAndErrorsPanel">
+                      <code-input lang="LaTeX" placeholder="Open a file using the side panel to begin..." value="" id="codeInput"></code-input>
+                      <div id="inputErrorResizer" class="resizer" data-direction="vertical"></div>
+                      <textarea id="errorsPanel" disabled>Compile errors will show here</textarea>
+                    </div>
                   </div>
                   <div id="codePdfResizer" class="resizer" data-direction="horizontal"></div>
                   <div class="pdf-panel" id="pdfViewerPanel">Opened PDF will show here</div>
