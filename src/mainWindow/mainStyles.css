@@ -122,10 +122,6 @@
     margin-right: 10px;
 }
 
-.tree .delete-button {
-    margin-right: 17px;
-}
-
 .tree .file-other {
     color: #8b8b8b;
 }
@@ -133,15 +129,22 @@
 .tree .delete-button {
     display: none;
     color: rgb(255, 89, 89);
+    margin-right: 18px;
 
     width: 10px;
     height: 10px;
+
+    cursor: pointer;
 }
 
 .tree .file-type-icon {
     display: inline;
     width: 10px;
     height: 10px;
+}
+
+.tree .file-type-icon, .tree .delete-button {
+    margin-left: 7px;
 }
 
 .tree .file:hover .delete-button {
@@ -154,10 +157,13 @@
 
 .tree li {
     list-style-type: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .tree ul {
-    padding-inline-start: 30px;
+    padding-inline-start: 15px;
 }
 
 #folderManagementBar, #structureManagementBar {

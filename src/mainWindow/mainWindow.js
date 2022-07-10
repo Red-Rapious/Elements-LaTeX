@@ -30,6 +30,19 @@ const openFolder = (folderPath) => {
     settings.setSync("current-folder", folderPath);
 };
 
+const deleteFile = (filePath, checkboxChecked) => {
+    fs.unlink(filePath, (error) => {
+        if (error) {
+            handleError("the deletion of the file", error);
+        }
+        else {
+            settings.setSync("ask-dialog-defore-delete", checkboxChecked);
+            ipcMain.emit("request-folder-reload");
+        }
+    });
+
+};
+
 const createMainWindow = (previousFile, previousFolder) => {
     mainWindow = new BrowserWindow({
         width: 1600,
@@ -272,24 +285,29 @@ const createMainWindow = (previousFile, previousFolder) => {
     });
 
     ipcMain.on("delete-file-triggered", (_, filePath) => {
-        dialog.showMessageBox(mainWindow, {
-            message: "Are you sure you want to delete " + path.basename(filePath) + "?",
-            buttons: ["Yes", "No"],
-            defaultId: 1,
-            cancelId: 1,
-        }).then(({ response }) => {
-            if (response == 0) {
-                fs.unlink(filePath, (error) => {
-                    if (error) {
-                        handleError("the deletion of the file", error);
-                    }
-                    else {
-                        mainWindow.webContents.send("request-folder-reload");
-                    }
-                });
-            }
-        });
-        
+        let askDialogBeforeDelete = true;
+        if (settings.hasSync("ask-dialog-defore-delete")) {
+            askDialogBeforeDelete = settings.getSync("ask-dialog-defore-delete");
+        }
+
+        if (askDialogBeforeDelete) {
+            dialog.showMessageBox(mainWindow, {
+                type: "question",
+                message: "Are you sure you want to delete \"" + path.basename(filePath) + "\"?",
+                buttons: ["Delete file", "Cancel"],
+                defaultId: 1,
+                cancelId: 1,
+                checkboxLabel: "Always ask before deleting a file",
+                checkboxChecked: true,
+            }).then(({ response, checkboxChecked }) => {
+                if (response == 0) {
+                    deleteFile(filePath, checkboxChecked);
+                }
+            });
+        }
+        else {
+            deleteFile(filePath, false);
+        }
     });
 
     return mainWindow;
