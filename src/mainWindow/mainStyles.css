@@ -236,7 +236,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 #developmentPanel {
@@ -252,7 +252,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 #inputAndErrorsPanel {
@@ -272,14 +272,15 @@ code-input {
 }
 
 #codeInput {
-    height: 70%;
+    height: 80%;
     width: 100%;
     min-height: 10%;
 }
 
 #errorsPanel {
-    min-height: 10%;
-    flex: 1;
+    /*min-height: 40%;
+    flex: 1;*/
+    height: 200px;
     resize: none;
     overflow-y: scroll;
     flex-wrap: wrap;
@@ -307,7 +308,7 @@ code-input {
 }
 
 #errorsPanel .compilation-finished {
-    margin-top: 12px;
+    line-height: 28px;
     color: rgb(61, 89, 161);
 }
 
