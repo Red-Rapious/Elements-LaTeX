@@ -12,6 +12,7 @@ const createStartupWindow = () => {
         frame: false,
         titleBarStyle: "customButtonsOnHover",
         icon: path.join(app.getAppPath(), "assets/logos/icon.png"),
+        backgroundColor: '#16161e',
         webPreferences: {
             nodeIntegration: true, 
             contextIsolation: false,

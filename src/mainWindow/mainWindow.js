@@ -51,6 +51,7 @@ const createMainWindow = (previousFile, previousFolder) => {
         height: 1000,
         titleBarStyle: "hiddenInset",
         icon: path.join(app.getAppPath(), "assets/logos/icon.png"),
+        backgroundColor: '#16161e',
         webPreferences: {
             nodeIntegration: true, 
             contextIsolation: false, 
