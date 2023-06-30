@@ -22,7 +22,7 @@ A cross-platform, powerful electron-based LaTeX editor.
 </div>
 
 ## Preview
-This is the current interface of Elements LaTeX, currently in active development:
+This is the current interface of Elements LaTeX:
 ![Current interface screenshot](/assets/screenshots/current_screenshot.png)
 
 ## Using Elements LaTeX on macOS
@@ -85,7 +85,7 @@ npm run build
 > Note: this `npm` script uses the `electron-builder` package to build the project: you can install it by launching `npm install electron-builder -D`.
 
 ## Developpement status
-Currently working on v0.0.3: middle phase of developpement.
+Currently working on v0.0.3: middle phase of developpement. This project is currently paused ; I continue development at some point in the future.
 
 ## License
 This work is licensed under the [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
